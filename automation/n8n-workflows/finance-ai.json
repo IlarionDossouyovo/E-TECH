@@ -1,0 +1,19 @@
+{
+  "name": "Finance AI",
+  "nodes": [
+    {"parameters": {"rule": "everyDay", "hour": 20, "minute": 0}, "id": "schedule", "name": "Daily 20h", "type": "scheduleTrigger", "position": [100, 300]},
+    {"parameters": {"operation": "read", "sheetId": "{{$credentials.google_sheets_id}}", "range": "Finances!A1:Z100"}, "id": "get-transactions", "name": "Get Transactions", "type": "googleSheets", "position": [300, 300]},
+    {"parameters": {"operation": "read", "sheetId": "{{$credentials.google_sheets_id}}", "range": "Commandes!A1:Z200"}, "id": "get-orders", "name": "Get Orders", "type": "googleSheets", "position": [300, 450]},
+    {"parameters": {"prompt": "You are Finance AI for E-Tech. Generate daily financial report:\n\nTransactions: {{$json.transactions}}\nOrders: {{$json.orders}}\n\nCalculate:\n1. Today's revenue\n2. Gross margin (target: 30%+)\n3. Net margin after costs (shipping, marketing)\n4. Cash flow status\n\nCosts:\n- Shipping: 150,000/month allocated\n- Marketing: 500,000/month allocated", "id": "analyze", "name": "Financial Analysis", "type": "anthropic", "position": [500, 300]},
+    {"parameters": {"operation": "append", "sheetId": "{{$credentials.google_sheets_id}}", "range": "Rapports_Financiers!A1", "value": "{{$json.report}}"}, "id": "save", "name": "Save Report", "type": "googleSheets", "position": [700, 300]},
+    {"parameters": {"channel": "telegram", "chatId": "{{$credentials.telegram_chat_id}}", "text": "💰 *E-Tech Finance*\n\n{{$json.report}}"}, "id": "notify", "name": "Daily Finance", "type": "telegram", "position": [900, 300]}
+  ],
+  "connections": {
+    "Daily 20h": {"main": [[{"node": "Get Transactions", "type": "main", "index": 0}]]},
+    "Financial Analysis": {"main": [[{"node": "Save Report", "type": "main", "index": 0}]]},
+    "Save Report": {"main": [[{"node": "Daily Finance", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "settings": {},
+  "version": 1
+}

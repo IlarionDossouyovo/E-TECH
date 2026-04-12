@@ -1,0 +1,21 @@
+{
+  "name": "Email Marketing AI",
+  "nodes": [
+    {"parameters": {"rule": "everyCustomInterval", "weeks": 1}}, "id": "schedule", "name": "Weekly", "type": "scheduleTrigger", "position": [100, 300]},
+    {"parameters": {"operation": "read", "sheetId": "{{$credentials.google_sheets_id}}", "range": "Marketing_Log!A1:Z500"}, "id": "get-subscribers", "name": "Get Subscribers", "type": "googleSheets", "position": [300, 300]},
+    {"parameters": {"prompt": "Segment this email list:\n\nSubscribers: {{$json.subscribers}}\n\nSegments:\n1. New prospects (never ordered)\n2. Customers (ordered once)\n3. VIP customers (>500k lifetime)\n4. Inactive (>30 days)\n\nCreate targeted campaigns for each segment", "id": "segment", "name": "Segment List", "type": "anthropic", "position": [500, 300]},
+    {"parameters": {"prompt": "Create welcome email for new subscribers:\nTone: Professional, welcoming\nInclude: -10% code (BIENVENUE10)\nCTA: Discover products", "id": "welcome", "name": "Welcome Email", "type": "anthropic", "position": [700, 300]},
+    {"parameters": {"prompt": "Create re-engagement email for inactive:\nTone: We miss you\nInclude: Special offer to come back", "id": "reactivate", "name": "Re-engagement", "type": "anthropic", "position": [700, 450]},
+    {"parameters": {"prompt": "Create post-purchase thank you email:\nTone: Thankful\nInclude: Request review, cross-sell", "id": "post-purchase", "name": "Post-Purchase", "type": "anthropic", "position": [700, 600]},
+    {"parameters": {"operation": "append", "sheetId": "{{$credentials.google_sheets_id}}", "range": "Email_Campaigns!A1", "value": "{{$json.campaigns}}"}, "id": "save", "name": "Save Campaigns", "type": "googleSheets", "position": [900, 300]},
+    {"parameters": {"channel": "telegram", "chatId": "{{$credentials.telegram_chat_id}}", "text": "📧 *Email Campaigns Ready*\n\n{{$json.summary}}"}, "id": "notify", "name": "Team Notified", "type": "telegram", "position": [1100, 300]}
+  ],
+  "connections": {
+    "Weekly": {"main": [[{"node": "Get Subscribers", "type": "main", "index": 0}]]},
+    "Segment List": {"main": [[{"node": "Save Campaigns", "type": "main", "index": 0}]]},
+    "Save Campaigns": {"main": [[{"node": "Team Notified", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "settings": {},
+  "version": 1
+}

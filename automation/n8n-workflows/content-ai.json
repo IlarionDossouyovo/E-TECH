@@ -1,0 +1,18 @@
+{
+  "name": "Content AI",
+  "nodes": [
+    {"parameters": {"rule": "everyCustomInterval", "weeks": 1, "interval": 2}, "id": "schedule", "name": "Every 2 Weeks", "type": "scheduleTrigger", "position": [100, 300]},
+    {"parameters": {"prompt": "Create a blog article for E-Tech e-commerce.\n\nTopics available: {{$json.topics}}\n\nCreate a comprehensive guide (2000-3000 words):\n1. Title engaging (French)\n2. Introduction (200 words)\n3. Main sections with H2/H3\n4. Product recommendations with links\n5. Conclusion with CTA\n\nFormat: Markdown\nLanguage: French\nSEO: Include keywords naturally"}, "id": "generate", "name": "Generate Article", "type": "anthropic", "position": [300, 300]},
+    {"parameters": {"prompt": "Translate this to English: {{$json.article_fr}}", "id": "translate", "name": "Translate EN", "type": "anthropic", "position": [300, 450]},
+    {"parameters": {"operation": "append", "sheetId": "{{$credentials.google_sheets_id}}", "range": "Content_Calendar!A1", "value": "{{$json.article}}"}, "id": "save", "name": "Save to Sheets", "type": "googleSheets", "position": [500, 300]},
+    {"parameters": {"channel": "telegram", "chatId": "{{$credentials.telegram_chat_id}}", "text": "📝 *New Article Ready*\n\n{{$json.title}}\n\nPreview: {{$json.preview}}"}, "id": "notify", "name": "Notify Team", "type": "telegram", "position": [700, 300]}
+  ],
+  "connections": {
+    "Every 2 Weeks": {"main": [[{"node": "Generate Article", "type": "main", "index": 0}]]},
+    "Generate Article": {"main": [[{"node": "Save to Sheets", "type": "main", "index": 0}]]},
+    "Save to Sheets": {"main": [[{"node": "Notify Team", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "settings": {},
+  "version": 1
+}

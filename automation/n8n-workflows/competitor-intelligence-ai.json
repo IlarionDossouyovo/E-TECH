@@ -1,0 +1,22 @@
+{
+  "name": "Competitor Intelligence AI",
+  "nodes": [
+    {"parameters": {"rule": "everyDay", "hour": 6, "minute": 0}}, "id": "schedule", "name": "Daily 6h", "type": "scheduleTrigger", "position": [100, 300]},
+    {"parameters": {"operation": "scrape", "url": "https://jumia.bj/categories/phones-tablets", "property": "html"}, "id": "scrape-jumia", "name": "Scrape Jumia", "type": "httpRequest", "position": [300, 300]},
+    {"parameters": {"operation": "scrape", "url": "https://www.aliexpress.com/category/150703/21017", "property": "html"}, "id": "scrape-aliexpress", "name": "Scrape AliExpress", "type": "httpRequest", "position": [300, 450]},
+    {"parameters": {"operation": "scrape", "url": "https://www.amazon.com/Best-Sellers-Electronics/zgbs", "property": "html"}, "id": "scrape-amazon", "name": "Scrape Amazon", "type": "httpRequest", "position": [300, 600]},
+    {"parameters": {"prompt": "You are Competitor Intelligence AI for E-Tech. Analyze competitor prices:\n\nCompetitor data:\n- Jumia Benin: {{$json.jumia}}\n- AliExpress: {{$json.aliexpress}}\n- Amazon: {{$json.amazon}}\n\nFor each product category:\n1. Compare prices (are we competitive?)\n2. Identify pricing gaps\n3. Note marketing tactics used\n4. Flag new competitor products\n\nCompetitors to monitor:\n- Jumia Benin\n- 3 local boutiques Cotonou\n- AliExpress (price reference)\n\nReport format:\n- Price comparison table\n- Opportunities\n- Threats", "id": "analyze", "name": "Analyze Competitors", "type": "anthropic", "position": [500, 450]},
+    {"parameters": {"operation": "append", "sheetId": "{{$credentials.google_sheets_id}}", "range": "Competitors_Tracking!A1", "value": "{{$json.report}}"}, "id": "save", "name": "Save Report", "type": "googleSheets", "position": [700, 450]},
+    {"parameters": {"operation": "if", "value1": "{{$json.major_change}}", "operation": "true"}, "id": "check-alert", "name": "Major Change?", "type": "if", "position": [900, 450]},
+    {"parameters": {"channel": "telegram", "chatId": "{{$credentials.telegram_chat_id}}", "text": "⚠️ *Competitor Alert*\n\n{{$json.alert}}"}, "id": "alert", "name": "Team Alert", "type": "telegram", "position": [1100, 450]}
+  ],
+  "connections": {
+    "Daily 6h": {"main": [[{"node": "Scrape Jumia", "type": "main", "index": 0}]]},
+    "Analyze Competitors": {"main": [[{"node": "Save Report", "type": "main", "index": 0}]]},
+    "Save Report": {"main": [[{"node": "Major Change?", "type": "main", "index": 0}]]},
+    "Major Change?": {"true": [[{"node": "Team Alert", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "settings": {},
+  "version": 1
+}

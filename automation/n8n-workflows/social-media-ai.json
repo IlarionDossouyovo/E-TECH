@@ -1,0 +1,23 @@
+{
+  "name": "Social Media AI",
+  "nodes": [
+    {"parameters": {"rule": "everyDay", "hour": 9, "minute": 0}}, "id": "morning", "name": "Daily 9h", "type": "scheduleTrigger", "position": [100, 300]},
+    {"parameters": {"rule": "everyDay", "hour": 14, "minute": 0}}, "id": "afternoon", "name": "Daily 14h", "type": "scheduleTrigger", "position": [100, 450]},
+    {"parameters": {"rule": "everyDay", "hour": 18, "minute": 0}}, "id": "evening", "name": "Daily 18h", "type": "scheduleTrigger", "position": [100, 600]},
+    {"parameters": {"operation": "read", "sheetId": "{{$credentials.google_sheets_id}}", "range": "Content_Calendar!A1:Z50"}, "id": "get-content", "name": "Get Scheduled", "type": "googleSheets", "position": [300, 300]},
+    {"parameters": {"prompt": "Get today's scheduled social media posts:\nPosts: {{$json.posts}}\nTime: {{$json.current_time}}", "id": "get-today", "name": "Get Today Posts", "type": "anthropic", "position": [500, 300]},
+    {"parameters": {"channel": "facebook", "pageId": "{{$credentials.facebook_page_id}}", "message": "{{$json.post}}"}, "id": "fb", "name": "Facebook Post", "type": "facebook", "position": [700, 300]},
+    {"parameters": {"channel": "instagram", "businessId": "{{$credentials.instagram_business_id}}", "caption": "{{$json.caption}}"}, "id": "ig", "name": "Instagram Post", "type": "instagram", "position": [700, 450]},
+    {"parameters": {"prompt": "Check engagement on recent posts:\n\nMentions: {{$json.mentions}}\nComments: {{$json.comments}}\n\nRespond to: positive, neutral, negative\nFor negative: escalate to human", "id": "check-engagement", "name": "Check Engagement", "type": "anthropic", "position": [700, 600]},
+    {"parameters": {"operation": "append", "sheetId": "{{$credentials.google_sheets_id}}", "range": "Social_Media_Log!A1", "value": "{{$json.activity}}"}, "id": "log", "name": "Log Activity", "type": "googleSheets", "position": [900, 600]}
+  ],
+  "connections": {
+    "Daily 9h": {"main": [[{"node": "Get Scheduled", "type": "main", "index": 0}]]},
+    "Get Today Posts": {"main": [[{"node": "Facebook Post", "type": "main", "index": 0}]]},
+    "Facebook Post": {"main": [[{"node": "Instagram Post", "type": "main", "index": 0}]]},
+    "Check Engagement": {"main": [[{"node": "Log Activity", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "settings": {},
+  "version": 1
+}

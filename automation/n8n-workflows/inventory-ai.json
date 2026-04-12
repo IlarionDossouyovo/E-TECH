@@ -1,0 +1,20 @@
+{
+  "name": "Inventory AI",
+  "nodes": [
+    {"parameters": {"rule": "everyHour"}, "id": "schedule", "name": "Every Hour", "type": "scheduleTrigger", "position": [100, 300]},
+    {"parameters": {"operation": "read", "sheetId": "{{$credentials.google_sheets_id}}", "range": "Inventaire!A1:Z200"}, "id": "get-stock", "name": "Get Inventory", "type": "googleSheets", "position": [300, 300]},
+    {"parameters": {"prompt": "You are Inventory AI for E-Tech. Check stock levels:\n\nInventory: {{$json.inventory}}\n\nAlerts:\n- If stock < 10: CRITICAL - reorder needed\n- If stock < 20: WARNING - prepare reorder\nRecommend actions: YES/NO for each product needing reorder\n\nMin stock: 10\nOptimal stock: 50", "id": "check", "name": "Check Levels", "type": "anthropic", "position": [500, 300]},
+    {"parameters": {"operation": "if", "value1": "{{$json.needs_reorder}}", "operation": "true"}, "id": "check-reorder", "name": "Reorder Needed?", "type": "if", "position": [700, 300]},
+    {"parameters": {"prompt": "Reorder alert for E-Tech:\n\nProducts: {{$json.products}}\n\nAuto-order from supplier (if configured)", "id": "auto-order", "name": "Auto Reorder", "type": "anthropic", "position": [900, 300]},
+    {"parameters": {"channel": "telegram", "chatId": "{{$credentials.telegram_chat_id}}", "text": "⚠️ *Inventory Alert*\n\n{{$json.alert}}"}, "id": "alert", "name": "Team Alert", "type": "telegram", "position": [900, 500]}
+  ],
+  "connections": {
+    "Every Hour": {"main": [[{"node": "Get Inventory", "type": "main", "index": 0}]]},
+    "Check Levels": {"main": [[{"node": "Reorder Needed?", "type": "main", "index": 0}]]},
+    "Reorder Needed?": {"true": [[{"node": "Auto Reorder", "type": "main", "index": 0}]]},
+    "Auto Reorder": {"main": [[{"node": "Team Alert", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "settings": {},
+  "version": 1
+}

@@ -1,0 +1,91 @@
+{
+  "name": "Marketing AI",
+  "nodes": [
+    {
+      "parameters": {"rule": "everyCustomInterval", "hours": 8},
+      "id": "schedule-trigger",
+      "name": "Every 8 Hours",
+      "type": "scheduleTrigger",
+      "position": [100, 300]
+    },
+    {
+      "parameters": {
+        "prompt": "You are the Marketing AI for E-Tech. Create 3 social media posts for today:\n\n1. Facebook post (150-250 words): Product announcement or promotion\n2. Instagram post: Engaging caption with hashtags\n3. WhatsApp message: Exclusive offer for subscribers\n\nTopics: Use these products {{$json.products}}\n\nTone: Professional, premium, engaging\nHashtags: #ETechBenin #TechAfrique #PremiumTech",
+        "metadata": false
+      },
+      "id": "generate-content",
+      "name": "Generate Content (Claude)",
+      "type": "anthropic",
+      "typeVersion": 1,
+      "position": [300, 300]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetId": "{{$credentials.google_sheets_id}}",
+        "range": "Content_Calendar!A1",
+        "value": "{{$json.posts}}"
+      },
+      "id": "save-posts",
+      "name": "Save to Calendar",
+      "type": "googleSheets",
+      "typeVersion": 4,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "prompt": "Create a visual for this product post: {{$json.product}}\nStyle: Modern, tech, premium\nColors: #0A1929, #D4AF37",
+        "metadata": false
+      },
+      "id": "generate-image",
+      "name": "Generate Image (DALL-E)",
+      "type": "openai",
+      "typeVersion": 1,
+      "position": [500, 450]
+    },
+    {
+      "parameters": {
+        "channel": "facebook",
+        "pageId": "{{$credentials.facebook_page_id}}",
+        "message": "{{$json.facebook_post}}"
+      },
+      "id": "post-facebook",
+      "name": "Post Facebook",
+      "type": "facebook",
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "channel": "instagram",
+        "businessId": "{{$credentials.instagram_business_id}}",
+        "caption": "{{$json.instagram_caption}}",
+        "imageUrl": "{{$json.image_url}}"
+      },
+      "id": "post-instagram",
+      "name": "Post Instagram",
+      "type": "instagram",
+      "position": [700, 450]
+    },
+    {
+      "parameters": {
+        "channel": "whatsapp",
+        "chatId": "{{$credentials.whatsapp_broadcast}}",
+        "text": "{{$json.whatsapp_message}}"
+      },
+      "id": "send-whatsapp",
+      "name": "Send WhatsApp",
+      "type": "whatsapp",
+      "position": [700, 600]
+    }
+  ],
+  "connections": {
+    "Every 8 Hours": {"main": [[{"node": "Generate Content (Claude)", "type": "main", "index": 0}]]},
+    "Generate Content (Claude)": {"main": [[{"node": "Save to Calendar", "type": "main", "index": 0}]]},
+    "Save to Calendar": {"main": [[{"node": "Post Facebook", "type": "main", "index": 0}]]},
+    "Generate Image (DALL-E)": {"main": [[{"node": "Post Instagram", "type": "main", "index": 0}]]},
+    "Post Facebook": {"main": [[{"node": "Send WhatsApp", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "settings": {},
+  "version": 1
+}

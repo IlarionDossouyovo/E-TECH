@@ -1,0 +1,20 @@
+{
+  "name": "Analytics AI",
+  "nodes": [
+    {"parameters": {"rule": "everyDay", "hour": 8, "minute": 0}, "id": "schedule", "name": "Daily 8h", "type": "scheduleTrigger", "position": [100, 300]},
+    {"parameters": {"operation": "read", "sheetId": "{{$credentials.google_sheets_id}}", "range": "Dashboard!A1:Z50"}, "id": "get-kpis", "name": "Get KPIs", "type": "googleSheets", "position": [300, 300]},
+    {"parameters": {"operation": "read", "sheetId": "{{$credentials.google_sheets_id}}", "range": "Products_Database!A1:Z200"}, "id": "get-products", "name": "Get Products", "type": "googleSheets", "position": [300, 450]},
+    {"parameters": {"prompt": "You are Analytics AI for E-Tech. Analyze this data:\n\nDaily KPIs: {{$json.kpis}}\nProducts: {{$json.products}}\n\nProvide:\n1. Today's summary (3 sentences)\n2. Top 3 performing products\n3. Alert if any KPI below target:\n   - Revenue < 50,000/day\n   - Conversion < 1.5%\n   - Stock < 10 units\n4. 3 recommendations for tomorrow\n\nTarget thresholds:\n- Revenue: 50,000 FCA/day\n- Orders: 2/day\n- Conversion: 1.5%\n- Cart abandonment: <25%", "id": "analyze", "name": "Analyze (Claude)", "type": "anthropic", "position": [500, 300]},
+    {"parameters": {"operation": "append", "sheetId": "{{$credentials.google_sheets_id}}", "range": "Analytics!A1", "value": "{{$json.analysis}}"}, "id": "log", "name": "Log Analysis", "type": "googleSheets", "position": [700, 300]},
+    {"parameters": {"channel": "telegram", "chatId": "{{$credentials.telegram_chat_id}}", "text": "📊 *E-Tech Analytics*\n\n{{$json.report}}"}, "id": "notify", "name": "Daily Report", "type": "telegram", "position": [900, 300]}
+  ],
+  "connections": {
+    "Daily 8h": {"main": [[{"node": "Get KPIs", "type": "main", "index": 0}]]},
+    "Get KPIs": {"main": [[{"node": "Analyze (Claude)", "type": "main", "index": 0}]]},
+    "Analyze (Claude)": {"main": [[{"node": "Log Analysis", "type": "main", "index": 0}]]},
+    "Log Analysis": {"main": [[{"node": "Daily Report", "type": "main", "index": 0}]]}
+  },
+  "active": true,
+  "settings": {},
+  "version": 1
+}
