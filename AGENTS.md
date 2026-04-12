@@ -6,8 +6,9 @@
 - **Tech Stack**: Wix (frontend), N8N (automation), Anthropic Claude (AI), Google Sheets (database)
 - **Launch Date**: Q2 2025
 
-## Key Technologies
-- **Frontend**: [À définir - pas Wix]
+## Tech Stack (Custom - Not Wix)
+- **Frontend**: Custom HTML/CSS/JS (Next.js planned)
+- **Backend**: API Node.js + N8N
 - **Automation**: N8N (self-hosted on VPS)
 - **AI**: Anthropic Claude Sonnet 4 (12 agents)
 - **Database**: Google Sheets (Phase 1-2), PostgreSQL (future)

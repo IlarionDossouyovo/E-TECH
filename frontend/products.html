@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="E-Tech - Tous nos produits électroniques premium">
+    <title>Tous les Produits | E-Tech</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header__content">
+            <a href="index.html" class="header__logo">
+                <div class="header__logo-icon">⚡</div>
+                <span>E-Tech</span>
+            </a>
+            
+            <nav class="header__nav">
+                <a href="index.html">Accueil</a>
+                <a href="products.html" class="active">Produits</a>
+                <a href="#about">À Propos</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            
+            <div class="header__actions">
+                <a href="cart.html" class="header__cart">
+                    🛒
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Products Page -->
+    <section style="padding: 48px 0; background: #f8f9fa;">
+        <div class="container">
+            <h1 style="margin-bottom: 32px;">Nos Produits</h1>
+            
+            <div style="display: grid; grid-template-columns: 280px 1fr; gap: 32px;">
+                <!-- Filters Sidebar -->
+                <aside style="background: white; padding: 24px; border-radius: 12px; height: fit-content; position: sticky; top: 100px;">
+                    <h3 style="margin-bottom: 24px;">Filtres</h3>
+                    
+                    <!-- Search -->
+                    <div style="margin-bottom: 24px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 600;">Rechercher</label>
+                        <input type="text" id="search-input" placeholder="Nom du produit..." style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                    </div>
+                    
+                    <!-- Categories -->
+                    <div style="margin-bottom: 24px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 600;">Catégorie</label>
+                        <select id="category-filter" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                            <option value="">Toutes les catégories</option>
+                            <option value="smartphones">Smartphones</option>
+                            <option value="computers">Ordinateurs</option>
+                            <option value="audio">Audio</option>
+                            <option value="accessories">Accessoires</option>
+                            <option value="wearables">Objets Connectés</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Price Range -->
+                    <div style="margin-bottom: 24px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 600;">Prix</label>
+                        <div style="display: flex; gap: 8px;">
+                            <input type="number" id="price-min" placeholder="Min" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                            <input type="number" id="price-max" placeholder="Max" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+                        </div>
+                    </div>
+                    
+                    <!-- Brands -->
+                    <div style="margin-bottom: 24px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 600;">Marque</label>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <label><input type="checkbox" name="brand" value="apple"> Apple</label>
+                            <label><input type="checkbox" name="brand" value="samsung"> Samsung</label>
+                            <label><input type="checkbox" name="brand" value="google"> Google</label>
+                            <label><input type="checkbox" name="brand" value="xiaomi"> Xiaomi</label>
+                            <label><input type="checkbox" name="brand" value="sony"> Sony</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Rating -->
+                    <div style="margin-bottom: 24px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 600;">Note</label>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <label><input type="radio" name="rating" value="5"> ★★★★★ (5)</label>
+                            <label><input type="radio" name="rating" value="4"> ★★★★+ (4+)</label>
+                            <label><input type="radio" name="rating" value="3"> ★★★+ (3+)</label>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn--primary" style="width: 100%;" onclick="applyFilters()">
+                        Appliquer les Filtres
+                    </button>
+                </aside>
+                
+                <!-- Products Grid -->
+                <div>
+                    <!-- Sort & Results -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                        <p id="results-count">4 produits</p>
+                        <select id="sort-select" style="padding: 12px; border: 1px solid #ddd; border-radius: 8px;" onchange="sortProducts()">
+                            <option value="relevance">Pertinence</option>
+                            <option value="price-asc">Prix: Croissant</option>
+                            <option value="price-desc">Prix: Décroissant</option>
+                            <option value="name-asc">Nom: A-Z</option>
+                            <option value="rating-desc">Mieux Notés</option>
+                            <option value="newest">Nouveautés</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Products -->
+                    <div class="products__grid" id="products-grid">
+                        <!-- Dynamic products loaded here -->
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div style="display: flex; justify-content: center; gap: 8px; margin-top: 48px;">
+                        <button class="btn btn--secondary">← Précédent</button>
+                        <button class="btn btn--primary">1</button>
+                        <button class="btn btn--secondary">2</button>
+                        <button class="btn btn--secondary">3</button>
+                        <button class="btn btn--secondary">Suivant →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__bottom">
+                <p class="footer__copyright">© 2025 E-Tech. Tous droits réservés. | E-Tech SARL - Cotonou, Bénin</p>
+                <div class="footer__legal">
+                    <a href="#">CGV</a>
+                    <a href="#">Mentions Légales</a>
+                    <a href="#">Politique RGPD</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Load products on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProducts();
+        });
+    </script>
+</body>
+</html>

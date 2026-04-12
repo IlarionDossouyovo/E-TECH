@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Panier | E-Tech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+    <style>
+        .cart-page { padding: 48px 0; }
+        .cart-grid { display: grid; grid-template-columns: 1fr 380px; gap: 32px; }
+        .cart-item { display: flex; gap: 16px; padding: 16px; background: white; border-radius: 12px; margin-bottom: 16px; }
+        .cart-item__image { width: 120px; height: 120px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 48px; }
+        .cart-item__info { flex: 1; }
+        .cart-item__name { font-weight: 600; margin-bottom: 4px; }
+        .cart-item__brand { font-size: 14px; color: #666; margin-bottom: 8px; }
+        .cart-item__price { font-size: 18px; font-weight: 700; color: var(--bleu-nuit); }
+        .cart-item__actions { display: flex; align-items: center; gap: 16px; }
+        .quantity-selector { display: flex; align-items: center; gap: 8px; }
+        .quantity-btn { width: 32px; height: 32px; border: 1px solid #ddd; background: white; border-radius: 4px; cursor: pointer; }
+        .cart-summary { background: white; padding: 24px; border-radius: 12px; position: sticky; top: 100px; }
+        .cart-summary__row { display: flex; justify-content: space-between; margin-bottom: 12px; }
+        .cart-summary__total { font-size: 20px; font-weight: 700; padding-top: 16px; border-top: 1px solid #ddd; }
+        .promo-input { display: flex; gap: 8px; margin-bottom: 24px; }
+        .promo-input input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; }
+        .empty-cart { text-align: center; padding: 64px; }
+        .empty-cart__icon { font-size: 64px; margin-bottom: 16px; }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header__content">
+            <a href="index.html" class="header__logo">
+                <div class="header__logo-icon">⚡</div>
+                <span>E-Tech</span>
+            </a>
+            <nav class="header__nav">
+                <a href="index.html">Accueil</a>
+                <a href="products.html">Produits</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="header__actions">
+                <a href="cart.html" class="header__cart">🛒 <span class="cart-count" id="cart-count">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cart Page -->
+    <section class="cart-page">
+        <div class="container">
+            <h1 style="margin-bottom: 32px;">Mon Panier</h1>
+            
+            <div class="cart-grid" id="cart-content">
+                <!-- Cart Items -->
+                <div id="cart-items">
+                    <!-- Dynamic content -->
+                </div>
+                
+                <!-- Cart Summary -->
+                <div class="cart-summary">
+                    <h3 style="margin-bottom: 24px;">Récapitulatif</h3>
+                    
+                    <div class="promo-input">
+                        <input type="text" id="promo-code" placeholder="Code promo">
+                        <button class="btn btn--secondary" onclick="applyPromoCode()">Appliquer</button>
+                    </div>
+                    
+                    <div class="cart-summary__row">
+                        <span>Sous-total</span>
+                        <span id="subtotal">0 FCA</span>
+                    </div>
+                    <div class="cart-summary__row">
+                        <span>Livraison</span>
+                        <span id="shipping">-</span>
+                    </div>
+                    <div class="cart-summary__row">
+                        <span>TVA (18%)</span>
+                        <span id="vat">0 FCA</span>
+                    </div>
+                    <div class="cart-summary__row cart-summary__total">
+                        <span>Total</span>
+                        <span id="total">0 FCA</span>
+                    </div>
+                    
+                    <a href="checkout.html" class="btn btn--primary" style="width: 100%; margin-top: 24px;">
+                        Passer la Commande
+                    </a>
+                    
+                    <p style="text-align: center; margin-top: 16px; font-size: 14px; color: #666;">
+                        🔒 Paiement sécurisé
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__bottom">
+                <p class="footer__copyright">© 2025 E-Tech. Tous droits réservés.</p>
+                <div class="footer__legal">
+                    <a href="#">CGV</a>
+                    <a href="#">Mentions Légales</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        function renderCart() {
+            const itemsContainer = document.getElementById('cart-items');
+            
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart__icon">🛒</div>
+                        <h2>Votre panier est vide</h2>
+                        <p style="color: #666; margin: 16px 0;">Découvrez nos produits!</p>
+                        <a href="products.html" class="btn btn--primary">Voir les Produits</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            itemsContainer.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item__image">${item.image || '📦'}</div>
+                    <div class="cart-item__info">
+                        <p class="cart-item__brand">${item.brand}</p>
+                        <h3 class="cart-item__name">${item.name}</h3>
+                        <p class="cart-item__price">${formatPrice(item.price)}</p>
+                        <div class="cart-item__actions">
+                            <div class="quantity-selector">
+                                <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                            </div>
+                            <button style="color: red; background: none; border: none; cursor: pointer;" onclick="removeFromCart(${item.id})">
+                                Supprimer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            updateCartSummary();
+        }
+        
+        function updateCartSummary() {
+            const subtotal = getCartTotal();
+            const shipping = getShippingCost();
+            const vat = Math.round(subtotal * 0.18);
+            const total = subtotal + shipping + vat;
+            
+            document.getElementById('subtotal').textContent = formatPrice(subtotal);
+            document.getElementById('shipping').textContent = shipping === 0 ? 'Gratuit' : formatPrice(shipping);
+            document.getElementById('vat').textContent = formatPrice(vat);
+            document.getElementById('total').textContent = formatPrice(total);
+        }
+        
+        function applyPromoCode() {
+            const code = document.getElementById('promo-code').value.toUpperCase();
+            if (code === 'BIENVENUE10') {
+                alert('Code appliqué: -10% de réduction!');
+            } else {
+                alert('Code promo invalide');
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartUI();
+            renderCart();
+        });
+    </script>
+</body>
+</html>

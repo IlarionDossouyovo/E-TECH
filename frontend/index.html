@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="E-Tech - Boutique E-Commerce Premium d'Électronique Internationale au Bénin. 100% produits authentiques, garantie internationale, livraison 2-3 jours.">
+    <title>E-Tech | Boutique Électronique Premium au Bénin</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header__content">
+            <a href="index.html" class="header__logo">
+                <div class="header__logo-icon">⚡</div>
+                <span>E-Tech</span>
+            </a>
+            
+            <nav class="header__nav">
+                <a href="index.html">Accueil</a>
+                <a href="#categories">Catégories</a>
+                <a href="#products">Produits</a>
+                <a href="#about">À Propos</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            
+            <div class="header__actions">
+                <a href="#" class="header__cart" aria-label="Panier">
+                    🛒
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+                <a href="#" class="btn btn--primary">Connexion</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero__content">
+            <div class="hero__text">
+                <span class="hero__badge">🚀 Lancement Officiel</span>
+                <h1 class="hero__title">L'Excellence Technologique en Afrique de l'Ouest</h1>
+                <p class="hero__subtitle">
+                    Votre boutique d'électronique premium au Bénin. 100% produits authentiques, 
+                    garantie internationale 1-3 ans, livraison gratuite dès 50 000 FCA.
+                </p>
+                <div class="hero__cta">
+                    <a href="#products" class="btn btn--primary">
+                        Découvrir Nos Produits
+                    </a>
+                    <a href="#about" class="btn btn--secondary">
+                        En Savoir Plus
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero__image">
+                <!-- placeholder - replace with actual hero image -->
+                <div style="font-size: 200px; opacity: 0.3;">📱</div>
+            </div>
+        </div>
+        
+        <!-- Trust Badges -->
+        <div class="container">
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <div class="trust-badge__icon">🛡️</div>
+                    <div>
+                        <div class="trust-badge__label">Authenticité Garantie</div>
+                        <div class="trust-badge__text">100% produits originaux</div>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge__icon">🚚</div>
+                    <div>
+                        <div class="trust-badge__label">Livraison Rapide</div>
+                        <div class="trust-badge__text">2-3 jours au Bénin</div>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge__icon">🛒</div>
+                    <div>
+                        <div class="trust-badge__label">Support 24/7</div>
+                        <div class="trust-badge__text">Assistant IA + Humain</div>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge__icon">💎</div>
+                    <div>
+                        <div class="trust-badge__label">Garantie Internationale</div>
+                        <div class="trust-badge__text">1 à 3 ans constructeur</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-header__title">Nos Catégories</h2>
+                <p class="section-header__subtitle">
+                    Découvrez notre sélection premium d'équipements technologiques
+                </p>
+            </div>
+            
+            <div class="categories__grid">
+                <div class="category-card">
+                    <div class="category-card__image">📱</div>
+                    <div class="category-card__content">
+                        <h3 class="category-card__title">Smartphones</h3>
+                        <p class="category-card__count">iPhone, Samsung, Pixel, Xiaomi...</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-card__image">💻</div>
+                    <div class="category-card__content">
+                        <h3 class="category-card__title">Ordinateurs</h3>
+                        <p class="category-card__count">MacBook, Dell, HP, Lenovo...</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-card__image">🎧</div>
+                    <div class="category-card__content">
+                        <h3 class="category-card__title">Audio</h3>
+                        <p class="category-card__count">AirPods, Galaxy Buds, Casques...</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-card__image">⌚</div>
+                    <div class="category-card__content">
+                        <h3 class="category-card__title">Objets Connectés</h3>
+                        <p class="category-card__count">Montres, Fitbit, IoT...</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-card__image">🔌</div>
+                    <div class="category-card__content">
+                        <h3 class="category-card__title">Accessoires</h3>
+                        <p class="category-card__count">Coques, Chargeurs, Câbles...</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-card__image">🎮</div>
+                    <div class="category-card__content">
+                        <h3 class="category-card__title">Gaming</h3>
+                        <p class="category-card__count">Consoles, PC, Accessoires...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-header__title">Produits Vedettes</h2>
+                <p class="section-header__subtitle">
+                    Les meilleures ventes et nouveautés de la semaine
+                </p>
+            </div>
+            
+            <div class="products__grid" id="products-grid">
+                <!-- Products will be loaded dynamically via JavaScript -->
+                <!-- Example product cards (static fallback) -->
+                <div class="product-card">
+                    <div class="product-card__badges">
+                        <span class="product-badge product-badge--new">Nouveau</span>
+                    </div>
+                    <div class="product-card__image">
+                        <div style="font-size: 80px;">📱</div>
+                    </div>
+                    <div class="product-card__quick-view">Aperçu Rapide</div>
+                    <div class="product-card__content">
+                        <p class="product-card__brand">Apple</p>
+                        <h3 class="product-card__name">iPhone 16 Pro Max 256Go</h3>
+                        <div class="product-card__rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(128)</span>
+                        </div>
+                        <div class="product-card__price">
+                            <span class="product-card__price-current">1 450 000 FCA</span>
+                        </div>
+                        <div class="product-card__actions">
+                            <button class="product-card__btn product-card__btn--cart" onclick="addToCart(1)">
+                                Ajouter au Panier
+                            </button>
+                            <button class="product-card__btn product-card__btn--wishlist">♡</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-card__badges">
+                        <span class="product-badge product-badge--bestseller">Best-Seller</span>
+                    </div>
+                    <div class="product-card__image">
+                        <div style="font-size: 80px;">🎧</div>
+                    </div>
+                    <div class="product-card__quick-view">Aperçu Rapide</div>
+                    <div class="product-card__content">
+                        <p class="product-card__brand">Apple</p>
+                        <h3 class="product-card__name">AirPods Pro 2ème Génération</h3>
+                        <div class="product-card__rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(256)</span>
+                        </div>
+                        <div class="product-card__price">
+                            <span class="product-card__price-current">175 000 FCA</span>
+                        </div>
+                        <div class="product-card__actions">
+                            <button class="product-card__btn product-card__btn--cart" onclick="addToCart(2)">
+                                Ajouter au Panier
+                            </button>
+                            <button class="product-card__btn product-card__btn--wishlist">♡</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-card__badges">
+                        <span class="product-badge product-badge--promo">-15%</span>
+                    </div>
+                    <div class="product-card__image">
+                        <div style="font-size: 80px;">⌚</div>
+                    </div>
+                    <div class="product-card__quick-view">Aperçu Rapide</div>
+                    <div class="product-card__content">
+                        <p class="product-card__brand">Apple</p>
+                        <h3 class="product-card__name">Apple Watch Ultra 2</h3>
+                        <div class="product-card__rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(89)</span>
+                        </div>
+                        <div class="product-card__price">
+                            <span class="product-card__price-current">520 000 FCA</span>
+                            <span class="product-card__price-original">600 000 FCA</span>
+                        </div>
+                        <div class="product-card__actions">
+                            <button class="product-card__btn product-card__btn--cart" onclick="addToCart(3)">
+                                Ajouter au Panier
+                            </button>
+                            <button class="product-card__btn product-card__btn--wishlist">♡</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-card__image">
+                        <div style="font-size: 80px;">💻</div>
+                    </div>
+                    <div class="product-card__quick-view">Aperçu Rapide</div>
+                    <div class="product-card__content">
+                        <p class="product-card__brand">Apple</p>
+                        <h3 class="product-card__name">MacBook Air M4 15"</h3>
+                        <div class="product-card__rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-count">(67)</span>
+                        </div>
+                        <div class="product-card__price">
+                            <span class="product-card__price-current">1 150 000 FCA</span>
+                        </div>
+                        <div class="product-card__actions">
+                            <button class="product-card__btn product-card__btn--cart" onclick="addToCart(4)">
+                                Ajouter au Panier
+                            </button>
+                            <button class="product-card__btn product-card__btn--wishlist">♡</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-header__title">Pourquoi Choisir E-Tech ?</h2>
+                <p class="section-header__subtitle">
+                    Votre partenaire de confiance pour l'électronique au Bénin
+                </p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; text-align: center;">
+                <div style="padding: 24px;">
+                    <div style="font-size: 48px; margin-bottom: 16px;">🛡️</div>
+                    <h3>Authenticité 100%</h3>
+                    <p style="color: #666;">Tous nos produits sont certifiés originaux avec garantie constructeur internationale.</p>
+                </div>
+                <div style="padding: 24px;">
+                    <div style="font-size: 48px; margin-bottom: 16px;">💰</div>
+                    <h3>Prix Compétitifs</h3>
+                    <p style="color: #666;">-15 à -30% par rapport aux boutiques locales grâce à notre sourcing direct.</p>
+                </div>
+                <div style="padding: 24px;">
+                    <div style="font-size: 48px; margin-bottom: 16px;">⚡</div>
+                    <h3>Livraison Rapide</h3>
+                    <p style="color: #666;">2-3 jours au Bénin, 5-10 jours pour l'international avec suivi en temps réel.</p>
+                </div>
+                <div style="padding: 24px;">
+                    <div style="font-size: 48px; margin-bottom: 16px;">💬</div>
+                    <h3>Support 24/7</h3>
+                    <p style="color: #666;">Assistant IA + équipe humaine pour répondre à toutes vos questions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container newsletter__content">
+            <h2 class="newsletter__title">Recevez Nos Offres Exclusives</h2>
+            <p class="newsletter__text">
+                Inscrivez-vous et recevez -10% sur votre première commande + les meilleures offres!
+            </p>
+            <form class="newsletter__form" onsubmit="subscribeNewsletter(event)">
+                <input 
+                    type="email" 
+                    class="newsletter__input" 
+                    placeholder="Votre adresse email" 
+                    required
+                >
+                <button type="submit" class="btn btn--primary">
+                    S'inscrire
+                </button>
+            </form>
+            <p class="newsletter__promise">
+                🔒 Vos données sont sécurisées. Désinscription possible à tout moment.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-header__title">Contactez-Nous</h2>
+                <p class="section-header__subtitle">
+                    Notre équipe est disponible 24/7 pour vous accompagner
+                </p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; text-align: center;">
+                <div style="padding: 24px; background: #f8f9fa; border-radius: 12px;">
+                    <div style="font-size: 32px; margin-bottom: 16px;">💬</div>
+                    <h3>WhatsApp</h3>
+                    <p style="color: #666;">+229 XX XX XX XX</p>
+                    <a href="https://wa.me/229XXXXXXXX" class="btn btn--primary" style="margin-top: 16px;">
+                        Envoyer un Message
+                    </a>
+                </div>
+                <div style="padding: 24px; background: #f8f9fa; border-radius: 12px;">
+                    <div style="font-size: 32px; margin-bottom: 16px;">✉️</div>
+                    <h3>Email</h3>
+                    <p style="color: #666;">support@e-tech.bj</p>
+                    <a href="mailto:support@e-tech.bj" class="btn btn--primary" style="margin-top: 16px;">
+                        Envoyer un Email
+                    </a>
+                </div>
+                <div style="padding: 24px; background: #f8f9fa; border-radius: 12px;">
+                    <div style="font-size: 32px; margin-bottom: 16px;">📍</div>
+                    <h3>Adresse</h3>
+                    <p style="color: #666;">Cotonou, Bénin</p>
+                    <a href="#about" class="btn btn--primary" style="margin-top: 16px;">
+                        Voir sur la Carte
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <div class="footer__logo">
+                        <div class="header__logo-icon">⚡</div>
+                        <span>E-Tech</span>
+                    </div>
+                    <p class="footer__description">
+                        Votre boutique d'électronique premium au Bénin. 100% produits authentiques 
+                        avec garantie internationale. Livraison rapide dans toute l'Afrique de l'Ouest.
+                    </p>
+                    <div class="footer__social">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="TikTok">🎵</a>
+                        <a href="#" aria-label="WhatsApp">💬</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="footer__title">Catégories</h4>
+                    <ul class="footer__links">
+                        <li><a href="#">Smartphones</a></li>
+                        <li><a href="#">Ordinateurs</a></li>
+                        <li><a href="#">Audio</a></li>
+                        <li><a href="#">Accessoires</a></li>
+                        <li><a href="#">Objets Connectés</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer__title">Informations</h4>
+                    <ul class="footer__links">
+                        <li><a href="#">À Propos</a></li>
+                        <li><a href="#">Nos Fournisseurs</a></li>
+                        <li><a href="#">Garantie & SAV</a></li>
+                        <li><a href="#">Livraison</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer__title">Support</h4>
+                    <ul class="footer__links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Conditions de Retour</a></li>
+                        <li><a href="#">Politique de Confidentialité</a></li>
+                        <li><a href="#">CGV</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer__title">Moyens de Paiement</h4>
+                    <div class="payment-methods">
+                        <span>💳 Visa</span>
+                        <span>💳 Mastercard</span>
+                        <span>📱 MTN</span>
+                        <span>📱 Moov</span>
+                        <span>🏦 Virement</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p class="footer__copyright">
+                    © 2025 E-Tech. Tous droits réservés. | E-Tech SARL - Cotonou, Bénin
+                </p>
+                <div class="footer__legal">
+                    <a href="#">CGV</a>
+                    <a href="#">Mentions Légales</a>
+                    <a href="#">Politique RGPD</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>
