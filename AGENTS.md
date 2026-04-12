@@ -7,7 +7,7 @@
 - **Launch Date**: Q2 2025
 
 ## Key Technologies
-- **Frontend**: Wix E-Commerce Premium
+- **Frontend**: [À définir - pas Wix]
 - **Automation**: N8N (self-hosted on VPS)
 - **AI**: Anthropic Claude Sonnet 4 (12 agents)
 - **Database**: Google Sheets (Phase 1-2), PostgreSQL (future)
