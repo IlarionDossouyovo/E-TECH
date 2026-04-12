@@ -1,0 +1,6 @@
+Date,Revenue_FCFA,Orders,Avg_Basket_FCFA,Conversion_Rate,New_Clients,Returning_Clients,Abandoned_Carts,Shipping_Cost_FCFA,Tickets_Support,Response_Time_Min
+
+# Example data format for E-Tech Dashboard
+# Daily KPIs to track
+
+2025-04-01,0,0,0,0,0,0,0,0,0,0

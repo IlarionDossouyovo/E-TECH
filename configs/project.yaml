@@ -1,0 +1,186 @@
+# E-Tech Project Configuration
+project:
+  name: "E-Tech"
+  type: "ecommerce"
+  location: "Cotonou, Benin"
+  founded: "2025"
+  currency:
+    primary: "FCFA"
+    secondary: ["EUR", "USD"]
+    exchange_margin: 0.02  # 2% margin on exchange
+  vat_rate: 0.18  # 18% Benin VAT
+
+business:
+  objectives:
+    month_3:
+      revenue: 5000000  # 5M FCA
+      orders: 50
+      avg_basket: 100000
+    month_6:
+      revenue: 20000000  # 20M
+      orders: 200
+    month_12:
+      revenue: 60000000  # 60M
+      orders: 600
+
+  margins:
+    phase_1: 0.30  # 30%
+    phase_2: 0.35  # 35%
+    phase_3: 0.40  # 40%
+
+products:
+  categories:
+    - name: "Smartphones Nouvelle Génération"
+      level: 1
+      subcategories:
+        - iPhone (16 Series)
+        - Samsung Galaxy (S25)
+        - Google Pixel (9)
+        - Xiaomi (14)
+        - OnePlus (12)
+      price_range: [150000, 1500000]
+    - name: "Accessoires Smartphones Premium"
+      level: 1
+      subcategories:
+        - Coques & Protection
+        - Chargeurs & Alimentation
+        - Audio & Son
+        - Connectivité
+      price_range: [5000, 150000]
+    - name: "Ordinateurs Dernière Génération"
+      level: 1
+      subcategories:
+        - Ultrabooks Premium
+        - PC Gaming
+        - Stations de travail
+      price_range: [300000, 3500000]
+    - name: "Accessoires Informatiques"
+      level: 1
+      subcategories:
+        - Périphériques
+        - Stockage
+        - Réseau
+      price_range: [8000, 500000]
+    - name: "Objets Connectés & IoT"
+      level: 1
+      subcategories:
+        - Wearables
+        - Smart Home
+        - Audio Premium
+      price_range: [25000, 600000]
+    - name: "Audio & Son Haute Fidélité"
+      level: 1
+      price_range: [35000, 1200000]
+
+  sourcing:
+    scan_interval_hours: 6
+    min_score: 70
+    min_supplier_rating: 4.0
+    min_reviews: 50
+
+logistics:
+  delivery:
+    benin:
+      standard_days: 3
+      express_days: 1
+      free_threshold: 50000
+    international:
+      standard_days: 7
+      express_days: 3
+    storage:
+      phase_1: "dropshipping"
+      phase_2: "20% local"
+      phase_3: "40% local"
+
+  partners:
+    international: ["DHL", "FedEx", "UPS"]
+    local: ["DHL Benin", "Coursier local"]
+
+payments:
+  methods:
+    - card (Stripe)
+    - mobile_money (MTN, Moov)
+    - paypal
+    - bank_transfer
+    - cash_on_delivery
+
+support:
+  channels:
+    - WhatsApp
+    - Messenger
+    - Email
+    - Phone
+  hours:
+    ai: "24/7"
+    human: "8h-20h WAT"
+  response_time:
+    target_minutes: 5
+    max_first_contact_resolution: 0.90
+
+automation:
+  n8n:
+    host: "VPS (Contabo)"
+    ram: "8GB"
+    cpu: "4 vCores"
+    auto_update: true
+
+  agents:
+    - name: "Master AI Orchestrator"
+      schedule: "daily 8h"
+    - name: "Product Sourcing AI"
+      schedule: "every 6h"
+    - name: "Marketing AI"
+      schedule: "3x daily"
+    - name: "Sales AI"
+      schedule: "every 30min"
+    - name: "Customer Service AI"
+      schedule: "24/7"
+    - name: "Content AI"
+      schedule: "2/week"
+    - name: "Social Media AI"
+      schedule: "daily"
+    - name: "Analytics AI"
+      schedule: "daily 8h"
+    - name: "Inventory AI"
+      schedule: "realtime"
+    - name: "Finance AI"
+      schedule: "monthly"
+    - name: "Email Marketing AI"
+      schedule: "weekly"
+    - name: "Competitor Intelligence AI"
+      schedule: "daily"
+
+marketing:
+  channels:
+    - Facebook
+    - Instagram
+    - TikTok
+    - WhatsApp Business
+    - Email
+    - SEO
+
+  launch_social:
+    facebook:
+      target_followers_month_3: 1000
+      target_followers_month_6: 5000
+      target_followers_month_12: 15000
+    instagram:
+      target_followers_month_3: 800
+      target_followers_month_6: 4000
+      target_followers_month_12: 12000
+    tiktok:
+      target_followers_month_3: 500
+      target_followers_month_6: 3000
+      target_followers_month_12: 10000
+
+  budgets:
+    month_1_3: 500000  # Organic
+    month_4_6: 1200000
+    month_7_12: 2000000
+
+security:
+  tls_version: "1.3"
+  pci_dss: "SAQ A (Stripe)"
+  2fa_required: true
+  password_min_length: 12
+  session_timeout_minutes: 30

@@ -1,0 +1,67 @@
+{
+  "name": "E-Tech Master AI Orchestrator",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": "everyDay",
+        "hour": 8,
+        "minute": 0
+      },
+      "id": "schedule-trigger",
+      "name": "Morning Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [100, 300]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "sheetId": "{{$credentials.google_sheets_id}}",
+        "range": "Dashboard!A1:Z50"
+      },
+      "id": "get-dashboard",
+      "name": "Get KPIs",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [300, 300]
+    },
+    {
+      "parameters": {
+        "prompt": "You are the Master AI Orchestrator for E-Tech e-commerce. Analyze these daily KPIs and provide a summary: Revenue, conversion rate, abandoned carts, critical stock, support tickets, social engagement, ad ROI. Then list top 3 successes, top 3 alerts, and 5 priority actions for today.\n\nKPIs: {{$json.kpis}}"
+      },
+      "id": "analyze-kpis",
+      "name": "Analyze KPIs (Claude)",
+      "type": "anthropic",
+      "typeVersion": 1,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "channel": "telegram",
+        "chatId": "{{$credentials.telegram_chat_id}}",
+        "text": "📊 *E-Tech Daily Report*\n\n{{$json.report}}"
+      },
+      "id": "send-report",
+      "name": "Send Telegram Report",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [700, 300]
+    }
+  ],
+  "connections": {
+    "Morning Schedule": {
+      "main": [[{"node": "Get KPIs", "type": "main", "index": 0}]]
+    },
+    "Get KPIs": {
+      "main": [[{"node": "Analyze KPIs (Claude)", "type": "main", "index": 0}]]
+    },
+    "Analyze KPIs (Claude)": {
+      "main": [[{"node": "Send Telegram Report", "type": "main", "index": 0}]]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "version": 1
+}

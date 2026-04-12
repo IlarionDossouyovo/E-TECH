@@ -1,0 +1,89 @@
+{
+  "name": "Sales AI (Abandoned Cart)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": "everyCustomInterval",
+        "minutes": 30
+      },
+      "id": "schedule-trigger",
+      "name": "Every 30 Minutes",
+      "type": "scheduleTrigger",
+      "position": [100, 300]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "sheetId": "{{$credentials.google_sheets_id}}",
+        "range": "Panier_Récupération!A1:Z100"
+      },
+      "id": "get-abandoned",
+      "name": "Get Abandoned Carts",
+      "type": "googleSheets",
+      "typeVersion": 4,
+      "position": [300, 300]
+    },
+    {
+      "parameters": {
+        "operation": "if",
+        "value1": "{{$json.cart_value}}",
+        "operation": "greaterThan",
+        "value2": 150000
+      },
+      "id": "check-cart-value",
+      "name": "Cart > 150k?",
+      "type": "if",
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "prompt": "Create a WhatsApp recovery message for an abandoned cart.\n\nProduct: {{$json.product_name}}\nCart value: {{$json.cart_value}} FCA\nTime abandoned: {{$json.hours_ago}} hours ago\n\nTone: Professional, warm, not pushy.\nInclude: 10% discount code for carts > 150k.\nMax 2 sentences."
+      },
+      "id": "generate-message-vip",
+      "name": "Generate VIP Message",
+      "type": "anthropic",
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "prompt": "Create a WhatsApp recovery message for an abandoned cart.\n\nProduct: {{$json.product_name}}\nCart value: {{$json.cart_value}} FCA\nTime abandoned: {{$json.hours_ago}} hours ago\n\nTone: Professional, warm, not pushy.\nMax 2 sentences."
+      },
+      "id": "generate-message-std",
+      "name": "Generate Standard Message",
+      "type": "anthropic",
+      "position": [700, 450]
+    },
+    {
+      "parameters": {
+        "channel": "whatsapp",
+        "chatId": "{{$json.phone}}",
+        "text": "{{$json.message}}"
+      },
+      "id": "send-whatsapp",
+      "name": "Send WhatsApp",
+      "type": "httpRequest",
+      "position": [900, 300]
+    }
+  ],
+  "connections": {
+    "Every 30 Minutes": {
+      "main": [[{"node": "Get Abandoned Carts", "type": "main", "index": 0}]]
+    },
+    "Get Abandoned Carts": {
+      "main": [[{"node": "Cart > 150k?", "type": "main", "index": 0}]]
+    },
+    "Cart > 150k?": {
+      "true": [[{"node": "Generate VIP Message", "type": "main", "index": 0}]],
+      "false": [[{"node": "Generate Standard Message", "type": "main", "index": 0}]]
+    },
+    "Generate VIP Message": {
+      "main": [[{"node": "Send WhatsApp", "type": "main", "index": 0}]]
+    },
+    "Generate Standard Message": {
+      "main": [[{"node": "Send WhatsApp", "type": "main", "index": 0}]]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "version": 1
+}

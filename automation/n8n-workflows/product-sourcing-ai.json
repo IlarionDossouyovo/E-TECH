@@ -1,0 +1,125 @@
+{
+  "name": "Product Sourcing AI",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": "everyCustomInterval",
+        "hours": 6
+      },
+      "id": "schedule-trigger",
+      "name": "Every 6 Hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [100, 300]
+    },
+    {
+      "parameters": {
+        "operation": "scrape",
+        "url": "https://www.copify.com/products/trending",
+        "scrapeProperty": "html"
+      },
+      "id": "scrape-copify",
+      "name": "Scan Copify",
+      "type": "n8n-nodes-base.httPRequest",
+      "typeVersion": 4,
+      "position": [300, 300]
+    },
+    {
+      "parameters": {
+        "operation": "scrape",
+        "url": "https://www.alibaba.com/category electronics",
+        "scrapeProperty": "html"
+      },
+      "id": "scrape-alibaba",
+      "name": "Scan Alibaba",
+      "type": "n8n-nodes-base.httPRequest",
+      "typeVersion": 4,
+      "position": [300, 450]
+    },
+    {
+      "parameters": {
+        "operation": "scrape",
+        "url": "https://www.amazon.com/Best-Sellers-Electronics",
+        "scrapeProperty": "html"
+      },
+      "id": "scrape-amazon",
+      "name": "Scan Amazon",
+      "type": "n8n-nodes-base.httPRequest",
+      "typeVersion": 4,
+      "position": [300, 600]
+    },
+    {
+      "parameters": {
+        "prompt": "You are the Product Sourcing AI for E-Tech. Analyze these products: {{$json.products}}\n\nFor each product, calculate:\n1. Benin market potential score (0-100)\n2. International market potential (0-100)\n3. Optimal margin calculation\n4. Risk identification\n\nRecommend: ADD, WAIT, or REJECT\n\nMin criteria: supplier rating >4.0, min 50 reviews, price $100-1000, available stock"
+      },
+      "id": "analyze-products",
+      "name": "Analyze (Claude)",
+      "type": "anthropic",
+      "typeVersion": 1,
+      "position": [500, 450]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetId": "{{$credentials.google_sheets_id}}",
+        "range": "Sourcing_Recommendations!A1",
+        "value": "{{$json.recommendations}}"
+      },
+      "id": "save-recommendations",
+      "name": "Save to Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [700, 450]
+    },
+    {
+      "parameters": {
+        "operation": "if",
+        "value1": "{{$json.recommendations}}",
+        "operation": "notEmpty"
+      },
+      "id": "check-recommendations",
+      "name": "Any Recommendations?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [900, 450]
+    },
+    {
+      "parameters": {
+        "channel": "telegram",
+        "chatId": "{{$credentials.telegram_chat_id}}",
+        "text": "🛒 *Product Sourcing Alert*\n\nFound {{$json.count}} new products to recommend:\n\n{{$json.summary}}"
+      },
+      "id": "notify-team",
+      "name": "Telegram Alert",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [1100, 450]
+    }
+  ],
+  "connections": {
+    "Every 6 Hours": {
+      "main": [[{"node": "Scan Copify", "type": "main", "index": 0}]]
+    },
+    "Scan Copify": {
+      "main": [[{"node": "Analyze (Claude)", "type": "main", "index": 0}]]
+    },
+    "Scan Alibaba": {
+      "main": [[{"node": "Analyze (Claude)", "type": "main", "index": 0}]]
+    },
+    "Scan Amazon": {
+      "main": [[{"node": "Analyze (Claude)", "type": "main", "index": 0}]]
+    },
+    "Analyze (Claude)": {
+      "main": [[{"node": "Save to Sheets", "type": "main", "index": 0}]]
+    },
+    "Save to Sheets": {
+      "main": [[{"node": "Any Recommendations?", "type": "main", "index": 0}]]
+    },
+    "Any Recommendations?": {
+      "main": [[{"node": "Telegram Alert", "type": "main", "index": 0}]]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "version": 1
+}
