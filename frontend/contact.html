@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | E-Tech</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .contact-page { padding: 48px 0; }
+        .contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+        .contact-card { background: white; padding: 32px; border-radius: 12px; text-align: center; }
+        .contact-card__icon { font-size: 48px; margin-bottom: 16px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; }
+        .form-group textarea { min-height: 150px; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__content">
+            <a href="index.html" class="header__logo"><span>⚡ E-Tech</span></a>
+            <nav class="header__nav">
+                <a href="index.html">Accueil</a>
+                <a href="products.html">Produits</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="contact-page">
+        <div class="container">
+            <h1 style="text-align: center; margin-bottom: 32px;">Contactez-Nous</h1>
+            
+            <div style="text-align: center; margin-bottom: 48px;">
+                <p>Notre équipe est disponible 24/7 pour vous accompagner</p>
+            </div>
+            
+            <!-- Quick Contact Cards -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 48px;">
+                <div class="contact-card">
+                    <div class="contact-card__icon">💬</div>
+                    <h3>WhatsApp</h3>
+                    <p>+229 XX XX XX XX</p>
+                    <p style="color: #666; margin-top: 8px;">24/7 - Réponse instantanée</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-card__icon">✉️</div>
+                    <h3>Email</h3>
+                    <p>support@e-tech.bj</p>
+                    <p style="color: #666; margin-top: 8px;">Réponse sous 2h</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-card__icon">📍</div>
+                    <h3>Adresse</h3>
+                    <p>Cotonou, Bénin</p>
+                    <p style="color: #666; margin-top: 8px;">Sur rendez-vous</p>
+                </div>
+            </div>
+            
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div style="background: white; padding: 32px; border-radius: 12px;">
+                    <h3 style="margin-bottom: 24px;">📝Formulaire de Contact</h3>
+                    <form onsubmit="submitContact(event)">
+                        <div class="form-group">
+                            <label>Nom complet</label>
+                            <input type="text" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Téléphone</label>
+                            <input type="tel" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label>Sujet</label>
+                            <select name="subject">
+                                <option value="order">Question sur une commande</option>
+                                <option value="product">Question sur un produit</option>
+                                <option value="return">Retour/Echange</option>
+                                <option value="partnership">Partenariat</option>
+                                <option value="other">Autre</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn--primary">Envoyer le Message</button>
+                    </form>
+                </div>
+                
+                <!-- Map / Info -->
+                <div style="background: white; padding: 32px; border-radius: 12px;">
+                    <h3 style="margin-bottom: 24px;">ℹ️Informations</h3>
+                    
+                    <div style="margin-bottom: 24px;">
+                        <h4>🕐 Horaires</h4>
+                        <p>Lundi - Samedi: 8h - 20h</p>
+                        <p>Dimanche: 10h - 18h</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 24px;">
+                        <h4>📦 Livraisons</h4>
+                        <p>Cotonou: 1-2 jours</p>
+                        <p>Autres villes BJ: 2-3 jours</p>
+                        <p>International: 5-10 jours</p>
+                    </div>
+                    
+                    <div>
+                        <h4>🔄 Retours</h4>
+                        <p>30 jours pour retourner</p>
+                        <p>Produit neuf, emballage intact</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__bottom">
+                <p class="footer__copyright">© 2025 E-Tech. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        function submitContact(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            alert('Message envoyé! Notre équipe vous répondra sous 2h.');
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>

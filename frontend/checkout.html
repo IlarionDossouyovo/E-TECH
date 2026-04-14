@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commande | E-Tech</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .checkout { padding: 48px 0; }
+        .checkout-grid { display: grid; grid-template-columns: 1fr 380px; gap: 32px; }
+        .form-section { background: white; padding: 24px; border-radius: 12px; margin-bottom: 24px; }
+        .form-section h3 { margin-bottom: 16px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; }
+        .payment-methods { display: flex; flex-direction: column; gap: 12px; }
+        .payment-option { display: flex; align-items: center; gap: 12px; padding: 16px; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; }
+        .payment-option.selected { border-color: var(--or-champagne); background: #fffbeb; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__content">
+            <a href="index.html" class="header__logo"><span>⚡ E-Tech</span></a>
+        </div>
+    </header>
+
+    <section class="checkout">
+        <div class="container">
+            <h1 style="margin-bottom: 32px;">Finaliser Votre Commande</h1>
+            
+            <div class="checkout-grid">
+                <div>
+                    <!-- Contact -->
+                    <div class="form-section">
+                        <h3>📞Informations de Contact</h3>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="email" placeholder="votre@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Téléphone</label>
+                            <input type="tel" id="phone" placeholder="+229 XX XX XX XX">
+                        </div>
+                    </div>
+                    
+                    <!-- Shipping -->
+                    <div class="form-section">
+                        <h3>🚚Livraison</h3>
+                        <div class="form-group">
+                            <label>Nom complet</label>
+                            <input type="text" id="name" placeholder="Votre nom">
+                        </div>
+                        <div class="form-group">
+                            <label>Adresse</label>
+                            <input type="text" id="address" placeholder="Adresse complète">
+                        </div>
+                        <div class="form-group">
+                            <label>Ville</label>
+                            <select id="city">
+                                <option value="cotono">Cotonou</option>
+                                <option value="porto-novo">Porto-Novo</option>
+                                <option value="other">Autre ville</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Payment -->
+                    <div class="form-section">
+                        <h3>💳Paiement</h3>
+                        <div class="payment-methods">
+                            <div class="payment-option selected" onclick="selectPayment('card')">
+                                <span>💳</span> <div><strong>Carte Bancaire</strong><br><small>Visa, Mastercard</small></div>
+                            </div>
+                            <div class="payment-option" onclick="selectPayment('mobile')">
+                                <span>📱</span> <div><strong>Mobile Money</strong><br><small>MTN, Moov</small></div>
+                            </div>
+                            <div class="payment-option" onclick="selectPayment('virement')">
+                                <span>🏦</span> <div><strong>Virement Bancaire</strong></div>
+                            </div>
+                            <div class="payment-option" onclick="selectPayment('delivery')">
+                                <span>💵</span> <div><strong>Paiement à la livraison</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Summary -->
+                <div class="form-section" style="position: sticky; top: 100px;">
+                    <h3>Récapitulatif</h3>
+                    <div id="order-items"></div>
+                    <hr style="margin: 16px 0;">
+                    <div style="display: flex; justify-content: space-between;"><span>Sous-total</span><span id="subtotal">0 FCA</span></div>
+                    <div style="display: flex; justify-content: space-between;"><span>Livraison</span><span id="shipping">-</span></div>
+                    <div style="display: flex; justify-content: space-between;"><span>TVA</span><span id="vat">0 FCA</span></div>
+                    <hr style="margin: 16px 0;">
+                    <div style="display: flex; justify-content: space-between; font-size: 20px; font-weight: 700;"><span>Total</span><span id="total">0 FCA</span></div>
+                    
+                    <button class="btn btn--primary" style="width: 100%; margin-top: 24px;" onclick="placeOrder()">
+                        Passer la Commande
+                    </button>
+                    
+                    <p style="text-align: center; margin-top: 16px; font-size: 12px; color: #666;">
+                        🔒 Paiement sécurisé | 📦 Livraison 2-3 jours | ↩️ 30 jours pour retourner
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script src="js/main.js"></script>
+    <script>
+        function selectPayment(method) {
+            document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+        }
+        
+        function placeOrder() {
+            alert('Commande passée! Merci pour votre achat.');
+            window.location.href = 'index.html';
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const cart = JSON.parse(localStorage.getItem('e-tech-cart')) || [];
+            const itemsContainer = document.getElementById('order-items');
+            itemsContainer.innerHTML = cart.map(item => `
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span>${item.name} x${item.quantity}</span>
+                    <span>${formatPrice(item.price * item.quantity)}</span>
+                </div>
+            `).join('');
+            
+            const subtotal = getCartTotal();
+            const shipping = getShippingCost();
+            const vat = Math.round(subtotal * 0.18);
+            const total = subtotal + shipping + vat;
+            
+            document.getElementById('subtotal').textContent = formatPrice(subtotal);
+            document.getElementById('shipping').textContent = shipping === 0 ? 'Gratuit' : formatPrice(shipping);
+            document.getElementById('vat').textContent = formatPrice(vat);
+            document.getElementById('total').textContent = formatPrice(total);
+        });
+    </script>
+</body>
+</html>
