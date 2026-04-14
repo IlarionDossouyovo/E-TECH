@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objets Connectés | E-Tech</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../images/logo.svg">
+    <style>.category-hero{background:linear-gradient(135deg,#0A1929,#1a3a5c);color:#fff;padding:60px 0;text-align:center}.category-hero__icon{font-size:80px}</style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__content">
+            <a href="../index.html" class="header__logo"><div class="header__logo-icon">⚡</div><span>E-Tech</span></a>
+            <nav class="header__nav">
+                <a href="../index.html">Accueil</a>
+                <a href="smartphones.html">Smartphones</a>
+                <a href="computers.html">Ordinateurs</a>
+                <a href="audio.html">Audio</a>
+                <a href="wearables.html" class="active">Objets Connectés</a>
+            </nav>
+            <div class="header__actions"><a href="../cart.html">🛒</a></div>
+        </div>
+    </header>
+    <section class="category-hero">
+        <div class="container"><div class="category-hero__icon">⌚</div><h1>Objets Connectés & IoT</h1><p>Montres, Fitbit, Maison intelligente</p></div>
+    </section>
+    <section style="padding:24px;background:#f8f9fa;text-align:center">
+        <div style="display:flex;gap:16px;justify-content:center">
+            <a href="wearables.html" class="btn btn--primary">Tous</a>
+            <a href="smartwatches.html" class="btn btn--secondary">Montres</a>
+            <a href="fitness.html" class="btn btn--secondary">Fitness</a>
+            <a href="smarthome.html" class="btn btn--secondary">Smart Home</a>
+        </div>
+    </section>
+    <section class="products" style="padding:48px 0"><div class="container"><div class="products__grid" id="products-grid"></div></section>
+    <footer class="footer"><div class="container"><div class="footer__bottom"><p>© 2025 E-Tech</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+        const products = [
+            {id:3,name:'Apple Watch Ultra 2',brand:'Apple',price:520000,originalPrice:600000,image:'⌚',badge:'promo',rating:5,reviews:89},
+            {id:42,name:'Apple Watch Series 9',brand:'Apple',price:320000,image:'⌚',rating:5,reviews:156},
+            {id:43,name:'Galaxy Watch6',brand:'Samsung',price:245000,image:'⌚',rating:4,reviews:78},
+            {id:44,name:'Fitbit Charge 6',brand:'Fitbit',price:85000,image:'⌚',rating:4,reviews:234},
+            {id:45,name:'Google Nest Hub',brand:'Google',price:95000,image:'🏠',badge:'new',rating:4,reviews:45},
+            {id:46,name:'Ring Video Doorbell',brand:'Ring',price:145000,image:'🔔',rating:4,reviews:67},
+            {id:47,name:'Philips Hue Starter',brand:'Philips',price:125000,image:'💡',rating:4,reviews:89},
+            {id:48,name:'Oura Ring Gen4',brand:'Oura',price:450000,image:'💍',badge:'new',rating:5,reviews:34}
+        ];
+        document.addEventListener('DOMContentLoaded',()=>{
+            document.getElementById('products-grid').innerHTML=products.map(p=>`<div class="product-card">${p.badge?`<div class="product-card__badges"><span class="product-badge product-badge--${p.badge}">${p.badge}</span></div>`:''}<div class="product-card__image"><div style="font-size:80px">${p.image}</div></div><div class="product-card__quick-view">Aperçu</div><div class="product-card__content"><p class="product-card__brand">${p.brand}</p><h3 class="product-card__name">${p.name}</h3><div class="product-card__rating"><span class="stars">${'★'.repeat(p.rating)}</span><span>(${p.reviews})</span></div><div class="product-card__price"><span>${formatPrice(p.price)}</span>${p.originalPrice?`<span class="product-card__price-original">${formatPrice(p.originalPrice)}</span>`:''}</div><div class="product-card__actions"><button class="btn btn--primary">Panier</button><button>♡</button></div></div></div>`).join('')});
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone 16 | E-Tech</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../images/logo.svg">
+    <style>.category-hero{background:#0A1929;color:#fff;padding:60px 0;text-align:center}</style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__content">
+            <a href="../index.html" class="header__logo"><div class="header__logo-icon">⚡</div><span>E-Tech</span></a>
+            <nav class="header__nav">
+                <a href="../index.html">Accueil</a>
+                <a href="smartphones.html">Smartphones</a>
+                <a href="iphone.html" class="active">iPhone</a>
+            </nav>
+            <div class="header__actions"><a href="../cart.html">🛒</a></div>
+        </div>
+    </header>
+    <section class="category-hero"><div class="container"><h1>📱 iPhone 16 Series</h1><p>100% Apple Original - Garantie Internationale</p></div></section>
+    <section style="padding:48px 0"><div class="container"><div class="products__grid" id="products-grid"></div></section>
+    <footer class="footer"><div class="container"><div class="footer__bottom"><p>© 2025 E-Tech</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+        const products = [
+            {id:1,name:'iPhone 16 Pro Max 256Go',price:1450000,image:'📱',badge:'new',rating:5,reviews:128},
+            {id:11,name:'iPhone 16 Pro 256Go',price:1150000,image:'📱',badge:'new',rating:5,reviews:89},
+            {id:34,name:'iPhone 16 Plus 256Go',price:980000,image:'📱',badge:'new',rating:5,reviews:67},
+            {id:35,name:'iPhone 16 256Go',price:850000,image:'📱',badge:'new',rating:5,reviews:45},
+            {id:36,name:'iPhone 15 Pro Max',price:1100000,image:'📱',rating:4,reviews:234},
+            {id:37,name:'iPhone 15',price:650000,image:'📱',rating:4,reviews:312}
+        ];
+        document.addEventListener('DOMContentLoaded',()=>{
+            document.getElementById('products-grid').innerHTML=products.map(p=>`<div class="product-card">${p.badge?`<div class="product-card__badges"><span class="product-badge product-badge--${p.badge}">${p.badge}</span></div>`:''}<div class="product-card__image"><div style="font-size:80px">${p.image}</div></div><div class="product-card__quick-view">Aperçu</div><div class="product-card__content"><p class="product-card__brand">Apple</p><h3 class="product-card__name">${p.name}</h3><div class="product-card__rating"><span class="stars">${'★'.repeat(p.rating)}</span><span>(${p.reviews})</span></div><div class="product-card__price"><span class="product-card__price-current">${formatPrice(p.price)}</span></div><div class="product-card__actions"><button class="btn btn--primary">Panier</button><button>♡</button></div></div></div>`).join('')});
+    </script>
+</body>
+</html>

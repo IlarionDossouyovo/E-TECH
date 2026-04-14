@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="E-Tech - AirPods, Casques, Enceintes Bluetooth Premium">
+    <title>Audio & Son | E-Tech</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../images/logo.svg">
+    <style>.category-hero{background:linear-gradient(135deg,#0A1929,#1a3a5c);color:#fff;padding:60px 0;text-align:center}.category-hero__icon{font-size:80px;margin-bottom:16px}</style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__content">
+            <a href="../index.html" class="header__logo"><div class="header__logo-icon">⚡</div><span>E-Tech</span></a>
+            <nav class="header__nav">
+                <a href="../index.html">Accueil</a>
+                <a href="../products.html">Produits</a>
+                <a href="smartphones.html">Smartphones</a>
+                <a href="computers.html">Ordinateurs</a>
+                <a href="audio.html" class="active">Audio</a>
+                <a href="accessories.html">Accessoires</a>
+            </nav>
+            <div class="header__actions"><a href="../cart.html">🛒 <span class="cart-count">0</span></a></div>
+        </div>
+    </header>
+    <section class="category-hero">
+        <div class="container"><div class="category-hero__icon">🎧</div><h1>Audio & Son Haute Fidélité</h1><p>AirPods, Casques premium, Enceintes Bluetooth</p></div>
+    </section>
+    <section style="padding:24px;background:#f8f9fa;text-align:center">
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+            <a href="audio.html" class="btn btn--primary">Tous</a>
+            <a href="airpods.html" class="btn btn--secondary">AirPods</a>
+            <a href="headphones.html" class="btn btn--secondary">Casques</a>
+            <a href="speakers.html" class="btn btn--secondary">Enceintes</a>
+        </div>
+    </section>
+    <section class="products" style="padding:48px 0"><div class="container"><div class="products__grid" id="products-grid"></div></section>
+    <footer class="footer"><div class="container"><div class="footer__bottom"><p class="footer__copyright">© 2025 E-Tech</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+        const products = [
+            {id:2,name:'AirPods Pro 2',brand:'Apple',price:175000,image:'🎧',badge:'bestseller',rating:5,reviews:256},
+            {id:6,name:'Galaxy Buds3 Pro',brand:'Samsung',price:145000,image:'🎧',rating:4,reviews:78},
+            {id:21,name:'Sony WH-1000XM5',brand:'Sony',price:285000,image:'🎧',badge:'new',rating:5,reviews:123},
+            {id:22,name:'Bose QC Ultra',brand:'Bose',price:320000,image:'🎧',badge:'new',rating:5,reviews:89},
+            {id:23,name:'AirPods Max',brand:'Apple',price:450000,image:'🎧',rating:5,reviews:67},
+            {id:24,name:'Sonos Arc',brand:'Sonos',price:580000,image:'🔊',rating:5,reviews:45},
+            {id:25,name:'Bose SoundLink',brand:'Bose',price:195000,image:'🔊',rating:4,reviews:78},
+            {id:26,JBL:'Flip 6',price:85000,image:'🔊',rating:4,reviews:156}
+        ];
+        document.addEventListener('DOMContentLoaded',()=>{
+            document.getElementById('products-grid').innerHTML=products.map(p=>`<div class="product-card">${p.badge?`<div class="product-card__badges"><span class="product-badge product-badge--${p.badge}">${p.badge}</span></div>`:''}<div class="product-card__image"><div style="font-size:80px">${p.image}</div></div><div class="product-card__quick-view">Aperçu</div><div class="product-card__content"><p class="product-card__brand">${p.brand}</p><h3 class="product-card__name">${p.name}</h3><div class="product-card__rating"><span class="stars">${'★'.repeat(p.rating)}</span><span>(${p.reviews})</span></div><div class="product-card__price"><span>${formatPrice(p.price)}</span></div><div class="product-card__actions"><button class="btn btn--primary">Panier</button><button>♡</button></div></div></div>`).join('')});
+    </script>
+</body>
+</html>

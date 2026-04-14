@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="E-Tech - Accessoires premium: coques, chargeurs, cables, supports">
+    <title>Accessoires Tech | E-Tech</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../images/logo.svg">
+    <style>.category-hero{background:linear-gradient(135deg,#0A1929,#1a3a5c);color:#fff;padding:60px 0;text-align:center}.category-hero__icon{font-size:80px;margin-bottom:16px}</style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__content">
+            <a href="../index.html" class="header__logo"><div class="header__logo-icon">⚡</div><span>E-Tech</span></a>
+            <nav class="header__nav">
+                <a href="../index.html">Accueil</a>
+                <a href="../products.html">Produits</a>
+                <a href="smartphones.html">Smartphones</a>
+                <a href="computers.html">Ordinateurs</a>
+                <a href="audio.html">Audio</a>
+                <a href="accessories.html" class="active">Accessoires</a>
+            </nav>
+            <div class="header__actions"><a href="../cart.html">🛒 <span class="cart-count">0</span></a></div>
+        </div>
+    </header>
+    <section class="category-hero">
+        <div class="container"><div class="category-hero__icon">🔌</div><h1>Accessoires Premium</h1><p>Coques, Chargeurs, Câbles, Supports et plus</p></div>
+    </section>
+    <section style="padding:24px;background:#f8f9fa;text-align:center">
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+            <a href="accessories.html" class="btn btn--primary">Tous</a>
+            <a href="cases.html" class="btn btn--secondary">Coques</a>
+            <a href="chargers.html" class="btn btn--secondary">Chargeurs</a>
+            <a href="cables.html" class="btn btn--secondary">Câbles</a>
+            <a href="powerbanks.html" class="btn btn--secondary">Power Banks</a>
+            <a href="stands.html" class="btn btn--secondary">Supports</a>
+        </div>
+    </section>
+    <section class="products" style="padding:48px 0"><div class="container"><div class="products__grid" id="products-grid"></div></section>
+    <footer class="footer"><div class="container"><div class="footer__bottom"><p class="footer__copyright">© 2025 E-Tech</p></div></div></footer>
+    <script src="../js/main.js"></script>
+    <script>
+        const products = [
+            {id:8,name:'Anker Power Bank 20000mAh',brand:'Anker',price:35000,image:'🔋',badge:'bestseller',rating:5,reviews:234},
+            {id:27,name:'OtterBox Defender',brand:'OtterBox',price:25000,image:'📱',rating:5,reviews:89},
+            {id:28,name:'Spigen Ultra',brand:'Spigen',price:15000,image:'📱',rating:4,reviews:156},
+            {id:29,name:'Belkin Chargeur Sans Fil',brand:'Belkin',price:45000,image:'⚡',badge:'new',rating:5,reviews:67},
+            {id:30,name:'Anker Chargeur Rapide',brand:'Anker',price:18000,image:'⚡',rating:5,reviews:234},
+            {id:31,name:'Cable USB-C 2m',brand:'Belkin',price:12000,image:'🔌',rating:4,reviews:189},
+            {id:32,name:'Support Voiture Magnétique',brand:'Mous',price:22000,image:'🧲',rating:4,reviews:45},
+            {id:33,name:'Glass Trempé Premium',brand:' OtterBox',price:8000,image:'🛡️',rating:4,reviews:312}
+        ];
+        document.addEventListener('DOMContentLoaded',()=>{
+            document.getElementById('products-grid').innerHTML=products.map(p=>`<div class="product-card">${p.badge?`<div class="product-card__badges"><span class="product-badge product-badge--${p.badge}">${p.badge}</span></div>`:''}<div class="product-card__image"><div style="font-size:80px">${p.image}</div></div><div class="product-card__quick-view">Aperçu</div><div class="product-card__content"><p class="product-card__brand">${p.brand}</p><h3 class="product-card__name">${p.name}</h3><div class="product-card__rating"><span class="stars">${'★'.repeat(p.rating)}</span><span>(${p.reviews})</span></div><div class="product-card__price"><span>${formatPrice(p.price)}</span></div><div class="product-card__actions"><button class="btn btn--primary">Panier</button><button>♡</button></div></div></div>`).join('')});
+    </script>
+</body>
+</html>

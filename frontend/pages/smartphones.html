@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="E-Tech - Achetez les derniers iPhones au Benin. 100% authentiques avec garantie internationale.">
+    <title>iPhone & Smartphones | E-Tech</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="category.css">
+    <link rel="icon" href="../images/logo.svg">
+    <style>
+        .category-hero { background: linear-gradient(135deg, #0A1929 0%, #1a3a5c 100%); color: white; padding: 60px 0; text-align: center; }
+        .category-hero__icon { font-size: 80px; margin-bottom: 16px; }
+        .category-hero__title { font-size: 42px; margin-bottom: 12px; }
+        .category-hero__desc { font-size: 18px; opacity: 0.9; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__content">
+            <a href="../index.html" class="header__logo"><div class="header__logo-icon">⚡</div><span>E-Tech</span></a>
+            <nav class="header__nav">
+                <a href="../index.html">Accueil</a>
+                <a href="../products.html">Tous les Produits</a>
+                <a href="smartphones.html" class="active">Smartphones</a>
+                <a href="computers.html">Ordinateurs</a>
+                <a href="audio.html">Audio</a>
+                <a href="accessories.html">Accessoires</a>
+            </nav>
+            <div class="header__actions">
+                <a href="../cart.html" class="header__cart">🛒 <span class="cart-count" id="cart-count">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Category Hero -->
+    <section class="category-hero">
+        <div class="container">
+            <div class="category-hero__icon">📱</div>
+            <h1 class="category-hero__title">Smartphones Nouvelle Génération</h1>
+            <p class="category-hero__desc">Les derniers modèles iPhone, Samsung, Google Pixel et plus. 100% authentiques.</p>
+        </div>
+    </section>
+
+    <!-- Sub Categories -->
+    <section style="padding: 24px 0; background: #f8f9fa;">
+        <div class="container">
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                <a href="smartphones.html" class="btn btn--primary">Tous</a>
+                <a href="iphone.html" class="btn btn--secondary">iPhone</a>
+                <a href="samsung.html" class="btn btn--secondary">Samsung</a>
+                <a href="google-pixel.html" class="btn btn--secondary">Google Pixel</a>
+                <a href="xiaomi.html" class="btn btn--secondary">Xiaomi</a>
+                <a href="oneplus.html" class="btn btn--secondary">OnePlus</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="products" style="padding: 48px 0;">
+        <div class="container">
+            <div class="products__grid" id="products-grid">
+                <!-- Products loaded via JS -->
+            </div>
+            
+            <!-- Pagination -->
+            <div style="display: flex; justify-content: center; gap: 8px; margin-top: 48px;">
+                <button class="btn btn--secondary">← Précédent</button>
+                <button class="btn btn--primary">1</button>
+                <button class="btn btn--secondary">2</button>
+                <button class="btn btn--secondary">Suivant →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section style="padding: 48px 0; background: #f8f9fa;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center;">
+                <div><div style="font-size: 32px;">🛡️</div><h4>Garantie 1-3 ans</h4><p style="color:#666;">Internationale constructeur</p></div>
+                <div><div style="font-size: 32px;">📦</div><h4>Livraison</h4><p style="color:#666;">2-3 jours Benin</p></div>
+                <div><div style="font-size: 32px;">💰</div><h4>Prix Competitifs</h4><p style="color:#666;">-15 a -30%</p></div>
+                <div><div style="font-size: 32px;">💬</div><h4>Support 24/7</h4><p style="color:#666;">WhatsApp</p></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__bottom">
+                <p class="footer__copyright">© 2025 E-Tech. Tous droits réservés.</p>
+                <div class="footer__legal"><a href="#">CGV</a><a href="#">Mentions Légales</a></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Category products
+        const categoryProducts = [
+            { id: 1, name: 'iPhone 16 Pro Max 256Go', brand: 'Apple', price: 1450000, originalPrice: null, image: '📱', badge: 'new', rating: 5, reviews: 128 },
+            { id: 5, name: 'Samsung Galaxy S25 Ultra', brand: 'Samsung', price: 980000, originalPrice: null, image: '📱', badge: 'new', rating: 4, reviews: 95 },
+            { id: 7, name: 'Google Pixel 9 Pro', brand: 'Google', price: 750000, originalPrice: null, image: '📱', badge: 'new', rating: 4, reviews: 56 },
+            { id: 9, name: 'Xiaomi 14 Ultra', brand: 'Xiaomi', price: 850000, originalPrice: 950000, image: '📱', badge: 'promo', rating: 4, reviews: 45 },
+            { id: 10, name: 'OnePlus 12 Pro', brand: 'OnePlus', price: 680000, originalPrice: null, image: '📱', badge: null, rating: 4, reviews: 78 },
+            { id: 11, name: 'iPhone 16 Pro 256Go', brand: 'Apple', price: 1150000, originalPrice: null, image: '📱', badge: 'new', rating: 5, reviews: 89 },
+            { id: 12, name: 'Samsung Galaxy S25+', brand: 'Samsung', price: 750000, originalPrice: null, image: '📱', badge: null, rating: 4, reviews: 67 },
+            { id: 13, name: 'Google Pixel 9', brand: 'Google', price: 550000, originalPrice: null, image: '📱', badge: null, rating: 4, reviews: 34 }
+        ];
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts(categoryProducts);
+        });
+        
+        function renderProducts(products) {
+            document.getElementById('products-grid').innerHTML = products.map(p => `
+                <div class="product-card">
+                    ${p.badge ? `<div class="product-card__badges"><span class="product-badge product-badge--${p.badge}">${p.badge === 'new' ? 'Nouveau' : '-15%'}</span></div>` : ''}
+                    <div class="product-card__image"><div style="font-size:80px;">${p.image}</div></div>
+                    <div class="product-card__quick-view">Aperçu Rapide</div>
+                    <div class="product-card__content">
+                        <p class="product-card__brand">${p.brand}</p>
+                        <h3 class="product-card__name">${p.name}</h3>
+                        <div class="product-card__rating"><span class="stars">${'★'.repeat(p.rating)}${'☆'.repeat(5-p.rating)}</span><span class="rating-count">(${p.reviews})</span></div>
+                        <div class="product-card__price">
+                            <span class="product-card__price-current">${formatPrice(p.price)}</span>
+                            ${p.originalPrice ? `<span class="product-card__price-original">${formatPrice(p.originalPrice)}</span>` : ''}
+                        </div>
+                        <div class="product-card__actions">
+                            <button class="product-card__btn product-card__btn--cart" onclick="addToCart(${p.id})">Ajouter au Panier</button>
+                            <button class="product-card__btn product-card__btn--wishlist">♡</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>
