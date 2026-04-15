@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="E-Tech - Cameras de surveillance professionnel. Solutions securite haut de gamme">
+    <title>Cameras de Surveillance | E-Tech</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../images/logo.svg">
+    <style>
+        .category-hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 60px 0; text-align: center; }
+        .category-hero__icon { font-size: 80px; margin-bottom: 16px; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__content">
+            <a href="../index.html" class="header__logo"><div class="header__logo-icon">⚡</div><span>E-Tech</span></a>
+            <nav class="header__nav">
+                <a href="../index.html">Accueil</a>
+                <a href="smartphones.html">Smartphones</a>
+                <a href="computers.html">Ordis</a>
+                <a href="security-cameras.html" class="active">Securite</a>
+                <a href="accessories.html">Accessoires</a>
+            </nav>
+            <div class="header__actions"><a href="../cart.html">🛒 <span class="cart-count">0</span></a></div>
+        </div>
+    </header>
+
+    <section class="category-hero">
+        <div class="container">
+            <div class="category-hero__icon">📹</div>
+            <h1>Cameras de Surveillance Pro</h1>
+            <p>Solutions de securite haut de gamme pour particulier et entreprise</p>
+        </div>
+    </section>
+
+    <section style="padding: 24px; background: #f8f9fa; text-align: center;">
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <a href="security-cameras.html" class="btn btn--primary">Tous</a>
+            <a href="ip-cameras.html" class="btn btn--secondary">IP Cameras</a>
+            <a href="dvr-nvr.html" class="btn btn--secondary">DVR/NVR</a>
+            <a href="access-control.html" class="btn btn--secondary">Controle Acces</a>
+        </div>
+    </section>
+
+    <section class="products" style="padding: 48px 0;">
+        <div class="container">
+            <div class="products__grid" id="products-grid"></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__bottom">
+                <p class="footer__copyright">© 2025 E-Tech. Tous droits reserves.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        const securityProducts = [
+            // IP Cameras
+            { id: 501, name: 'Reolink RLC-811A 4K', brand: 'Reolink', category: 'security', price: 145000, image: '📹', badge: 'new', rating: 5, reviews: 45, specs: '4K Ultra HD, Night Vision, IP67' },
+            { id: 502, name: 'Hikvision DS-2CD2387G2 4K', brand: 'Hikvision', category: 'security', price: 180000, image: '📹', badge: 'new', rating: 5, reviews: 34, specs: '4K, ColorVu, IP67' },
+            { id: 503, name: 'Dahua IPC-HFW2849 4K', brand: 'Dahua', category: 'security', price: 165000, image: '📹', rating: 4, reviews: 28, specs: '4K, Starlight, IP67' },
+            { id: 504, name: 'Reolink Argus 3 Pro', brand: 'Reolink', category: 'security', price: 85000, image: '📹', badge: 'bestseller', rating: 5, reviews: 89, specs: '2K, WiFi, Battery' },
+            { id: 505, name: 'Eufy S350 4K', brand: 'Eufy', category: 'security', price: 195000, image: '📹', badge: 'new', rating: 5, reviews: 23, specs: '4K, PTZ, AI Tracking' },
+            
+            // PTZ Cameras
+            { id: 506, name: 'Hikvision PTZ 4K', brand: 'Hikvision', category: 'security', price: 350000, image: '📹', badge: 'new', rating: 5, reviews: 15, specs: '4K, 30x Zoom, IP67' },
+            { id: 507, name: 'Dahua PTZ 4K', brand: 'Dahua', category: 'security', price: 320000, image: '📹', rating: 5, reviews: 12, specs: '4K, 25x Zoom' },
+            
+            // Wifi/Solar
+            { id: 508, name: 'Reolink Go Plus 4G', brand: 'Reolink', category: 'security', price: 120000, image: '📹', rating: 4, reviews: 56, specs: '4G, Solar, 2K' },
+            { id: 509, name: 'Eufy SoloCam S340', brand: 'Eufy', category: 'security', price: 95000, image: '📹', rating: 4, reviews: 45, specs: 'Solar, 2K, WiFi' },
+            
+            // Doorbell Cameras
+            { id: 510, name: 'Ring Video Doorbell Pro', brand: 'Ring', category: 'security', price: 145000, image: '🔔', badge: 'new', rating: 5, reviews: 67, specs: '1080p, WiFi, Alexa' },
+            { id: 511, name: 'Google Nest Doorbell', brand: 'Google', category: 'security', price: 125000, image: '🔔', rating: 5, reviews: 45, specs: 'HDR, 24/7' },
+            { id: 512, name: 'Eufy Video Doorbell', brand: 'Eufy', category: 'security', price: 85000, image: '🔔', rating: 4, reviews: 78, specs: '2K, Local Storage' },
+            
+            // DVR/NVR Systems
+            { id: 513, name: 'Hikvision NVR 8CH 4K', brand: 'Hikvision', category: 'security', price: 280000, image: '📀', rating: 5, reviews: 23, specs: '8 Channels, 4K, PoE' },
+            { id: 514, name: 'Dahua NVR 16CH 4K', brand: 'Dahua', category: 'security', price: 380000, image: '📀', badge: 'new', rating: 5, reviews: 18, specs: '16 Channels, 4K' },
+            { id: 515, name: 'Reolink NVR 8CH', brand: 'Reolink', category: 'security', price: 195000, image: '📀', rating: 4, reviews: 34, specs: '8 Channels, PoE' },
+            
+            // Access Control
+            { id: 516, name: 'Sonnette Video WiFi', brand: 'Sonnette', category: 'security', price: 45000, image: '🔔', rating: 4, reviews: 89, specs: '1080p, WiFi' },
+            { id: 517, name: 'Zkteco Access Control', brand: 'Zkteco', category: 'security', price: 185000, image: '🔐', rating: 5, reviews: 12, specs: 'Empreinte, Carte, Code' },
+            { id: 518, name: 'Hikvision Porte Cle RFID', brand: 'Hikvision', category: 'security', price: 95000, image: '🔐', rating: 4, reviews: 15, specs: 'RFID, Clavier' }
+        ];
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('products-grid').innerHTML = securityProducts.map(p => `
+                <div class="product-card">
+                    ${p.badge ? `<div class="product-card__badges"><span class="product-badge product-badge--${p.badge}">${p.badge === 'new' ? 'Nouveau' : 'Best-Seller'}</span></div>` : ''}
+                    <div class="product-card__image"><div style="font-size:80px">${p.image}</div></div>
+                    <div class="product-card__content">
+                        <p class="product-card__brand">${p.brand}</p>
+                        <h3 class="product-card__name">${p.name}</h3>
+                        <p style="font-size:12px;color:#666;margin-bottom:8px">${p.specs}</p>
+                        <div class="product-card__rating"><span class="stars">${'★'.repeat(p.rating)}</span><span class="rating-count">(${p.reviews})</span></div>
+                        <div class="product-card__price"><span class="product-card__price-current">${formatPrice(p.price)}</span></div>
+                        <div class="product-card__actions">
+                            <button class="product-card__btn product-card__btn--cart">Ajouter au Panier</button>
+                            <button class="product-card__btn product-card__btn--wishlist">♡</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        });
+    </script>
+</body>
+</html>

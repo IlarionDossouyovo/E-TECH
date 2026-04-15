@@ -1,0 +1,45 @@
+# E-Tech Security Configuration
+
+# Hide sensitive files
+.htaccess
+.env
+.env.local
+.gitignore
+README.md
+*.md
+config/
+docs/
+tests/
+scripts/
+node_modules/
+.DS_Store
+Thumbs.db
+
+# Security - Don't index
+/admin
+/backend
+/api
+/wp-admin
+/phpMyAdmin
+
+# Sitemap
+Sitemap: https://e-tech.bj/sitemap.xml
+
+# Allow crawling
+User-agent: *
+Allow: /
+
+# Disallow private areas
+Disallow: /api/
+Disallow: /admin/
+Disallow: /backend/
+Disallow: /cart
+Disallow: /checkout
+Disallow: /account
+Disallow: /order-tracking
+Disallow: /rgpd
+Disallow: /*?password=
+Disallow: /*?email=
+
+# Crawler delay
+Crawl-delay: 1

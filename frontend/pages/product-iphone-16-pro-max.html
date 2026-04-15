@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone 16 Pro Max 256Go | E-Tech</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../images/logo.svg">
+    <style>
+        .product-detail { padding: 48px 0; }
+        .product-detail__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+        .product-detail__gallery { position: relative; }
+        .product-detail__main-image { width: 100%; height: 500px; background: #f8f9fa; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 200px; }
+        .product-detail__thumbs { display: flex; gap: 12px; margin-top: 16px; }
+        .product-detail__thumb { width: 80px; height: 80px; background: #f8f9fa; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 32px; cursor: pointer; border: 2px solid transparent; }
+        .product-detail__thumb.active { border-color: var(--or-champagne); }
+        .product-detail__info h1 { font-size: 32px; margin-bottom: 8px; }
+        .product-detail__brand { color: #666; font-size: 14px; text-transform: uppercase; margin-bottom: 16px; }
+        .product-detail__rating { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
+        .product-detail__price { font-size: 36px; font-weight: 700; color: var(--bleu-nuit); margin-bottom: 16px; }
+        .product-detail__price_original { font-size: 20px; color: #999; text-decoration: line-through; margin-left: 12px; }
+        .product-detail__badges { display: flex; gap: 8px; margin-bottom: 24px; }
+        .product-detail__stock { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; color: var(--success); }
+        .product-detail__stock.out { color: var(--error); }
+        .product-detail__actions { display: flex; gap: 16px; margin-bottom: 32px; }
+        .product-detail__qty { display: flex; align-items: center; gap: 12px; }
+        .product-detail__qty button { width: 40px; height: 40px; border: 1px solid #ddd; background: white; border-radius: 8px; font-size: 20px; cursor: pointer; }
+        .product-detail__qty input { width: 60px; height: 40px; text-align: center; border: 1px solid #ddd; border-radius: 8px; }
+        .product-detail__features { margin-top: 32px; padding-top: 32px; border-top: 1px solid #eee; }
+        .product-detail__feature { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .tabs { display: flex; border-bottom: 1px solid #ddd; margin-bottom: 24px; }
+        .tab { padding: 16px 24px; cursor: pointer; border-bottom: 2px solid transparent; }
+        .tab.active { border-bottom-color: var(--or-champagne); font-weight: 600; }
+        .specs-table { width: 100%; border-collapse: collapse; }
+        .specs-table td { padding: 12px; border-bottom: 1px solid #eee; }
+        .specs-table td:first-child { font-weight: 600; width: 40%; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__content">
+            <a href="../index.html" class="header__logo"><div class="header__logo-icon">⚡</div><span>E-Tech</span></a>
+            <nav class="header__nav">
+                <a href="../index.html">Accueil</a>
+                <a href="smartphones.html">Smartphones</a>
+            </nav>
+            <div class="header__actions"><a href="../cart.html">🛒 <span class="cart-count">0</span></a></div>
+        </div>
+    </header>
+
+    <section class="product-detail">
+        <div class="container">
+            <div style="margin-bottom: 24px; color: #666;">
+                <a href="../index.html">Accueil</a> > <a href="smartphones.html">Smartphones</a> > iPhone 16 Pro Max
+            </div>
+            
+            <div class="product-detail__grid">
+                <div class="product-detail__gallery">
+                    <div class="product-detail__main-image" id="main-image">📱</div>
+                    <div class="product-detail__thumbs">
+                        <div class="product-detail__thumb active" onclick="changeImage('📱')">📱</div>
+                        <div class="product-detail__thumb" onclick="changeImage('📦')">📦</div>
+                        <div class="product-detail__thumb" onclick="changeImage('✨')">✨</div>
+                        <div class="product-detail__thumb" onclick="changeImage('🎁')">🎁</div>
+                    </div>
+                </div>
+                
+                <div class="product-detail__info">
+                    <p class="product-detail__brand">Apple</p>
+                    <h1>iPhone 16 Pro Max 256Go</h1>
+                    <div class="product-detail__rating">
+                        <span class="stars">★★★★★</span>
+                        <span>(128 avis)</span>
+                    </div>
+                    
+                    <div class="product-detail__price">
+                        1 450 000 FCA
+                        <span class="product-detail__price_original">1 500 000 FCA</span>
+                    </div>
+                    
+                    <div class="product-detail__badges">
+                        <span class="product-badge product-badge--new">Nouveau</span>
+                        <span class="product-badge product-badge--promo">-3%</span>
+                    </div>
+                    
+                    <div class="product-detail__stock">
+                        ✓ En stock - Livraison 2-3 jours
+                    </div>
+                    
+                    <div class="product-detail__actions">
+                        <div class="product-detail__qty">
+                            <button onclick="changeQty(-1)">-</button>
+                            <input type="number" id="qty" value="1" min="1" max="10">
+                            <button onclick="changeQty(1)">+</button>
+                        </div>
+                        <button class="btn btn--primary" style="flex:1" onclick="addToCart(1)">
+                            Ajouter au Panier
+                        </button>
+                        <button class="btn btn--secondary">♡</button>
+                    </div>
+                    
+                    <div style="display: flex; gap: 24px; margin-bottom: 24px;">
+                        <div style="display:flex;align-items:center;gap:8px"><span>🛡️</span>Garantie 2 ans</div>
+                        <div style="display:flex;align-items:center;gap:8px"><span>🚚</span>Livraison gratuite</div>
+                        <div style="display:flex;align-items:center;gap:8px"><span>↩️</span>30 jours retour</div>
+                    </div>
+                    
+                    <div class="product-detail__features">
+                        <div class="product-detail__feature">
+                            <span>📱</span> 100% Apple Original
+                        </div>
+                        <div class="product-detail__feature">
+                            <span>🏭</span> Garantie constructeur internationale
+                        </div>
+                        <div class="product-detail__feature">
+                            <span>📦</span> Livraison Cotonou 1-2 jours
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Details Tabs -->
+            <div style="margin-top: 64px;">
+                <div class="tabs">
+                    <div class="tab active" onclick="switchTab('desc')">Description</div>
+                    <div class="tab" onclick="switchTab('specs')">Specifications</div>
+                    <div class="tab" onclick="switchTab('box')">Dans la Boite</div>
+                    <div class="tab" onclick="switchTab('reviews')">Avis (128)</div>
+                </div>
+                
+                <div id="tab-desc">
+                    <h3>iPhone 16 Pro Max - L'Excellence Redefinie</h3>
+                    <p>Decouvrez l'iPhone 16 Pro Max avec son ecran Super Retina XDR de 6.9 pouces, la puce A18 Pro la plus puissante jamais creee par Apple, et un appareil photo pro de 48MP.</p>
+                    <br>
+                    <h4>Points forts:</h4>
+                    <ul>
+                        <li>Ecran OLED 6.9" 120Hz</li>
+                        <li>Puce A18 Pro</li>
+                        <li>Appareil photo 48MP</li>
+                        <li>Batterie 5000mAh</li>
+                        <li>Face ID</li>
+                        <li>5G / WiFi 7</li>
+                    </ul>
+                </div>
+                
+                <div id="tab-specs" style="display:none">
+                    <table class="specs-table">
+                        <tr><td>Ecran</td><td>6.9" Super Retina XDR OLED 120Hz</td></tr>
+                        <tr><td>Resolution</td><td>2796 x 1290 pixels</td></tr>
+                        <tr><td>Puce</td><td>A18 Pro</td></tr>
+                        <tr><td>Stockage</td><td>256Go</td></tr>
+                        <tr><td>Appareil Photo</td><td>48MP + 12MP + 12MP</td></tr>
+                        <tr><td>Camera Frontale</td><td>12MP</td></tr>
+                        <tr><td>Batterie</td><td>5000 mAh</td></tr>
+                        <tr><td>5G</td><td>Oui</td></tr>
+                        <tr><td>Face ID</td><td>Oui</td></tr>
+                        <tr><td>Garantie</td><td>2 ans internationale</td></tr>
+                    </table>
+                </div>
+                
+                <div id="tab-box" style="display:none">
+                    <ul>
+                        <li>iPhone 16 Pro Max</li>
+                        <li>Cable USB-C vers USB-C</li>
+                        <li>Documentation</li>
+                        <li>Sticker Apple</li>
+                    </ul>
+                </div>
+                
+                <div id="tab-reviews" style="display:none">
+                    <div style="padding: 16px; border-bottom: 1px solid #eee;">
+                        <div style="display:flex;justify-content:space-between"><strong>Jean D.</strong><span>★★★★★</span></div>
+                        <p>Excellent produit, livraison rapide. Je recommande!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Related Products -->
+            <div style="margin-top: 64px;">
+                <h3>Produits Similaires</h3>
+                <div class="products__grid" style="margin-top: 24px;">
+                    <div class="product-card">
+                        <div class="product-card__image"><div style="font-size:80px">📱</div></div>
+                        <div class="product-card__content">
+                            <p class="product-card__brand">Apple</p>
+                            <h3 class="product-card__name">iPhone 16 Pro 256Go</h3>
+                            <div class="product-card__price"><span>1 150 000 FCA</span></div>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-card__image"><div style="font-size:80px">📱</div></div>
+                        <div class="product-card__content">
+                            <p class="product-card__brand">Samsung</p>
+                            <h3 class="product-card__name">Galaxy S25 Ultra</h3>
+                            <div class="product-card__price"><span>980 000 FCA</span></div>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-card__image"><div style="font-size:80px">📱</div></div>
+                        <div class="product-card__content">
+                            <p class="product-card__brand">Google</p>
+                            <h3 class="product-card__name">Pixel 9 Pro</h3>
+                            <div class="product-card__price"><span>750 000 FCA</span></div>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-card__image"><div style="font-size:80px">📱</div></div>
+                        <div class="product-card__content">
+                            <p class="product-card__brand">OnePlus</p>
+                            <h3 class="product-card__name">OnePlus 12 Pro</h3>
+                            <div class="product-card__price"><span>680 000 FCA</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__bottom">
+                <p class="footer__copyright">© 2025 E-Tech. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function changeImage(img) {
+            document.getElementById('main-image').textContent = img;
+            document.querySelectorAll('.product-detail__thumb').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        
+        function changeQty(delta) {
+            const input = document.getElementById('qty');
+            let val = parseInt(input.value) + delta;
+            if (val < 1) val = 1;
+            if (val > 10) val = 10;
+            input.value = val;
+        }
+        
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            ['desc', 'specs', 'box', 'reviews'].forEach(t => {
+                document.getElementById('tab-' + t).style.display = t === tab ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
