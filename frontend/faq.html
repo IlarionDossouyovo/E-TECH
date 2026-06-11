@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="E-Tech FAQ - Questions fréquentes sur nos produits, commandes et livraison.">
+    <title>FAQ | E-Tech</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header__content">
+            <a href="index.html" class="header__logo">
+                <div class="header__logo-icon">⚡</div>
+                <span>E-Tech</span>
+            </a>
+            
+            <nav class="header__nav">
+                <a href="index.html">Accueil</a>
+                <a href="products.html">Electronics</a>
+                <a href="products.html?category=wearables">Wearables</a>
+                <a href="products.html?category=smart-home">Smart Home</a>
+                <a href="products.html?category=decoration">Décoration</a>
+                <a href="products.html?category=accessories">Accessoires</a>
+                <a href="products.html?category=promotions">Promotions</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            
+            <div class="header__actions">
+                <a href="cart.html" class="header__cart">🛒 <span class="cart-count">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- FAQ Hero -->
+    <section class="hero" style="padding: var(--spacing-3xl) 0;">
+        <div class="container">
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <span class="hero__badge">Aide</span>
+                <h1 class="hero__title" style="margin-top: var(--spacing-md);">Questions <span class="gradient-text">Fréquentes</span></h1>
+                <p class="hero__subtitle">
+                    Trouvez rapidement les réponses à vos questions
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class="faq">
+        <div class="container">
+            <div class="faq__categories">
+                <button class="faq__tab active" data-category="commandes">Commandes</button>
+                <button class="faq__tab" data-category="livraison">Livraison</button>
+                <button class="faq__tab" data-category="paiements">Paiements</button>
+                <button class="faq__tab" data-category="retours">Retours</button>
+                <button class="faq__tab" data-category="produits">Produits</button>
+            </div>
+            
+            <div class="faq__list">
+                <!-- Commandes -->
+                <div class="faq__category active" data-category="commandes">
+                    <div class="faq__item">
+                        <div class="faq__question">Comment passer une commande ?</div>
+                        <div class="faq__answer">
+                            <p>1. Parcourez notre catalogue<br>2. Ajoutez les produits au panier<br>3. Connectez-vous ou créez un compte<br>4. Validez votre commande</p>
+                        </div>
+                    </div>
+                    <div class="faq__item">
+                        <div class="faq__question">Puis-je modifier ma commande ?</div>
+                        <div class="faq__answer">
+                            <p>Oui, tant que la commande n'est pas expédiée.Contactez-nous rapidement via WhatsApp ou email.</p>
+                        </div>
+                    </div>
+                    <div class="faq__item">
+                        <div class="faq__question">Comment suivre ma commande ?</div>
+                        <div class="faq__answer">
+                            <p>Un email avec le numéro de suivi vous sera envoyé. Vous pouvez aussi suivre depuis votre compte.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Livraison -->
+                <div class="faq__category" data-category="livraison">
+                    <div class="faq__item">
+                        <div class="faq__question">Quels sont les délais de livraison ?</div>
+                        <div class="faq__answer">
+                            <p>• Afrique : 5-10 jours<br>• Europe : 7-14 jours<br>• USA/Amériques : 10-20 jours<br>• Asie : 10-15 jours</p>
+                        </div>
+                    </div>
+                    <div class="faq__item">
+                        <div class="faq__question">La livraison est-elle gratuite ?</div>
+                        <div class="faq__answer">
+                            <p>Gratuit dès 100$ de commande pour la plupart des zones. Sinon, frais variables selon destination.</p>
+                        </div>
+                    </div>
+                    <div class="faq__item">
+                        <div class="faq__question">Vers quels pays livrez-vous ?</div>
+                        <div class="faq__answer">
+                            <p>Nous livrons dans plus de 50 pays : Afrique, Europe, USA, Asie, Moyen-Orient et plus.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Paiements -->
+                <div class="faq__category" data-category="paiements">
+                    <div class="faq__item">
+                        <div class="faq__question">Quels moyens de paiement ?</div>
+                        <div class="faq__answer">
+                            <p>• Visa / Mastercard<br>• PayPal<br>• Stripe<br>• Flutterwave (Afrique)<br>• Virement bancaire</p>
+                        </div>
+                    </div>
+                    <div class="faq__item">
+                        <div class="faq__question">Le paiement est-il sécurisé ?</div>
+                        <div class="faq__answer">
+                            <p>Oui, nous utilisons des passerelles sécurisées certifiées PCI-DSS (Stripe, PayPal).</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Retours -->
+                <div class="faq__category" data-category="retours">
+                    <div class="faq__item">
+                        <div class="faq__question">Puis-je retourner un produit ?</div>
+                        <div class="faq__answer">
+                            <p>Oui, sous 14 jours si : produit non utilisé, emballage d'origine, preuve d'achat.</p>
+                        </div>
+                    </div>
+                    <div class="faq__item">
+                        <div class="faq__question">Qui paie les frais de retour ?</div>
+                        <div class="faq__answer">
+                            <p>Le client sauf si produit défectueux ou erreur de notre part.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Produits -->
+                <div class="faq__category" data-category="produits">
+                    <div class="faq__item">
+                        <div class="faq__question">Les produits sont-ils authentiques ?</div>
+                        <div class="faq__answer">
+                            <p>100% originaux. Garantie constructeur incluse sur tous les produits.</p>
+                        </div>
+                    </div>
+                    <div class="faq__item">
+                        <div class="faq__question">Quelle garantie ?</div>
+                        <div class="faq__answer">
+                            <p>1-3 ans selon produit. Garantie constructeur + SAV E-Tech.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Still Have Questions -->
+    <section class="cta">
+        <div class="container">
+            <h2>Vous n'avez pas trouvé votre réponse ?</h2>
+            <p>Notre équipe est disponible 24/7</p>
+            <a href="contact.html" class="btn btn--primary">Contactez-nous</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <div class="footer__logo">
+                        <div class="header__logo-icon">⚡</div>
+                        <span>E-Tech</span>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer__title">Légal</h4>
+                    <ul class="footer__links">
+                        <li><a href="cgv.html">CGV</a></li>
+                        <li><a href="privacy.html">Confidentialité</a></li>
+                        <li><a href="shipping.html">Livraison</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">© 2026 E-Tech. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

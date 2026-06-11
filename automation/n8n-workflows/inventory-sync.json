@@ -1,0 +1,108 @@
+{
+  "name": "E-Tech Inventory Sync",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 6
+            }
+          ]
+        }
+      },
+      "id": "schedule-inventory",
+      "name": "Schedule (Every 6h)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "retrieve",
+        "sheetId": "1ABC123",
+        "range": "Products!A2:Z",
+        "options": {}
+      },
+      "id": "gsheet-fetch",
+      "name": "Fetch Products",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 3,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Map Google Sheets format to products\nconst data = $input.first().json;\n\nconst products = data.map(row => ({\n  id: row.A,\n  name: row.B,\n  price: parseFloat(row.C),\n  stock: parseInt(row.D) || 0,\n  category: row.E\n}));\n\nreturn products.map(p => ({ json: p }));"
+      },
+      "id": "transform",
+      "name": "Transform Data",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "operation": "updateMany",
+        "collection": "products",
+        "filter": {},
+        "update": "{{$json}}",
+        "options": {}
+      },
+      "id": "db-update",
+      "name": "Update Database",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 1,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "operation": "sendSlack",
+        "channel": "#inventory",
+        "text": "🔄 Inventaire synchronisé - {{$json.length}} produits mis à jour",
+        "options": {}
+      },
+      "id": "slack-sync",
+      "name": "Slack Sync Done",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 1,
+      "position": [850, 450]
+    }
+  ],
+  "connections": {
+    "Schedule (Every 6h)": {
+      "main": [[
+        {
+          "node": "Fetch Products",
+          "type": "main",
+          "index": 0
+        }
+      ]]
+    },
+    "Fetch Products": {
+      "main": [[
+        {
+          "node": "Transform Data",
+          "type": "main",
+          "index": 0
+        }
+      ]]
+    },
+    "Transform Data": {
+      "main": [[
+        {
+          "node": "Update Database",
+          "type": "main",
+          "index": 0
+        },
+        {
+          "node": "Slack Sync Done",
+          "type": "main",
+          "index": 0
+        }
+      ]]
+    }
+  },
+  "settings": {},
+  "updatedAt": "2026-06-11T10:00:00.000Z"
+}

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" width="400" height="100">
+  <defs>
+    <linearGradient id="nexusGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00D4FF"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="silverGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C0C0C0"/>
+      <stop offset="50%" stop-color="#E8E8E8"/>
+      <stop offset="100%" stop-color="#A0A0A0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="100" fill="none"/>
+  
+  <!-- Neural Network / Globe Symbol -->
+  <g transform="translate(45, 50)">
+    <!-- Outer rings -->
+    <circle cx="0" cy="0" r="28" fill="none" stroke="url(#silverGrad)" stroke-width="1" opacity="0.5"/>
+    <circle cx="0" cy="0" r="22" fill="none" stroke="url(#nexusGrad)" stroke-width="1.5" filter="url(#glow)"/>
+    
+    <!-- Core -->
+    <circle cx="0" cy="0" r="8" fill="url(#nexusGrad)" filter="url(#softGlow)"/>
+    
+    <!-- Neural connections -->
+    <g stroke="#00D4FF" stroke-width="1.5" filter="url(#glow)">
+      <line x1="0" y1="-8" x2="0" y2="-22"/>
+      <line x1="0" y1="8" x2="0" y2="22"/>
+      <line x1="-8" y1="0" x2="-22" y2="0"/>
+      <line x1="8" y1="0" x2="22" y2="0"/>
+      <line x1="-6" y1="-6" x2="-16" y2="-16"/>
+      <line x1="6" y1="6" x2="16" y2="16"/>
+    </g>
+    
+    <!-- AI nodes -->
+    <circle cx="0" cy="-22" r="3" fill="#00D4FF" filter="url(#glow)"/>
+    <circle cx="22" cy="0" r="3" fill="#00D4FF" filter="url(#glow)"/>
+    <circle cx="0" cy="22" r="3" fill="#8B5CF6" filter="url(#glow)"/>
+    <circle cx="-22" cy="0" r="3" fill="#8B5CF6" filter="url(#glow)"/>
+    
+    <!-- Infinity loop hint -->
+    <path d="M -12 -12 Q 0 -8 12 -12" fill="none" stroke="url(#nexusGrad)" stroke-width="1.5" opacity="0.6"/>
+  </g>
+  
+  <!-- Text -->
+  <g transform="translate(90, 52)">
+    <text font-family="Arial, sans-serif" font-size="28" font-weight="700">
+      <tspan fill="#FFFFFF">E-Tech</tspan><tspan fill="url(#nexusGrad)">Nexus</tspan><tspan fill="#C0C0C0">AI</tspan>
+    </text>
+  </g>
+  
+  <!-- Tagline -->
+  <text x="92" y="72" font-family="Arial, sans-serif" font-size="8" fill="#666666" letter-spacing="3">INTELLIGENCE ECOSYSTEM</text>
+</svg>

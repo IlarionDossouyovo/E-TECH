@@ -8,14 +8,14 @@
     <style>
         .checkout { padding: 48px 0; }
         .checkout-grid { display: grid; grid-template-columns: 1fr 380px; gap: 32px; }
-        .form-section { background: white; padding: 24px; border-radius: 12px; margin-bottom: 24px; }
-        .form-section h3 { margin-bottom: 16px; }
+        .form-section { background: var(--gris-fonce); padding: 24px; border-radius: 12px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.1); }
+        .form-section h3 { margin-bottom: 16px; color: var(--blanc); }
         .form-group { margin-bottom: 16px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
-        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--blanc); }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid var(--gris-moyen); border-radius: 8px; background: var(--noir); color: var(--blanc); }
         .payment-methods { display: flex; flex-direction: column; gap: 12px; }
-        .payment-option { display: flex; align-items: center; gap: 12px; padding: 16px; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; }
-        .payment-option.selected { border-color: var(--or-champagne); background: #fffbeb; }
+        .payment-option { display: flex; align-items: center; gap: 12px; padding: 16px; border: 2px solid var(--gris-moyen); border-radius: 8px; cursor: pointer; color: var(--blanc); }
+        .payment-option.selected { border-color: var(--bleu-electrique); background: rgba(0,212,255,0.1); }
     </style>
 </head>
 <body>
@@ -56,12 +56,29 @@
                             <input type="text" id="address" placeholder="Adresse complète">
                         </div>
                         <div class="form-group">
-                            <label>Ville</label>
-                            <select id="city">
-                                <option value="cotono">Cotonou</option>
-                                <option value="porto-novo">Porto-Novo</option>
-                                <option value="other">Autre ville</option>
+                            <label>Pays</label>
+                            <select id="country">
+                                <option value="BJ">Bénin</option>
+                                <option value="TG">Togo</option>
+                                <option value="NG">Nigéria</option>
+                                <option value="GH">Ghana</option>
+                                <option value="CI">Côte d'Ivoire</option>
+                                <option value="SN">Sénégal</option>
+                                <option value="FR">France</option>
+                                <option value="BE">Belgique</option>
+                                <option value="DE">Allemagne</option>
+                                <option value="US">États-Unis</option>
+                                <option value="CA">Canada</option>
+                                <option value="OTHER">Autre</option>
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Ville</label>
+                            <input type="text" id="city" placeholder="Ville">
+                        </div>
+                        <div class="form-group">
+                            <label>Code Postal</label>
+                            <input type="text" id="postal" placeholder="Code postal">
                         </div>
                     </div>
                     
@@ -69,17 +86,17 @@
                     <div class="form-section">
                         <h3>💳Paiement</h3>
                         <div class="payment-methods">
-                            <div class="payment-option selected" onclick="selectPayment('card')">
-                                <span>💳</span> <div><strong>Carte Bancaire</strong><br><small>Visa, Mastercard</small></div>
+                            <div class="payment-option selected" onclick="selectPayment('stripe')">
+                                <span>💳</span> <div><strong>Carte Bancaire</strong><br><small>Visa, Mastercard - Stripe</small></div>
                             </div>
-                            <div class="payment-option" onclick="selectPayment('mobile')">
-                                <span>📱</span> <div><strong>Mobile Money</strong><br><small>MTN, Moov</small></div>
+                            <div class="payment-option" onclick="selectPayment('paypal')">
+                                <span>🅿️</span> <div><strong>PayPal</strong><br><small>Paiement sécurisé</small></div>
+                            </div>
+                            <div class="payment-option" onclick="selectPayment('flutterwave')">
+                                <span>🌍</span> <div><strong>Mobile Money</strong><br><small>MTN, Moov, Orange - Flutterwave</small></div>
                             </div>
                             <div class="payment-option" onclick="selectPayment('virement')">
                                 <span>🏦</span> <div><strong>Virement Bancaire</strong></div>
-                            </div>
-                            <div class="payment-option" onclick="selectPayment('delivery')">
-                                <span>💵</span> <div><strong>Paiement à la livraison</strong></div>
                             </div>
                         </div>
                     </div>
@@ -100,8 +117,8 @@
                         Passer la Commande
                     </button>
                     
-                    <p style="text-align: center; margin-top: 16px; font-size: 12px; color: #666;">
-                        🔒 Paiement sécurisé | 📦 Livraison 2-3 jours | ↩️ 30 jours pour retourner
+                    <p style="text-align: center; margin-top: 16px; font-size: 12px; color: var(--gris-clair);">
+                        🔒 Paiement sécurisé | 📦 Livraison mondiale | ↩️ 14 jours pour retourner
                     </p>
                 </div>
             </div>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 140" width="500" height="140">
+  <defs>
+    <linearGradient id="gradE" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E5E5E5"/>
+    </linearGradient>
+  </defs>
+  <rect width="500" height="140" fill="none"/>
+  
+  <!-- Minimalist E with negative space -->
+  <g transform="translate(40, 20)">
+    <!-- Outer hexagon - negative space cut -->
+    <path d="M 45 0 L 85 15 L 85 65 L 45 80 L 5 65 L 5 15 Z" fill="none" stroke="#FFFFFF" stroke-width="2.5"/>
+    
+    <!-- E formed by negative space cuts -->
+    <path d="M 22 18 L 22 62" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+    <path d="M 22 18 L 50 18" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+    <path d="M 22 40 L 45 40" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+    <path d="M 22 62 L 50 62" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+    
+    <!-- Tech nodes - single dots -->
+    <circle cx="50" cy="18" r="3" fill="#00D4FF"/>
+    <circle cx="45" cy="40" r="3" fill="#00D4FF"/>
+    <circle cx="50" cy="62" r="3" fill="#8B5CF6"/>
+  </g>
+  
+  <!-- Clean typography -->
+  <g transform="translate(145, 85)">
+    <text font-family="'SF Pro Display', -apple-system, sans-serif" font-size="52" font-weight="600" letter-spacing="-1">
+      <tspan fill="#FFFFFF">E</tspan><tspan fill="#00D4FF">-</tspan><tspan fill="#FFFFFF">Tech</tspan>
+    </text>
+  </g>
+  
+  <!-- Subtle underline accent -->
+  <rect x="148" y="108" width="120" height="2" fill="url(#gradE)" opacity="0.6"/>
+  
+  <!-- Tagline -->
+  <text x="148" y="128" font-family="'SF Pro Display', -apple-system, sans-serif" font-size="9" fill="#8B5CF6" letter-spacing="6" opacity="0.9">PREMIUM ELECTRONICS</text>
+</svg>

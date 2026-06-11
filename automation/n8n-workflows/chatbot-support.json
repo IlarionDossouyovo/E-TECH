@@ -1,0 +1,89 @@
+{
+  "name": "E-Tech AI Chatbot Support",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "chatbot",
+        "responseMode": "onReceived"
+      },
+      "id": "webhook-chat",
+      "name": "Webhook Chat",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "extractField",
+        "field": "message",
+        "options": {}
+      },
+      "id": "extract-msg",
+      "name": "Extract Message",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "model": "claude-sonnet-4-20240229",
+        "maxTokens": 500,
+        "options": {
+          "temperature": 0.7
+        },
+        "prompt": "Tu es l'assistant virtuel d'E-Tech, boutique d'électronique premium au Bénin.\n\nTu aides les clients avec:\n- Informations produits\n- Suivi commandes\n- Questions générales\n- Recommandations\n\nRègles:\n- Sois professionnel et aimable\n- Réponds en français\n- Connais nos produits (casques, montres, gadgets tech)\n- Si question hors scope, redirige vers support@e-tech.bj\n\nQuestion client: {{$json.message}}"
+      },
+      "id": "claude-ai",
+      "name": "Claude AI",
+      "type": "n8n-nodes-base.anthropic",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"reply\": {{$json.content}},\n  \"type\": \"ai\"\n}"
+      },
+      "id": "respond",
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [850, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Chat": {
+      "main": [[
+        {
+          "node": "Extract Message",
+          "type": "main",
+          "index": 0
+        }
+      ]]
+    },
+    "Extract Message": {
+      "main": [[
+        {
+          "node": "Claude AI",
+          "type": "main",
+          "index": 0
+        }
+      ]]
+    },
+    "Claude AI": {
+      "main": [[
+        {
+          "node": "Respond",
+          "type": "main",
+          "index": 0
+        }
+      ]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "updatedAt": "2026-06-11T10:00:00.000Z",
+  "versionId": "1"
+}

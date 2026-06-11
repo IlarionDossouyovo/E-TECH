@@ -1,0 +1,96 @@
+{
+  "name": "E-Tech Newsletter Hebdomadaire",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "cronExpression": "0 9 * * 5"
+        }
+      },
+      "id": "schedule-newsletter",
+      "name": "Schedule (Friday 9AM)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "retrieve",
+        "sheetId": "1ABC123",
+        "range": "Subscribers!A2:A",
+        "options": {}
+      },
+      "id": "gsheet-subs",
+      "name": "Get Subscribers",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 3,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "query": "new_product",
+        "options": {
+          "maxResults": 3
+        }
+      },
+      "id": "get-new-products",
+      "name": "Get New Products",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 3,
+      "position": [450, 450]
+    },
+    {
+      "parameters": {
+        "functionCode": "const subscribers = $input.first().json;\nconst products = $inputs[1].json;\n\nconst productList = products.map(p => \n  `- ${p.name} - $${p.price}`\n).join('\\n');\n\nconst html = `\n<h2>🛍️ Newsletter E-Tech</h2>\n\n<h3>Nouveautés cette semaine</h3>\n${productList}\n\n<h3>Promotions</h3>\n- <a href='https://e-tech.bj/products.html?category=promotions'>Voir les promotions</a>\n\n<hr>\n<p>Merci pour votre confiance! 🙏</p>\n<p><a href='{{Unsubscribe}}'>Se désabonner</a></p>\n`;\n\nreturn subscribers.map(s => ({\n  json: {\n    email: s.A,\n    subject: '🛍️ Nouveautés E-Tech - '+ new Date().toLocaleDateString('fr-FR'),\n    html\n  }\n}));"
+      },
+      "id": "build-email",
+      "name": "Build Email",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "operation": "sendEmail",
+        "subject": "{{$json.subject}}",
+        "emailTo": "{{$json.email}}",
+        "options": {
+          "from": "newsletter@e-tech.bj"
+        }
+      },
+      "id": "send-email",
+      "name": "Send Newsletter",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [850, 300]
+    }
+  ],
+  "connections": {
+    "Schedule (Friday 9AM)": {
+      "main": [[
+        {
+          "node": "Get Subscribers",
+          "type": "main",
+          "index": 0
+        },
+        {
+          "node": "Get New Products",
+          "type": "main",
+          "index": 0
+        }
+      ]]
+    },
+    "Build Email": {
+      "main": [[
+        {
+          "node": "Send Newsletter",
+          "type": "main",
+          "index": 0
+        }
+      ]]
+    }
+  },
+  "settings": {},
+  "updatedAt": "2026-06-11T10:00:00.000Z"
+}

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="nexusGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00D4FF"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" fill="none"/>
+  
+  <!-- Minimalist N with neural nodes -->
+  <g transform="translate(32, 32)">
+    <!-- Outer ring -->
+    <circle cx="0" cy="0" r="24" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+    
+    <!-- Center core -->
+    <circle cx="0" cy="0" r="6" fill="#FFFFFF"/>
+    
+    <!-- Neural paths -->
+    <g stroke="#FFFFFF" stroke-width="2" stroke-linecap="round">
+      <line x1="0" y1="-6" x2="0" y2="-18"/>
+      <line x1="6" y1="0" x2="18" y2="0"/>
+      <line x1="0" y1="6" x2="0" y2="18"/>
+      <line x1="-6" y1="0" x2="-18" y2="0"/>
+    </g>
+    
+    <!-- AI nodes -->
+    <circle cx="0" cy="-18" r="3" fill="url(#nexusGrad)"/>
+    <circle cx="18" cy="0" r="3" fill="url(#nexusGrad)"/>
+    <circle cx="0" cy="18" r="3" fill="#8B5CF6"/>
+    <circle cx="-18" cy="0" r="3" fill="#8B5CF6"/>
+  </g>
+</svg>

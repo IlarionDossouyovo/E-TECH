@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Tech Brand Identity Preview</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0A0A0A;
+      color: #FFFFFF;
+      min-height: 100vh;
+    }
+    .section {
+      padding: 80px 40px;
+      border-bottom: 1px solid #1A1A1A;
+    }
+    .section-title {
+      font-size: 12px;
+      color: #666;
+      letter-spacing: 3px;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+    }
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
+    .logo-card {
+      background: #111;
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .logo-card:hover {
+      transform: translateY(-5px);
+    }
+    .logo-card.light {
+      background: #F5F5F5;
+      color: #0A0A0A;
+    }
+    .logo-card img {
+      max-width: 100%;
+      height: auto;
+    }
+    .color-swatches {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .swatch {
+      width: 120px;
+      text-align: center;
+    }
+    .swatch-color {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      margin: 0 auto 12px;
+    }
+    .swatch-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .swatch-hex {
+      font-size: 12px;
+      color: #666;
+      font-family: monospace;
+    }
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      background: linear-gradient(135deg, #0A0A0A 0%, #111 50%, #0A0A0A 100%);
+    }
+    .hero-logo {
+      width: 300px;
+      height: 300px;
+      margin-bottom: 40px;
+    }
+    .hero-title {
+      font-size: 64px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .hero-title span:first-child { color: #FFF; }
+    .hero-title span:nth-child(2) { color: #00D4FF; }
+    .hero-title span:last-child { color: #FFF; }
+    .hero-tagline {
+      font-size: 14px;
+      color: #8B5CF6;
+      letter-spacing: 6px;
+    }
+    .hero-sub {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #444;
+    }
+    @media (max-width: 768px) {
+      .hero-title { font-size: 40px; }
+      .section { padding: 40px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <img class="hero-logo" src="branding/logo/E-Tech-Logo-Main.svg" alt="E-Tech Logo">
+    <h1 class="hero-title">
+      <span>E</span><span>-</span><span>Tech</span>
+    </h1>
+    <p class="hero-tagline">PREMIUM ELECTRONICS</p>
+    <p class="hero-sub">Cotonou, Benin • e-tech.bj</p>
+  </section>
+
+  <!-- Primary Logos -->
+  <section class="section">
+    <h2 class="section-title">Primary Logos</h2>
+    <div class="logo-grid">
+      <div class="logo-card">
+        <h3 style="font-size: 12px; color: #666; margin-bottom: 20px;">Transparent / Dark Background</h3>
+        <img src="branding/logo/E-Tech-Logo-Main.svg" alt="Main Logo">
+      </div>
+      <div class="logo-card">
+        <h3 style="font-size: 12px; color: #666; margin-bottom: 20px;">Solid Dark Background</h3>
+        <img src="branding/logo/E-Tech-Logo-Dark.svg" alt="Dark Logo">
+      </div>
+      <div class="logo-card light">
+        <h3 style="font-size: 12px; color: #999; margin-bottom: 20px;">Solid Light Background</h3>
+        <img src="branding/logo/E-Tech-Logo-Light.svg" alt="Light Logo">
+      </div>
+    </div>
+  </section>
+
+  <!-- Icons -->
+  <section class="section">
+    <h2 class="section-title">Icons & Favicon</h2>
+    <div class="logo-grid">
+      <div class="logo-card">
+        <h3 style="font-size: 12px; color: #666; margin-bottom: 20px;">App Icon (64x64)</h3>
+        <img src="branding/logo/E-Tech-Icon.svg" alt="Icon">
+      </div>
+      <div class="logo-card">
+        <h3 style="font-size: 12px; color: #666; margin-bottom: 20px;">Favicon (32x32)</h3>
+        <img src="branding/logo/E-Tech-Logo-Favicon.svg" alt="Favicon">
+      </div>
+      <div class="logo-card">
+        <h3 style="font-size: 12px; color: #666; margin-bottom: 20px;">Premium Minimalist</h3>
+        <img src="branding/logo/E-Tech-Logo-Premium.svg" alt="Premium">
+      </div>
+    </div>
+  </section>
+
+  <!-- Color System -->
+  <section class="section">
+    <h2 class="section-title">Color System</h2>
+    <div class="color-swatches">
+      <div class="swatch">
+        <div class="swatch-color" style="background: #00D4FF;"></div>
+        <p class="swatch-name">Electric Blue</p>
+        <p class="swatch-hex">#00D4FF</p>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #8B5CF6;"></div>
+        <p class="swatch-name">Neon Purple</p>
+        <p class="swatch-hex">#8B5CF6</p>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #0A0A0A;"></div>
+        <p class="swatch-name">Noir</p>
+        <p class="swatch-hex">#0A0A0A</p>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #FFFFFF; border: 1px solid #333;"></div>
+        <p class="swatch-name">White</p>
+        <p class="swatch-hex">#FFFFFF</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Award Winning -->
+  <section class="section">
+    <h2 class="section-title">Award Winning Presentation</h2>
+    <div class="logo-card" style="background: #111;">
+      <img src="branding/logo/E-Tech-Award-Winning.svg" alt="Award Winning" style="max-width: 100%;">
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="padding: 40px; text-align: center; color: #444; font-size: 12px;">
+    <p>© 2026 E-Tech • Premium Electronics • Cotonou, Benin</p>
+    <p style="margin-top: 8px;">e-tech.bj</p>
+  </footer>
+
+</body>
+</html>

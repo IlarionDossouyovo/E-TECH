@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace | E-Tech Nexus AI</title>
+    <style>
+        :root { --bleu: #00D4FF; --violet: #8B5CF6; --noir: #0A0A0A; --gris-fonce: #111; --gris-moyen: #333; --gris-clair: #888; --blanc: #FFF; --vert: #10B981; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, sans-serif; background: var(--noir); color: var(--blanc); min-height: 100vh; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+        
+        header { padding: 20px 0; border-bottom: 1px solid var(--gris-moyen); display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 12px; font-size: 20px; font-weight: 700; }
+        .logo span:nth-child(2) { color: var(--bleu); }
+        .cart-btn { position: relative; }
+        .cart-count { position: absolute; top: -8px; right: -8px; background: var(--violet); font-size: 12px; padding: 2px 6px; border-radius: 50%; }
+        
+        .hero { padding: 60px 0; text-align: center; }
+        .hero h1 { font-size: 40px; margin-bottom: 12px; }
+        .hero p { color: var(--gris-clair); font-size: 18px; }
+        
+        .filters { display: flex; gap: 12px; padding: 24px 0; flex-wrap: wrap; }
+        .filter { padding: 10px 20px; background: var(--gris-fonce); border: 1px solid var(--gris-moyen); border-radius: 24px; cursor: pointer; transition: all 0.3s; }
+        .filter:hover, .filter.active { background: var(--bleu); border-color: var(--bleu); color: var(--noir); }
+        
+        .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding-bottom: 48px; }
+        .product-card { background: var(--gris-fonce); border-radius: 16px; overflow: hidden; border: 1px solid var(--gris-moyen); transition: transform 0.3s; }
+        .product-card:hover { transform: translateY(-8px); }
+        .product-image { height: 200px; background: var(--noir); display: flex; align-items: center; justify-content: center; font-size: 64px; }
+        .product-info { padding: 20px; }
+        .product-category { font-size: 12px; color: var(--bleu); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .product-name { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .product-price { font-size: 24px; font-weight: 700; color: var(--vert); margin-bottom: 12px; }
+        .product-stock { font-size: 12px; color: var(--gris-clair); margin-bottom: 16px; }
+        .product-stock.out { color: var(--rouge, #EF4444); }
+        .btn-add { width: 100%; padding: 12px; background: var(--bleu); border: none; border-radius: 8px; color: var(--noir); font-weight: 600; cursor: pointer; }
+        .btn-add:hover { opacity: 0.9; }
+        .btn-add:disabled { background: var(--gris-moyen); cursor: not-allowed; }
+        
+        .cart-panel { position: fixed; top: 0; right: -400px; width: 400px; height: 100vh; background: var(--gris-fonce); border-left: 1px solid var(--gris-moyen); transition: right 0.3s; z-index: 100; padding: 24px; }
+        .cart-panel.open { right: 0; }
+        .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .cart-items { margin-bottom: 24px; max-height: 60vh; overflow-y: auto; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--noir); border-radius: 12px; margin-bottom: 12px; }
+        .cart-item-info h4 { font-size: 14px; }
+        .cart-item-info p { font-size: 12px; color: var(--gris-clair); }
+        .cart-total { padding: 24px; background: var(--noir); border-radius: 12px; margin-bottom: 16px; }
+        .cart-total .label { font-size: 14px; color: var(--gris-clair); }
+        .cart-total .amount { font-size: 28px; font-weight: 700; color: var(--bleu); }
+        .btn-checkout { width: 100%; padding: 16px; background: linear-gradient(90deg, var(--bleu), var(--violet)); border: none; border-radius: 8px; color: var(--blanc); font-size: 16px; font-weight: 600; cursor: pointer; }
+        
+        @media (max-width: 1024px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 768px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span>E-Tech</span><span>Nexus</span>AI
+        </div>
+        <div style="display: flex; gap: 24px; align-items: center;">
+            <a href="index.html" style="color: var(--gris-clair); text-decoration: none;">Diagnostic</a>
+            <a href="atelier.html" style="color: var(--gris-clair); text-decoration: none;">Atelier</a>
+            <div class="cart-btn" onclick="toggleCart()" style="cursor: pointer;">
+                🛒 <span class="cart-count" id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>🛒 Marketplace</h1>
+            <p>Pièces, outils et accessoires GSM</p>
+        </div>
+    </section>
+    
+    <section class="container">
+        <div class="filters">
+            <div class="filter active" onclick="filterProducts('')">Tous</div>
+            <div class="filter" onclick="filterProducts('ecran')">📱 Écrans</div>
+            <div class="filter" onclick="filterProducts('batterie')">🔋 Batteries</div>
+            <div class="filter" onclick="filterProducts('camera')">📷 Caméras</div>
+            <div class="filter" onclick="filterProducts('chargeur')">⚡ Chargeurs</div>
+            <div class="filter" onclick="filterProducts('outil')">🔧 Outils</div>
+            <div class="filter" onclick="filterProducts('accessoire')">🎁 Accessoires</div>
+        </div>
+        
+        <div class="products-grid" id="products-grid"></div>
+    </section>
+    
+    <div class="cart-panel" id="cart-panel">
+        <div class="cart-header">
+            <h2>Panier</h2>
+            <span onclick="toggleCart()" style="cursor: pointer; font-size: 24px;">✕</span>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-total">
+            <div class="label">Total</div>
+            <div class="amount" id="cart-total">$0</div>
+        </div>
+        <button class="btn-checkout" onclick="checkout()">Passer la commande</button>
+    </div>
+    
+    <script>
+        const products = [
+            { id: 1, name: 'Écran iPhone 15 Pro', category: 'ecran', price: 89, stock: 15, icon: '📱' },
+            { id: 2, name: 'Écran iPhone 15', category: 'ecran', price: 79, stock: 12, icon: '📱' },
+            { id: 3, name: 'Écran Samsung S24 Ultra', category: 'ecran', price: 129, stock: 8, icon: '📱' },
+            { id: 4, name: 'Écran iPhone 14 Pro', category: 'ecran', price: 75, stock: 20, icon: '📱' },
+            { id: 5, name: 'Batterie iPhone 15', category: 'batterie', price: 35, stock: 45, icon: '🔋' },
+            { id: 6, name: 'Batterie iPhone 14', category: 'batterie', price: 30, stock: 50, icon: '🔋' },
+            { id: 7, name: 'Batterie Samsung S23', category: 'batterie', price: 32, stock: 30, icon: '🔋' },
+            { id: 8, name: 'Caméra iPhone 15 Pro', category: 'camera', price: 45, stock: 18, icon: '📷' },
+            { id: 9, name: 'Caméra iPhone 15', category: 'camera', price: 40, stock: 22, icon: '📷' },
+            { id: 10, name: 'Caméra Samsung S24', category: 'camera', price: 55, stock: 10, icon: '📷' },
+            { id: 11, name: 'Chargeur 20W USB-C', category: 'chargeur', price: 15, stock: 100, icon: '⚡' },
+            { id: 12, name: 'Chargeur 30W GaN', category: 'chargeur', price: 25, stock: 80, icon: '⚡' },
+            { id: 13, name: 'Kit tournevis precision', category: 'outil', price: 22, stock: 60, icon: '🔧' },
+            { id: 14, name: 'Station de soudure', category: 'outil', price: 89, stock: 12, icon: '🔥' },
+            { id: 15, name: 'Pince antistatique', category: 'outil', price: 12, stock: 45, icon: '🔧' },
+            { id: 16, name: 'Coque iPhone 15 Pro', category: 'accessoire', price: 18, stock: 200, icon: '📱' },
+            { id: 17, name: 'Film verre trempé', category: 'accessoire', price: 8, stock: 500, icon: '🛡️' },
+            { id: 18, name: 'Cable USB-C 1m', category: 'accessoire', price: 12, stock: 150, icon: '🔌' },
+        ];
+        
+        let cart = [];
+        
+        function renderProducts(filter = '') {
+            const grid = document.getElementById('products-grid');
+            const filtered = filter ? products.filter(p => p.category === filter) : products;
+            
+            grid.innerHTML = filtered.map(p => `
+                <div class="product-card">
+                    <div class="product-image">${p.icon}</div>
+                    <div class="product-info">
+                        <div class="product-category">${p.category}</div>
+                        <div class="product-name">${p.name}</div>
+                        <div class="product-price">$${p.price}</div>
+                        <div class="product-stock ${p.stock < 5 ? 'out' : ''}">${p.stock > 0 ? `${p.stock} en stock` : 'Rupture'}</div>
+                        <button class="btn-add" onclick="addToCart(${p.id})" ${p.stock === 0 ? 'disabled' : ''}>
+                            ${p.stock > 0 ? 'Ajouter au panier' : 'Indisponible'}
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function filterProducts(category) {
+            document.querySelectorAll('.filter').forEach(f => f.classList.remove('active'));
+            event.target.classList.add('active');
+            renderProducts(category);
+        }
+        
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            if (product && product.stock > 0) {
+                cart.push(product);
+                updateCart();
+            }
+        }
+        
+        function updateCart() {
+            document.getElementById('cart-count').textContent = cart.length;
+            const total = cart.reduce((sum, p) => sum + p.price, 0);
+            
+            document.getElementById('cart-items').innerHTML = cart.map((p, i) => `
+                <div class="cart-item">
+                    <div class="cart-item-info">
+                        <h4>${p.name}</h4>
+                        <p>$${p.price}</p>
+                    </div>
+                    <span onclick="removeFromCart(${i})" style="cursor: pointer; color: var(--rouge);">✕</span>
+                </div>
+            `).join('') || '<p style="color: var(--gris-clair);">Panier vide</p>';
+            
+            document.getElementById('cart-total').textContent = `$${total}`;
+        }
+        
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+        
+        function toggleCart() {
+            document.getElementById('cart-panel').classList.toggle('open');
+        }
+        
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Panier vide!');
+                return;
+            }
+            alert('Commande enregistrée! Merci pour votre achat.');
+            cart = [];
+            updateCart();
+            toggleCart();
+        }
+        
+        renderProducts();
+    </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+# E-Tech Nexus AI - Dependencies
+fastapi==0.136.0
+uvicorn[standard]==0.32.2
+pydantic==2.10.5
+pydantic[email]==2.10.5
+email-validator==2.2.0
+sqlalchemy==2.0.36
+asyncpg==0.30.0
+psycopg2-binary==2.9.10
+redis==5.2.1
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.20
+aiofiles==24.1.0
+httpx==0.28.1

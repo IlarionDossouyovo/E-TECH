@@ -1,0 +1,90 @@
+{
+  "name": "E-Tech Order Notification",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "order-new",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-order",
+      "name": "Webhook Commande",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "etech-order"
+    },
+    {
+      "parameters": {
+        "operation": "sendEmail",
+        "subject": "Nouvelle commande E-Tech #{{$json.orderId}}",
+        "emailTo": "{{$json.customerEmail}}",
+        "options": {
+          "cc": "orders@e-tech.bj"
+        }
+      },
+      "id": "email-confirm",
+      "name": "Email Confirmation",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "sendSlack",
+        "channel": "#orders",
+        "text": "🛒 Nouvelle commande #{{$json.orderId}} - {{$json.total}}",
+        "options": {}
+      },
+      "id": "slack-notify",
+      "name": "Slack Notification",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 1,
+      "position": [450, 450]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetId": "1ABC123",
+        "options": {
+          "scope": "SPREADSHEET"
+        }
+      },
+      "id": "gsheet-order",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 3,
+      "position": [650, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Commande": {
+      "main": [[
+        {
+          "node": "Email Confirmation",
+          "type": "main",
+          "index": 0
+        },
+        {
+          "node": "Slack Notification",
+          "type": "main",
+          "index": 0
+        },
+        {
+          "node": "Google Sheets",
+          "type": "main",
+          "index": 0
+        }
+      ]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "trigger": "webhook",
+  "updatedAt": "2026-06-11T10:00:00.000Z",
+  "versionId": "1"
+}

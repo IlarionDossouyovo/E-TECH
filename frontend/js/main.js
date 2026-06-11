@@ -216,6 +216,54 @@ function showNotification(message, type = 'info') {
 }
 
 // ===================
+// New Product Functions (2026 Categories)
+// ===================
+
+// Import products from products-data.js
+let productsData = [];
+let blogData = [];
+
+// Load products data
+async function loadProductsData() {
+    try {
+        // Products data is loaded via products-data.js
+        if (typeof products !== 'undefined') {
+            productsData = products;
+        }
+    } catch (e) {
+        console.log('Using default products');
+    }
+}
+
+// Filter products by category
+function filterProductsByCategory(category) {
+    if (!category || category === 'all') {
+        return productsData;
+    }
+    return productsData.filter(p => p.category === category);
+}
+
+// Search products
+function searchProducts(query) {
+    const q = query.toLowerCase();
+    return productsData.filter(p => 
+        p.name.toLowerCase().includes(q) || 
+        p.description?.toLowerCase().includes(q) ||
+        p.tags?.some(t => t.toLowerCase().includes(q))
+    );
+}
+
+// Get promotions
+function getPromotions() {
+    return productsData.filter(p => p.originalPrice > p.price);
+}
+
+// Get best sellers
+function getBestSellers() {
+    return productsData.slice(0, 8);
+}
+
+// ===================
 // Cart Functions
 // ===================
 

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivez-nous | E-Tech</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .social-hero {
+            padding: 80px 0;
+            text-align: center;
+            background: var(--noir);
+        }
+        .social-hero h1 {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        .social-hero p {
+            color: var(--gris-clair);
+            font-size: 18px;
+        }
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            padding: 48px 0;
+        }
+        .social-card {
+            background: var(--gris-fonce);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        .social-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--bleu-electrique);
+        }
+        .social-card__icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        .social-card__name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .social-card__handle {
+            color: var(--gris-clair);
+            font-size: 14px;
+        }
+        .social-card__followers {
+            margin-top: 16px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--bleu-electrique);
+        }
+        .social-card__cta {
+            margin-top: 16px;
+            font-size: 14px;
+            color: var(--bleu-electrique);
+        }
+        .social-feed {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            padding: 32px 0;
+        }
+        .social-post {
+            aspect-ratio: 1;
+            background: var(--gris-fonce);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .social-post:hover {
+            transform: scale(1.05);
+            background: var(--bleu-electrique);
+        }
+        @media (max-width: 768px) {
+            .social-grid { grid-template-columns: 1fr; }
+            .social-feed { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__content">
+            <a href="index.html" class="header__logo">
+                <div class="header__logo-icon">⚡</div>
+                <span>E-Tech</span>
+            </a>
+            <nav class="header__nav">
+                <a href="index.html">Accueil</a>
+                <a href="products.html">Produits</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="header__actions">
+                <a href="cart.html" class="header__cart">🛒 <span class="cart-count">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <section class="social-hero">
+        <div class="container">
+            <h1>Suivez <span class="gradient-text">E-Tech</span></h1>
+            <p>Rejoignez notre communauté sur les réseaux sociaux</p>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="social-grid">
+            <a href="https://facebook.com/etech.bj" target="_blank" class="social-card">
+                <div class="social-card__icon">📘</div>
+                <div class="social-card__name">Facebook</div>
+                <div class="social-card__handle">@E-Tech.bj</div>
+                <div class="social-card__followers">5.2K</div>
+                <div class="social-card__cta">→ Suivre</div>
+            </a>
+            
+            <a href="https://instagram.com/etech.bj" target="_blank" class="social-card">
+                <div class="social-card__icon">📸</div>
+                <div class="social-card__name">Instagram</div>
+                <div class="social-card__handle">@etech.bj</div>
+                <div class="social-card__followers">8.1K</div>
+                <div class="social-card__cta">→ Suivre</div>
+            </a>
+            
+            <a href="https://wa.me/22900000000" target="_blank" class="social-card">
+                <div class="social-card__icon">💬</div>
+                <div class="social-card__name">WhatsApp</div>
+                <div class="social-card__handle">+229 XX XX XX XX</div>
+                <div class="social-card__followers">12K+</div>
+                <div class="social-card__cta">→ Discuter</div>
+            </a>
+            
+            <a href="https://twitter.com/etech_bj" target="_blank" class="social-card">
+                <div class="social-card__icon">𝕏</div>
+                <div class="social-card__name">X (Twitter)</div>
+                <div class="social-card__handle">@etech_bj</div>
+                <div class="social-card__followers">2.8K</div>
+                <div class="social-card__cta">→ Suivre</div>
+            </a>
+            
+            <a href="https://tiktok.com/@etech.bj" target="_blank" class="social-card">
+                <div class="social-card__icon">🎵</div>
+                <div class="social-card__name">TikTok</div>
+                <div class="social-card__handle">@etech.bj</div>
+                <div class="social-card__followers">25K+</div>
+                <div class="social-card__cta">→ Suivre</div>
+            </a>
+            
+            <a href="https://youtube.com/@etech-bj" target="_blank" class="social-card">
+                <div class="social-card__icon">📺</div>
+                <div class="social-card__name">YouTube</div>
+                <div class="social-card__handle">@etech-bj</div>
+                <div class="social-card__followers">3.5K</div>
+                <div class="social-card__cta">→ S'abonner</div>
+            </a>
+        </div>
+
+        <h2 style="margin-bottom: 24px;">Derniers Posts</h2>
+        <div class="social-feed">
+            <div class="social-post">📦</div>
+            <div class="social-post">🎧</div>
+            <div class="social-post">⌚</div>
+            <div class="social-post">⚡</div>
+            <div class="social-post">🎮</div>
+            <div class="social-post">🔋</div>
+            <div class="social-post">🎁</div>
+            <div class="social-post">🔥</div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__bottom">
+                <p class="footer__copyright">© 2026 E-Tech. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

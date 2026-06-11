@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 140" width="500" height="140">
+  <defs>
+    <linearGradient id="nexusGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00D4FF"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+  <rect width="500" height="140" fill="none"/>
+  
+  <!-- Premium Minimalist Symbol: N letterform with neural network -->
+  <g transform="translate(40, 20)">
+    <!-- Outer circle - negative space -->
+    <circle cx="40" cy="50" r="45" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+    
+    <!-- Neural core -->
+    <circle cx="40" cy="50" r="12" fill="#FFFFFF"/>
+    
+    <!-- Neural connections -->
+    <g stroke="#FFFFFF" stroke-width="2" stroke-linecap="round">
+      <line x1="40" y1="38" x2="40" y2="18"/>
+      <line x1="52" y1="50" x2="72" y2="50"/>
+      <line x1="40" y1="62" x2="40" y2="82"/>
+      <line x1="28" y1="50" x2="8" y2="50"/>
+    </g>
+    
+    <!-- Neural nodes -->
+    <circle cx="40" cy="18" r="4" fill="url(#nexusGrad)"/>
+    <circle cx="72" cy="50" r="4" fill="url(#nexusGrad)"/>
+    <circle cx="40" cy="82" r="4" fill="#8B5CF6"/>
+    <circle cx="8" cy="50" r="4" fill="#8B5CF6"/>
+    
+    <!-- AI sparkle -->
+    <path d="M 55 30 L 58 35 L 55 40 L 52 35 Z" fill="#00D4FF"/>
+  </g>
+  
+  <!-- Clean typography -->
+  <g transform="translate(130, 80)">
+    <text font-family="'SF Pro Display', -apple-system, sans-serif" font-size="42" font-weight="600" letter-spacing="-1">
+      <tspan fill="#FFFFFF">E</tspan><tspan fill="#00D4FF">-</tspan><tspan fill="#FFFFFF">Tech</tspan>
+    </text>
+    <text x="0" y="28" font-family="'SF Pro Display', -apple-system, sans-serif" font-size="18" font-weight="300" fill="#00D4FF" letter-spacing="4">NEXUS</text>
+  </g>
+  
+  <!-- AI indicator -->
+  <g transform="translate(320, 45)">
+    <circle cx="0" cy="0" r="20" fill="none" stroke="#8B5CF6" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <text x="0" y="5" font-family="'SF Pro Display', -apple-system, sans-serif" font-size="12" fill="#8B5CF6" text-anchor="middle">AI</text>
+  </g>
+</svg>

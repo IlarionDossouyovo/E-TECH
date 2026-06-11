@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Tech Nexus AI | Diagnostic Intelligent</title>
+    <link rel="icon" href="../branding/nexus/E-Tech-Nexus-Favicon.svg">
+    <style>
+        :root {
+            --bleu: #00D4FF;
+            --violet: #8B5CF6;
+            --noir: #0A0A0A;
+            --gris-fonce: #111111;
+            --gris-moyen: #333333;
+            --gris-clair: #888888;
+            --blanc: #FFFFFF;
+            --vert: #10B981;
+            --rouge: #EF4444;
+            --orange: #F59E0B;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--noir);
+            color: var(--blanc);
+            min-height: 100vh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        
+        /* Header */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--gris-moyen);
+            background: rgba(10,10,10,0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+        }
+        .logo span:first-child { color: var(--blanc); }
+        .logo span:nth-child(2) { color: var(--bleu); }
+        .logo span:last-child { color: var(--gris-clair); }
+        
+        nav { display: flex; gap: 32px; }
+        nav a {
+            color: var(--gris-clair);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        nav a:hover, nav a.active { color: var(--bleu); }
+        
+        /* Hero */
+        .hero {
+            padding: 160px 0 80px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--noir) 0%, var(--gris-fonce) 100%);
+        }
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        .hero h1 .gradient {
+            background: linear-gradient(90deg, var(--bleu), var(--violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 20px;
+            color: var(--gris-clair);
+            margin-bottom: 40px;
+        }
+        
+        /* Diagnostic Form */
+        .diagnostic-box {
+            background: var(--gris-fonce);
+            border-radius: 24px;
+            padding: 48px;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid var(--gris-moyen);
+        }
+        .diagnostic-box h2 {
+            font-size: 28px;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        .form-group { margin-bottom: 24px; }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            color: var(--gris-clair);
+            margin-bottom: 8px;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 16px;
+            background: var(--noir);
+            border: 1px solid var(--gris-moyen);
+            border-radius: 12px;
+            color: var(--blanc);
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--bleu);
+        }
+        .form-group textarea { min-height: 100px; resize: vertical; }
+        
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--noir);
+            border: 1px solid var(--gris-moyen);
+            border-radius: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .checkbox-item:hover { border-color: var(--bleu); }
+        .checkbox-item.selected {
+            background: var(--bleu);
+            border-color: var(--bleu);
+            color: var(--noir);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 18px 32px;
+            background: linear-gradient(90deg, var(--bleu), var(--violet));
+            border: none;
+            border-radius: 12px;
+            color: var(--blanc);
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,212,255,0.3);
+        }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        /* Results */
+        .results {
+            display: none;
+            margin-top: 48px;
+        }
+        .results.show { display: block; }
+        
+        .result-card {
+            background: var(--gris-fonce);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            border: 1px solid var(--gris-moyen);
+        }
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .health-badge {
+            padding: 8px 20px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .health-badge.excellent { background: rgba(16,185,129,0.2); color: var(--vert); }
+        .health-badge.medium { background: rgba(245,158,11,0.2); color: var(--orange); }
+        .health-badge.critical { background: rgba(239,68,68,0.2); color: var(--rouge); }
+        
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .component-item {
+            background: var(--noir);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .component-item .icon { font-size: 32px; margin-bottom: 8px; }
+        .component-item .name { font-size: 12px; color: var(--gris-clair); }
+        .component-item .status { font-size: 14px; font-weight: 600; margin-top: 4px; }
+        .component-item .status.ok { color: var(--vert); }
+        .component-item .status.warning { color: var(--orange); }
+        .component-item .status.error { color: var(--rouge); }
+        
+        .issue-list {
+            margin-bottom: 24px;
+        }
+        .issue-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: var(--noir);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--orange);
+        }
+        .issue-item.high { border-left-color: var(--rouge); }
+        .issue-item .issue-name { font-weight: 600; }
+        .issue-item .issue-cost { color: var(--bleu); }
+        
+        .recommendations {
+            background: rgba(0,212,255,0.1);
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--bleu);
+        }
+        .recommendations h4 { color: var(--bleu); margin-bottom: 12px; }
+        .recommendations ul { padding-left: 20px; }
+        .recommendations li { margin-bottom: 8px; color: var(--gris-clair); }
+        
+        .total-cost {
+            text-align: center;
+            padding: 24px;
+            background: linear-gradient(90deg, rgba(0,212,255,0.1), rgba(139,92,246,0.1));
+            border-radius: 12px;
+            margin-top: 24px;
+        }
+        .total-cost .label { font-size: 14px; color: var(--gris-clair); }
+        .total-cost .amount { font-size: 36px; font-weight: 700; color: var(--bleu); }
+        
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            padding: 48px 0;
+        }
+        .stat-card {
+            background: var(--gris-fonce);
+            padding: 24px;
+            border-radius: 16px;
+            text-align: center;
+        }
+        .stat-card .value { font-size: 36px; font-weight: 700; color: var(--bleu); }
+        .stat-card .label { font-size: 14px; color: var(--gris-clair); }
+        
+        /* Footer */
+        footer {
+            padding: 48px 0;
+            border-top: 1px solid var(--gris-moyen);
+            text-align: center;
+            color: var(--gris-clair);
+            font-size: 14px;
+        }
+        
+        /* Loading */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 48px;
+        }
+        .loading.show { display: block; }
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid var(--gris-moyen);
+            border-top-color: var(--bleu);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .component-grid { grid-template-columns: 1fr; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img class="logo-icon" src="../branding/nexus/E-Tech-Nexus-Icon.svg" alt="E-Tech Nexus">
+                <span>E-Tech</span><span>Nexus</span><span>AI</span>
+            </div>
+            <nav>
+                <a href="#" class="active">Diagnostic</a>
+                <a href="#atelier">Atelier</a>
+                <a href="#marketplace">Marketplace</a>
+                <a href="#formation">Formation</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1><span class="gradient">Diagnostic</span> Intelligent</h1>
+            <p>IA-powered GSM analysis • Réparation • Marketplace</p>
+            
+            <div class="diagnostic-box">
+                <h2>🔍 Analyser mon appareil</h2>
+                <form id="diagnostic-form">
+                    <div class="form-group">
+                        <label>Modèle de l'appareil</label>
+                        <select name="device_model" required>
+                            <option value="">Sélectionner...</option>
+                            <option value="iPhone 15 Pro Max">iPhone 15 Pro Max</option>
+                            <option value="iPhone 15 Pro">iPhone 15 Pro</option>
+                            <option value="iPhone 15">iPhone 15</option>
+                            <option value="iPhone 14 Pro Max">iPhone 14 Pro Max</option>
+                            <option value="iPhone 14">iPhone 14</option>
+                            <option value="iPhone 13">iPhone 13</option>
+                            <option value="Samsung Galaxy S24 Ultra">Samsung Galaxy S24 Ultra</option>
+                            <option value="Samsung Galaxy S24">Samsung Galaxy S24</option>
+                            <option value="Samsung Galaxy S23">Samsung Galaxy S23</option>
+                            <option value="Samsung Galaxy A54">Samsung Galaxy A54</option>
+                            <option value="Google Pixel 8 Pro">Google Pixel 8 Pro</option>
+                            <option value="Google Pixel 8">Google Pixel 8</option>
+                            <option value="Autre">Autre modèle</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>IMEI (15 chiffres)</label>
+                        <input type="text" name="imei" placeholder="123456789012345" maxlength="15">
+                    </div>
+                    <div class="form-group">
+                        <label>Problèmes constatés</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item" data-value="battery" onclick="toggleCheckbox(this)">🔋 Batterie</div>
+                            <div class="checkbox-item" data-value="ecran" onclick="toggleCheckbox(this)">📱 Écran</div>
+                            <div class="checkbox-item" data-value="camera" onclick="toggleCheckbox(this)">📷 Caméra</div>
+                            <div class="checkbox-item" data-value="reseau" onclick="toggleCheckbox(this)">📶 Réseau</div>
+                            <div class="checkbox-item" data-value="son" onclick="toggleCheckbox(this)">🔊 Son</div>
+                            <div class="checkbox-item" data-value="tactile" onclick="toggleCheckbox(this)">👆 Tactile</div>
+                            <div class="checkbox-item" data-value="charge" onclick="toggleCheckbox(this)">⚡ Charge</div>
+                            <div class="checkbox-item" data-value="capteurs" onclick="toggleCheckbox(this)">🎯 Capteurs</div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn" id="analyze-btn">🚀 Lancer l'analyse IA</button>
+                </form>
+                
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Analyse en cours par l'IA...</p>
+                </div>
+                
+                <div class="results" id="results">
+                    <!-- Results will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="stats">
+            <div class="stat-card">
+                <div class="value">15K+</div>
+                <div class="label">Diagnostics</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">98%</div>
+                <div class="label">Précision IA</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">50K+</div>
+                <div class="label">Réparations</div>
+            </div>
+            <div class="stat-card">
+                <div class="value">24h</div>
+                <div class="label">Délai moyen</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 E-Tech Nexus AI • Plateforme mondiale de réparation GSM</p>
+            <p style="margin-top: 8px; color: var(--gris-moyen);">etechnexus.ai • contact@etechnexus.ai</p>
+        </div>
+    </footer>
+
+    <script>
+        let selectedIssues = [];
+        
+        function toggleCheckbox(el) {
+            el.classList.toggle('selected');
+            const value = el.dataset.value;
+            if (selectedIssues.includes(value)) {
+                selectedIssues = selectedIssues.filter(i => i !== value);
+            } else {
+                selectedIssues.push(value);
+            }
+        }
+        
+        document.getElementById('diagnostic-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const form = e.target;
+            const deviceModel = form.device_model.value;
+            const imei = form.imei.value || 'N/A';
+            
+            if (!deviceModel) {
+                alert('Veuillez sélectionner un modèle');
+                return;
+            }
+            
+            // Show loading
+            document.getElementById('analyze-btn').disabled = true;
+            document.getElementById('loading').classList.add('show');
+            document.getElementById('results').classList.remove('show');
+            
+            // Call API
+            try {
+                const response = await fetch('http://localhost:3001/api/diagnostic', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        device_model: deviceModel,
+                        imei: imei,
+                        issues: selectedIssues
+                    })
+                });
+                
+                const result = await response.json();
+                displayResults(result);
+            } catch (error) {
+                console.error(error);
+                alert('Erreur de connexion. Le serveur est-il démarré?');
+            } finally {
+                document.getElementById('analyze-btn').disabled = false;
+                document.getElementById('loading').classList.remove('show');
+            }
+        });
+        
+        function displayResults(result) {
+            const healthClass = result.overall_health === 'Excellent' ? 'excellent' : 
+                           result.overall_health === 'Réparation recommandée' ? 'medium' : 'critical';
+            
+            const totalCost = result.detected_issues.reduce((sum, issue) => sum + (issue.estimated_cost || 0), 0);
+            
+            let html = `
+                <div class="result-card">
+                    <div class="result-header">
+                        <div>
+                            <h3>${result.device_model}</h3>
+                            <p style="color: var(--gris-clair); font-size: 14px;">IMEI: ${result.imei}</p>
+                        </div>
+                        <span class="health-badge ${healthClass}">${result.overall_health}</span>
+                    </div>
+                    
+                    <div class="component-grid">
+                        <div class="component-item">
+                            <div class="icon">🔋</div>
+                            <div class="name">Batterie</div>
+                            <div class="status ${result.battery_health > 70 ? 'ok' : result.battery_health > 50 ? 'warning' : 'error'}">${result.battery_health}%</div>
+                        </div>
+                        <div class="component-item">
+                            <div class="icon">📱</div>
+                            <div class="name">Écran</div>
+                            <div class="status ${result.screen_status === 'OK' ? 'ok' : 'error'}">${result.screen_status}</div>
+                        </div>
+                        <div class="component-item">
+                            <div class="icon">📷</div>
+                            <div class="name">Caméra</div>
+                            <div class="status ${result.camera_status === 'OK' ? 'ok' : 'error'}">${result.camera_status}</div>
+                        </div>
+                        <div class="component-item">
+                            <div class="icon">📶</div>
+                            <div class="name">Réseau</div>
+                            <div class="status ${result.network_status === 'OK' ? 'ok' : 'error'}">${result.network_status}</div>
+                        </div>
+                        <div class="component-item">
+                            <div class="icon">🎯</div>
+                            <div class="name">Capteurs</div>
+                            <div class="status ${result.sensors_status === 'OK' ? 'ok' : 'error'}">${result.sensors_status}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            if (result.detected_issues.length > 0) {
+                html += `
+                    <div class="result-card">
+                        <h4 style="margin-bottom: 16px;">Problèmes détectés</h4>
+                        ${result.detected_issues.map(issue => `
+                            <div class="issue-item ${issue.severity === 'high' ? 'high' : ''}">
+                                <div>
+                                    <div class="issue-name">${issue.component}</div>
+                                    <div style="font-size: 14px; color: var(--gris-clair);">${issue.issue}</div>
+                                </div>
+                                <div class="issue-cost">$${issue.estimated_cost}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            if (result.recommendations.length > 0) {
+                html += `
+                    <div class="recommendations">
+                        <h4>💡 Recommandations IA</h4>
+                        <ul>
+                            ${result.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+            
+            html += `
+                <div class="total-cost">
+                    <div class="label">Coût estimé de réparation</div>
+                    <div class="amount">$${totalCost}</div>
+                </div>
+            `;
+            
+            document.getElementById('results').innerHTML = html;
+            document.getElementById('results').classList.add('show');
+        }
+    </script>
+</body>
+</html>
