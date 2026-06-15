@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord | E-Tech Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .dashboard { padding: 24px; }
+        .dashboard__header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+        .dashboard__title { font-size: 32px; margin: 0; }
+        
+        /* Stats Cards */
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 32px; }
+        .stat-card { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .stat-card__label { font-size: 14px; color: #666; margin-bottom: 8px; }
+        .stat-card__value { font-size: 32px; font-weight: 700; color: var(--bleu-nuit); }
+        .stat-card__change { font-size: 14px; margin-top: 8px; }
+        .stat-card__change--positive { color: green; }
+        .stat-card__change--negative { color: red; }
+        
+        /* Tables */
+        .data-table { width: 100%; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .data-table th, .data-table td { padding: 16px; text-align: left; border-bottom: 1px solid #eee; }
+        .data-table th { background: #f8f9fa; font-weight: 600; }
+        .data-table tr:last-child td { border-bottom: none; }
+        
+        /* Status badges */
+        .status { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .status--pending { background: #FEF3C7; color: #92400E; }
+        .status--processing { background: #DBEAFE; color: #1E40AF; }
+        .status--delivered { background: #D1FAE5; color: #065F46; }
+        .status--cancelled { background: #FEE2E2; color: #991B1B; }
+        
+        /* Sidebar */
+        .dashboard__layout { display: grid; grid-template-columns: 240px 1fr; gap: 24px; }
+        .sidebar { background: white; padding: 24px; border-radius: 12px; height: fit-content; }
+        .sidebar__item { display: block; padding: 12px 16px; color: var(--bleu-nuit); text-decoration: none; border-radius: 8px; margin-bottom: 8px; }
+        .sidebar__item:hover, .sidebar__item--active { background: var(--bleu-nuit); color: white; }
+        
+        /* AI Panel */
+        .ai-panel { background: linear-gradient(135deg, var(--bleu-nuit) 0%, #1a3a5c 100%); color: white; padding: 24px; border-radius: 12px; margin-top: 24px; }
+        .ai-panel__title { font-size: 20px; margin-bottom: 16px; }
+        .ai-panel__messages { height: 200px; overflow-y: auto; background: rgba(255,255,255,0.1); border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+        .ai-message { padding: 12px; margin-bottom: 12px; border-radius: 8px; }
+        .ai-message--user { background: rgba(255,255,255,0.2); text-align: right; }
+        .ai-message--ai { background: rgba(212, 175, 55, 0.3); }
+        .ai-input { display: flex; gap: 12px; }
+        .ai-input input { flex: 1; padding: 12px; border: none; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header__content">
+            <a href="index.html" class="header__logo">
+                <div class="header__logo-icon">⚡</div>
+                <span>E-Tech Admin</span>
+            </a>
+            <nav class="header__nav">
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <a href="products.html">Produits</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="header__actions">
+                <span style="color: white;">Admin</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard -->
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard__header">
+                <h1 class="dashboard__title">Tableau de Bord</h1>
+                <p id="date"></p>
+            </div>
+            
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-card__label">Commandes Aujourd'hui</div>
+                    <div class="stat-card__value">12</div>
+                    <div class="stat-card__change stat-card__change--positive">+25% vs hier</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card__label">Revenus Aujourd'hui</div>
+                    <div class="stat-card__value">2.4M</div>
+                    <div class="stat-card__change stat-card__change--positive">+18% vs hier</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card__label">Produits</div>
+                    <div class="stat-card__value">44</div>
+                    <div class="stat-card__change">En stock</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card__label">Clients</div>
+                    <div class="stat-card__value">156</div>
+                    <div class="stat-card__change stat-card__change--positive">+8 ce mois</div>
+                </div>
+            </div>
+            
+            <div class="dashboard__layout">
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <h3 style="margin-bottom: 16px;">Menu</h3>
+                    <a href="#" class="sidebar__item sidebar__item--active">📊 Aperçu</a>
+                    <a href="#" class="sidebar__item">📦 Commandes</a>
+                    <a href="#" class="sidebar__item">📱 Produits</a>
+                    <a href="#" class="sidebar__item">👥 Clients</a>
+                    <a href="#" class="sidebar__item">💬 Messages IA</a>
+                    <a href="#" class="sidebar__item">📈 Analytics</a>
+                    <a href="#" class="sidebar__item">⚙️ Paramètres</a>
+                    
+                    <!-- AI Assistant Quick -->
+                    <div class="ai-panel">
+                        <div class="ai-panel__title">🤖 Assistant IA</div>
+                        <div class="ai-panel__messages" id="ai-messages">
+                            <div class="ai-message ai-message--ai">Bonjour! Je suis votre assistant IA. Comment puis-je vous aider?</div>
+                        </div>
+                        <div class="ai-input">
+                            <input type="text" id="ai-input" placeholder="Tapez votre message...">
+                            <button class="btn btn--primary" onclick="sendAIMessage()">Envoyer</button>
+                        </div>
+                    </div>
+                </aside>
+                
+                <!-- Main Content -->
+                <main>
+                    <!-- Recent Orders -->
+                    <h2 style="margin-bottom: 16px;">Commandes Récentes</h2>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Client</th>
+                                <th>Produits</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-table">
+                            <tr>
+                                <td>#CMD-001</td>
+                                <td>Jean Dupont</td>
+                                <td>iPhone 16 Pro</td>
+                                <td>1,450,000 FCA</td>
+                                <td><span class="status status--pending">En attente</span></td>
+                                <td>15/06/2026</td>
+                            </tr>
+                            <tr>
+                                <td>#CMD-002</td>
+                                <td>Marie Ok</td>
+                                <td>AirPods Pro 2</td>
+                                <td>175,000 FCA</td>
+                                <td><span class="status status--processing">En cours</span></td>
+                                <td>15/06/2026</td>
+                            </tr>
+                            <tr>
+                                <td>#CMD-003</td>
+                                <td>Paul K.</td>
+                                <td>MacBook Air M4</td>
+                                <td>1,150,000 FCA</td>
+                                <td><span class="status status--delivered">Livré</span></td>
+                                <td>14/06/2026</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <!-- Top Products -->
+                    <h2 style="margin: 32px 0 16px;">Produits les Plus Vendus</h2>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Produit</th>
+                                <th>Ventes</th>
+                                <th>Revenus</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>iPhone 16 Pro Max 256Go</td>
+                                <td>28</td>
+                                <td>40,600,000 FCA</td>
+                            </tr>
+                            <tr>
+                                <td>AirPods Pro 2</td>
+                                <td>45</td>
+                                <td>7,875,000 FCA</td>
+                            </tr>
+                            <tr>
+                                <td>Samsung Galaxy S25 Ultra</td>
+                                <td>18</td>
+                                <td>17,640,000 FCA</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer__copyright">© 2025 E-Tech Admin - Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Show current date
+        document.getElementById('date').textContent = new Date().toLocaleDateString('fr-FR', { 
+            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+        });
+        
+        // AI Chat Function
+        async function sendAIMessage() {
+            const input = document.getElementById('ai-input');
+            const messages = document.getElementById('ai-messages');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            messages.innerHTML += `<div class="ai-message ai-message--user">${message}</div>`;
+            input.value = '';
+            
+            // Show loading
+            messages.innerHTML += `<div class="ai-message ai-message--ai">⏳ Traitement en cours...</div>`;
+            messages.scrollTop = messages.scrollHeight;
+            
+            try {
+                // Call AI API
+                const response = await fetch('http://localhost:3000/api/n8n/support', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message })
+                });
+                
+                const data = await response.json();
+                
+                // Remove loading and add response
+                messages.innerHTML = messages.innerHTML.replace(
+                    '<div class="ai-message ai-message--ai">⏳ Traitement en cours...</div>',
+                    `<div class="ai-message ai-message--ai">${data.response || 'Réponse IA ici...'}</div>`
+                );
+            } catch (e) {
+                messages.innerHTML += `<div class="ai-message ai-message--ai">Erreur: IA non disponible. ${e.message}</div>`;
+            }
+            
+            messages.scrollTop = messages.scrollHeight;
+        }
+        
+        // Enter key to send
+        document.getElementById('ai-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') sendAIMessage();
+        });
+    </script>
+</body>
+</html>
