@@ -314,6 +314,20 @@ function subscribeNewsletter(event) {
 }
 
 // ===================
+// UI Updates
+// ===================
+
+/**
+ * Update results count display
+ */
+function updateResultsCount(count) {
+    const countEl = document.getElementById('results-count');
+    if (countEl) {
+        countEl.textContent = `${count} produits`;
+    }
+}
+
+// ===================
 // Product Loading
 // ===================
 
@@ -323,20 +337,24 @@ function subscribeNewsletter(event) {
 async function loadProducts() {
     isLoading = true;
     
+    // API URL - Change if needed
+    const API_URL = 'http://localhost:3000/api';
+    
     try {
         // Try to fetch from backend API first
-        const apiUrl = 'http://localhost:3000/api/products';
+        const apiUrl = `${API_URL}/products`;
         const response = await fetch(apiUrl);
         
         if (response.ok) {
             const data = await response.json();
             products = data.products || [];
-            console.log(`Loaded ${products.length} products from API`);
+            console.log(`✅ Loaded ${products.length} products from API`);
+            updateResultsCount(products.length);
         } else {
             throw new Error('API not available');
         }
     } catch (error) {
-        console.warn('API not available, using static data:', error.message);
+        console.warn('⚠️ API not available, using static data:', error.message);
         
         // Static fallback - simulating API response
         products = [
