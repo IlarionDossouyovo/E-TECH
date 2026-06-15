@@ -318,68 +318,40 @@ function subscribeNewsletter(event) {
 // ===================
 
 /**
- * Load products from API (placeholder - would connect to backend/N8N)
+ * Load products from API
  */
 async function loadProducts() {
     isLoading = true;
     
     try {
-        // In production: const response = await fetch(`${CONFIG.apiBaseUrl}/products`);
-        // const products = await response.json();
+        // Try to fetch from backend API first
+        const apiUrl = 'http://localhost:3000/api/products';
+        const response = await fetch(apiUrl);
+        
+        if (response.ok) {
+            const data = await response.json();
+            products = data.products || [];
+            console.log(`Loaded ${products.length} products from API`);
+        } else {
+            throw new Error('API not available');
+        }
+    } catch (error) {
+        console.warn('API not available, using static data:', error.message);
         
         // Static fallback - simulating API response
         products = [
-            {
-                id: 1,
-                name: 'iPhone 16 Pro Max 256Go',
-                brand: 'Apple',
-                price: 1450000,
-                originalPrice: null,
-                image: '📱',
-                badge: 'new',
-                rating: 5,
-                reviews: 128
-            },
-            {
-                id: 2,
-                name: 'AirPods Pro 2ème Génération',
-                brand: 'Apple',
-                price: 175000,
-                originalPrice: null,
-                image: '🎧',
-                badge: 'bestseller',
-                rating: 5,
-                reviews: 256
-            },
-            {
-                id: 3,
-                name: 'Apple Watch Ultra 2',
-                brand: 'Apple',
-                price: 520000,
-                originalPrice: 600000,
-                image: '⌚',
-                badge: 'promo',
-                rating: 5,
-                reviews: 89
-            },
-            {
-                id: 4,
-                name: 'MacBook Air M4 15"',
-                brand: 'Apple',
-                price: 1150000,
-                originalPrice: null,
-                image: '💻',
-                badge: null,
-                rating: 5,
-                reviews: 67
-            }
+            { id: 1, name: 'iPhone 16 Pro Max 256Go', brand: 'Apple', category: 'smartphones', price: 1450000, originalPrice: null, image: '📱', badge: 'new', rating: 5, reviews: 128, stock: 15 },
+            { id: 2, name: 'AirPods Pro 2', brand: 'Apple', category: 'audio', price: 175000, originalPrice: null, image: '🎧', badge: 'bestseller', rating: 5, reviews: 256, stock: 45 },
+            { id: 3, name: 'Apple Watch Ultra 2', brand: 'Apple', category: 'wearables', price: 520000, originalPrice: 600000, image: '⌚', badge: 'promo', rating: 5, reviews: 89, stock: 8 },
+            { id: 4, name: 'MacBook Air M4 15"', brand: 'Apple', category: 'computers', price: 1150000, originalPrice: null, image: '💻', badge: null, rating: 5, reviews: 67, stock: 12 },
+            { id: 5, name: 'Samsung Galaxy S25 Ultra', brand: 'Samsung', category: 'smartphones', price: 980000, originalPrice: null, image: '📱', badge: 'new', rating: 4, reviews: 95, stock: 20 },
+            { id: 6, name: 'Galaxy Buds3 Pro', brand: 'Samsung', category: 'audio', price: 145000, originalPrice: null, image: '🎧', badge: null, rating: 4, reviews: 78, stock: 30 },
+            { id: 7, name: 'Google Pixel 9 Pro', brand: 'Google', category: 'smartphones', price: 750000, originalPrice: null, image: '📱', badge: 'new', rating: 4, reviews: 56, stock: 18 },
+            { id: 8, name: 'Anker Power Bank 20000mAh', brand: 'Anker', category: 'accessories', price: 35000, originalPrice: null, image: '🔌', badge: 'bestseller', rating: 5, reviews: 234, stock: 100 }
         ];
-        
-        renderProducts();
-    } catch (error) {
-        console.error('Error loading products:', error);
     } finally {
         isLoading = false;
+        renderProducts();
     }
 }
 
