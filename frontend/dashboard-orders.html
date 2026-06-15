@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commandes | E-Tech Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .dashboard { padding: 24px; }
+        .data-table { width: 100%; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .data-table th, .data-table td { padding: 16px; text-align: left; border-bottom: 1px solid #eee; }
+        .data-table th { background: #f8f9fa; font-weight: 600; }
+        .status { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .status--pending { background: #FEF3C7; color: #92400E; }
+        .status--processing { background: #DBEAFE; color: #1E40AF; }
+        .status--delivered { background: #D1FAE5; color: #065F46; }
+        .status--cancelled { background: #FEE2E2; color: #991B1B; }
+        .filters { display: flex; gap: 16px; margin-bottom: 24px; }
+        .filters select, .filters input { padding: 10px; border: 1px solid #ddd; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__content">
+            <a href="index.html" class="header__logo"><span>⚡ E-Tech Admin</span></a>
+            <nav class="header__nav">
+                <a href="dashboard.html">📊 Aperçu</a>
+                <a href="dashboard-orders.html" class="active">📦 Commandes</a>
+                <a href="products.html">📱 Produits</a>
+                <a href="dashboard-settings.html">⚙️</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="dashboard">
+        <div class="container">
+            <h1>📦 Gestion des Commandes</h1>
+            
+            <div class="filters">
+                <select>
+                    <option>Tous les statuts</option>
+                    <option>En attente</option>
+                    <option>En cours</option>
+                    <option>Livrés</option>
+                    <option>Annulés</option>
+                </select>
+                <input type="date">
+                <input type="text" placeholder="Rechercher...">
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Client</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Produits</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#CMD-001</td>
+                        <td>Jean Dupont</td>
+                        <td>jean@email.bj</td>
+                        <td>+229 01 234 567</td>
+                        <td>iPhone 16 Pro</td>
+                        <td>1,450,000 FCA</td>
+                        <td><span class="status status--pending">En attente</span></td>
+                        <td>15/06/2026</td>
+                        <td><button>Voir</button></td>
+                    </tr>
+                    <tr>
+                        <td>#CMD-002</td>
+                        <td>Marie Ok</td>
+                        <td>marie@email.bj</td>
+                        <td>+229 01 234 567</td>
+                        <td>AirPods Pro 2</td>
+                        <td>175,000 FCA</td>
+                        <td><span class="status status--processing">En cours</span></td>
+                        <td>15/06/2026</td>
+                        <td><button>Voir</button></td>
+                    </tr>
+                    <tr>
+                        <td>#CMD-003</td>
+                        <td>Paul K.</td>
+                        <td>paul@email.bj</td>
+                        <td>+229 01 234 567</td>
+                        <td>MacBook Air M4</td>
+                        <td>1,150,000 FCA</td>
+                        <td><span class="status status--delivered">Livré</span></td>
+                        <td>14/06/2026</td>
+                        <td><button>Voir</button></td>
+                    </tr>
+                    <tr>
+                        <td>#CMD-004</td>
+                        <td>Alice B.</td>
+                        <td>alice@email.bj</td>
+                        <td>+229 01 234 567</td>
+                        <td>Galaxy S25 Ultra</td>
+                        <td>980,000 FCA</td>
+                        <td><span class="status status--delivered">Livré</span></td>
+                        <td>14/06/2026</td>
+                        <td><button>Voir</button></td>
+                    </tr>
+                    <tr>
+                        <td>#CMD-005</td>
+                        <td>Bob M.</td>
+                        <td>bob@email.bj</td>
+                        <td>+229 01 234 567</td>
+                        <td>Apple Watch Ultra 3</td>
+                        <td>520,000 FCA</td>
+                        <td><span class="status status--cancelled">Annulé</span></td>
+                        <td>13/06/2026</td>
+                        <td><button>Voir</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+</html>

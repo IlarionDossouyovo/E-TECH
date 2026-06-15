@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages IA | E-Tech Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .dashboard { padding: 24px; }
+        .chat-container { display: grid; grid-template-columns: 300px 1fr; gap: 24px; }
+        .chat-list { background: white; border-radius: 12px; padding: 16px; height: fit-content; }
+        .chat-list__item { padding: 12px; border-radius: 8px; cursor: pointer; margin-bottom: 8px; }
+        .chat-list__item:hover, .chat-list__item--active { background: #f0f0f0; }
+        .chat-list__name { font-weight: 600; }
+        .chat-list__preview { font-size: 12px; color: #666; }
+        .chat-main { background: white; border-radius: 12px; padding: 24px; }
+        .chat-messages { height: 400px; overflow-y: auto; border: 1px solid #eee; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+        .chat-message { padding: 12px; margin-bottom: 12px; border-radius: 8px; max-width: 70%; }
+        .chat-message--user { background: var(--bleu-nuit); color: white; margin-left: auto; }
+        .chat-message--ai { background: #f0f0f0; }
+        .chat-input { display: flex; gap: 12px; }
+        .chat-input input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; }
+        
+        /* AI Stats */
+        .ai-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+        .ai-stat { background: white; padding: 20px; border-radius: 12px; text-align: center; }
+        .ai-stat__value { font-size: 28px; font-weight: 700; }
+        .ai-stat__label { font-size: 14px; color: #666; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__content">
+            <a href="index.html" class="header__logo"><span>⚡ E-Tech Admin</span></a>
+            <nav class="header__nav">
+                <a href="dashboard.html">📊 Aperçu</a>
+                <a href="dashboard-orders.html">📦 Commandes</a>
+                <a href="dashboard-ai.html" class="active">💬 Messages IA</a>
+                <a href="dashboard-settings.html">⚙️</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="dashboard">
+        <div class="container">
+            <h1>💬 Assistant IA - Messages</h1>
+            
+            <!-- AI Stats -->
+            <div class="ai-stats">
+                <div class="ai-stat">
+                    <div class="ai-stat__value">247</div>
+                    <div class="ai-stat__label">Messages aujourd'hui</div>
+                </div>
+                <div class="ai-stat">
+                    <div class="ai-stat__value">89%</div>
+                    <div class="ai-stat__label">Satisfaction</div>
+                </div>
+                <div class="ai-stat">
+                    <div class="ai-stat__value">2.3 min</div>
+                    <div class="ai-stat__label">Temps moyen réponse</div>
+                </div>
+            </div>
+
+            <div class="chat-container">
+                <!-- Chat List -->
+                <div class="chat-list">
+                    <h3 style="margin-bottom: 16px;">Conversations</h3>
+                    <div class="chat-list__item chat-list__item--active">
+                        <div class="chat-list__name">Jean Dupont</div>
+                        <div class="chat-list__preview">Quel iPhone choisir?</div>
+                    </div>
+                    <div class="chat-list__item">
+                        <div class="chat-list__name">Marie Ok</div>
+                        <div class="chat-list__preview">Délai de livraison?</div>
+                    </div>
+                    <div class="chat-list__item">
+                        <div class="chat-list__name">Paul K.</div>
+                        <div class="chat-list__preview">Garantie internationale</div>
+                    </div>
+                    <div class="chat-list__item">
+                        <div class="chat-list__name">Alice B.</div>
+                        <div class="chat-list__preview">Paiement Mobile Money</div>
+                    </div>
+                </div>
+                
+                <!-- Chat Main -->
+                <div class="chat-main">
+                    <div class="chat-messages">
+                        <div class="chat-message chat-message--ai">Bonjour! Je suis l'assistant IA d'E-Tech. Comment puis-je vous aider?</div>
+                        <div class="chat-message chat-message--user">Bonjour, quel iPhone choisir pour la photo?</div>
+                        <div class="chat-message chat-message--ai">Pour la photo, je recommande l'iPhone 16 Pro Max avec sa caméra 48MP et le nouveau système de traitement d'image. Il est disponible à 1,450,000 FCA.</div>
+                        <div class="chat-message chat-message--user">Et le Samsung?</div>
+                        <div class="chat-message chat-message--ai">Le Galaxy S25 Ultra est aussi excellent avec sa caméra 200MP. Disponible à 980,000 FCA pour le 256Go.</div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="ai-msg" placeholder="Tapez votre réponse...">
+                        <button class="btn btn--primary" onclick="sendMessage()">Envoyer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('ai-msg');
+            const messages = document.querySelector('.chat-messages');
+            if (input.value.trim()) {
+                messages.innerHTML += `<div class="chat-message chat-message--user">${input.value}</div>`;
+                messages.innerHTML += `<div class="chat-message chat-message--ai">Merci pour votre message! L'IAtraitera votre demande...</div>`;
+                input.value = '';
+            }
+        }
+    </script>
+</body>
+</html>

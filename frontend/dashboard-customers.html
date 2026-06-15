@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients | E-Tech Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .dashboard { padding: 24px; }
+        .data-table { width: 100%; background: white; border-radius: 12px; overflow: hidden; }
+        .data-table th, .data-table td { padding: 16px; text-align: left; border-bottom: 1px solid #eee; }
+        .data-table th { background: #f8f9fa; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__content">
+            <a href="index.html" class="header__logo"><span>⚡ E-Tech Admin</span></a>
+            <nav class="header__nav">
+                <a href="dashboard.html">📊 Aperçu</a>
+                <a href="dashboard-orders.html">📦 Commandes</a>
+                <a href="dashboard-customers.html" class="active">👥 Clients</a>
+                <a href="dashboard-settings.html">⚙️</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="dashboard">
+        <div class="container">
+            <h1>👥 Gestion des Clients</h1>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Ville</th>
+                        <th>Commandes</th>
+                        <th>Total</th>
+                        <th>Inscription</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#CLT-001</td>
+                        <td>Jean Dupont</td>
+                        <td>jean@email.bj</td>
+                        <td>+229 01 234 567</td>
+                        <td>Cotonou</td>
+                        <td>3</td>
+                        <td>2,450,000 FCA</td>
+                        <td>10/01/2025</td>
+                    </tr>
+                    <tr>
+                        <td>#CLT-002</td>
+                        <td>Marie Ok</td>
+                        <td>marie@email.bj</td>
+                        <td>+229 01 234 567</td>
+                        <td>Porto-Novo</td>
+                        <td>5</td>
+                        <td>1,875,000 FCA</td>
+                        <td>15/02/2025</td>
+                    </tr>
+                    <tr>
+                        <td>#CLT-003</td>
+                        <td>Paul K.</td>
+                        <td>paul@email.bj</td>
+                        <td>+229 01 234 567</td>
+                        <td>Cotonou</td>
+                        <td>2</td>
+                        <td>1,150,000 FCA</td>
+                        <td>20/03/2025</td>
+                    </tr>
+                    <tr>
+                        <td>#CLT-004</td>
+                        <td>Alice B.</td>
+                        <td>alice@email.bj</td>
+                        <td>+229 01 234 567</td>
+                        <td>Abomey-Calavi</td>
+                        <td>1</td>
+                        <td>980,000 FCA</td>
+                        <td>05/04/2025</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+</html>
