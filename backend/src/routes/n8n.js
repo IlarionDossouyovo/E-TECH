@@ -1,10 +1,19 @@
 /**
  * N8N Webhook Routes
- * Connect frontend to N8N automation
+ * Connect frontend to N8N automation / Ollama
  */
 
 const express = require('express');
 const router = express.Router();
+
+// Import Ollama AI
+let aiClient = null;
+try {
+    const { ETechAI } = require('../lib/ollama');
+    aiClient = new ETechAI();
+} catch (e) {
+    console.log('⚠️ Ollama non disponible:', e.message);
+}
 
 // Webhook for new order (triggers Sales AI, Inventory AI)
 router.post('/webhook/order', (req, res) => {
@@ -64,6 +73,68 @@ router.post('/trigger/marketing', (req, res) => {
 
 router.post('/trigger/product-scrape', (req, res) => {
     res.json({ triggered: 'competitor_intelligence_ai' });
+});
+
+// ===================
+// Ollama AI Endpoints
+// ===================
+
+// Health check AI
+router.get('/ai/health', async (req, res) => {
+    if (aiClient) {
+        const health = await aiClient.checkHealth();
+        res.json(health);
+    } else {
+        res.json({ available: false, error: 'AI non configure' });
+    }
+});
+
+// Customer Support AI
+router.post('/ai/support', async (req, res) => {
+    const { message, context } = req.body;
+    
+    if (!aiClient) {
+        return res.status(503).json({ error: 'AI non disponible' });
+    }
+    
+    try {
+        const response = await aiClient.handleSupport(message, context);
+        res.json({ response: response.content, tokens: response.totalTokens });
+    } catch (e) {
+        res.status(500).json({ error: e.message });
+    }
+});
+
+// Product Recommendation
+router.post('/ai/recommend', async (req, res) => {
+    const { preferences } = req.body;
+    
+    if (!aiClient) {
+        return res.status(503).json({ error: 'AI non disponible' });
+    }
+    
+    try {
+        const response = await aiClient.recommendProduct(preferences);
+        res.json({ recommendation: response.content });
+    } catch (e) {
+        res.status(500).json({ error: e.message });
+    }
+});
+
+// Marketing Content
+router.post('/ai/marketing', async (req, res) => {
+    const { topic, tone } = req.body;
+    
+    if (!aiClient) {
+        return res.status(503).json({ error: 'AI non disponible' });
+    }
+    
+    try {
+        const response = await aiClient.generateMarketingContent(topic, tone);
+        res.json({ content: response.content });
+    } catch (e) {
+        res.status(500).json({ error: e.message });
+    }
 });
 
 module.exports = router;
