@@ -258,10 +258,10 @@
                 <main id="section-settings" style="display: none;">
                     <h2 style="margin-bottom: 16px;">⚙️ Paramètres</h2>
                     <div style="background: white; padding: 24px; border-radius: 12px;">
-                        <div class="form-group"><label>Nom de la boutique</label><input type="text" value="E-Tech"></div>
-                        <div class="form-group"><label>Téléphone</label><input type="text" value="+229 01 977 003 47"></div>
-                        <div class="form-group"><label>Email</label><input type="email" value="support@e-tech.bj"></div>
-                        <button class="btn btn--primary">Enregistrer</button>
+                        <div class="form-group"><label>Nom de la boutique</label><input type="text" id="shop-name" value="E-Tech"></div>
+                        <div class="form-group"><label>Téléphone</label><input type="text" id="shop-phone" value="+229 01 977 003 47"></div>
+                        <div class="form-group"><label>Email</label><input type="email" id="shop-email" value="support@e-tech.bj"></div>
+                        <button class="btn btn--primary" onclick="saveSettings()">Enregistrer</button>
                     </div>
                 </main>
             </div>
@@ -342,6 +342,48 @@
         document.getElementById('ai-input').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') sendAIMessage();
         });
+        
+        // AI Chat Function 2 (for section)
+        async function sendAIMessage2() {
+            const input = document.getElementById('ai-input-2');
+            const messages = document.getElementById('ai-messages-2');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            messages.innerHTML += `<div class="ai-message ai-message--user">${message}</div>`;
+            input.value = '';
+            messages.innerHTML += `<div class="ai-message ai-message--ai">⏳ Traitement en cours...</div>`;
+            messages.scrollTop = messages.scrollHeight;
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/n8n/support', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message })
+                });
+                const data = await response.json();
+                messages.innerHTML = messages.innerHTML.replace(
+                    '<div class="ai-message ai-message--ai">⏳ Traitement en cours...</div>',
+                    `<div class="ai-message ai-message--ai">${data.response || 'IA: Traitement terminé!'}</div>`
+                );
+            } catch (e) {
+                messages.innerHTML += `<div class="ai-message ai-message--ai">Erreur connexion IA. Assurez-vous que le backend est lancé.</div>`;
+            }
+            messages.scrollTop = messages.scrollHeight;
+        }
+        
+        // Save Settings
+        function saveSettings() {
+            const name = document.getElementById('shop-name').value;
+            const phone = document.getElementById('shop-phone').value;
+            const email = document.getElementById('shop-email').value;
+            
+            // Save to localStorage
+            localStorage.setItem('e-tech-settings', JSON.stringify({ name, phone, email }));
+            
+            alert('✅ Paramètres enregistrés!\n\nBoutique: ' + name + '\nTéléphone: ' + phone + '\nEmail: ' + email);
+        }
     </script>
 </body>
 </html>
