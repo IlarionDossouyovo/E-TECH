@@ -8,7 +8,7 @@ const fetch = require('node-fetch');
 class OllamaClient {
     constructor(options = {}) {
         this.baseUrl = options.baseUrl || 'http://localhost:11434';
-        this.model = options.model || 'llama3.1:8b';
+        this.model = options.model || 'tinyllama';
         this.systemPrompt = options.systemPrompt || 'You are a helpful AI assistant.';
     }
 

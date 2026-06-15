@@ -2,16 +2,24 @@
 /* Based on cahier des charges specifications */
 
 :root {
-    /* Primary Colors */
-    --bleu-nuit: #0A1929;
+    /* === E-TECH PREMIUM COLOR PALETTE === */
+    
+    /* Primary Colors - According to Brand Guide */
+    --bleu-electrique: #0066FF;
+    --midnight-navy: #081C3A;
     --or-champagne: #D4AF37;
     --blanc: #FFFFFF;
     --gris-ardoise: #2D3748;
     
     /* Secondary Colors */
+    --cyber-violet: #6D28D9;
+    --silver-titanium: #B8BCC8;
+    --noir: #111111;
+    --bleu-nuit: #0A1929;
+    
+    /* Secondary Colors - Legacy */
     --bleu-electrique: #00D4FF;
     --argent: #C0C0C0;
-    --noir: #000000;
     
     /* Functional Colors */
     --success: #10B981;
@@ -107,9 +115,9 @@ p {
     padding: 0 var(--spacing-lg);
 }
 
-/* Header */
+/* Header - Premium Design */
 .header {
-    background: var(--bleu-nuit);
+    background: linear-gradient(90deg, var(--midnight-navy) 0%, var(--bleu-nuit) 100%);
     color: var(--blanc);
     padding: var(--spacing-md) 0;
     position: sticky;
@@ -139,13 +147,12 @@ p {
 .header__logo-icon {
     width: 40px;
     height: 40px;
-    background: var(--or-champagne);
-    border-radius: var(--radius-sm);
+    /* Premium gradient background */
+    background: linear-gradient(135deg, #0066FF 0%, #6D28D9 100%);
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--bleu-nuit);
-    font-weight: 800;
 }
 
 .header__nav {
@@ -287,26 +294,30 @@ p {
 }
 
 .btn--primary {
-    background: var(--or-champagne);
-    color: var(--bleu-nuit);
+    /* Premium Electric Blue Gradient */
+    background: linear-gradient(90deg, #0066FF 0%, #6D28D9 100%);
+    color: var(--blanc);
+    border: none;
+    font-weight: 600;
 }
 
 .btn--primary:hover {
-    background: #c9a432;
-    color: var(--bleu-nuit);
+    background: linear-gradient(90deg, #0052cc 0%, #5a1fbf 100%);
+    color: var(--blanc);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3);
     text-decoration: none;
 }
 
 .btn--secondary {
     background: transparent;
-    color: var(--blanc);
-    border: 2px solid var(--argent);
+    color: var(--bleu-electrique);
+    border: 2px solid var(--bleu-electrique);
 }
 
 .btn--secondary:hover {
-    border-color: var(--blanc);
+    background: var(--bleu-electrique);
+    border-color: var(--bleu-electrique);
     color: var(--blanc);
     text-decoration: none;
 }
