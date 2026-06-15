@@ -80,7 +80,7 @@ router.post('/trigger/product-scrape', (req, res) => {
 // ===================
 
 // Health check AI
-router.get('/ai/health', async (req, res) => {
+router.get('/health', async (req, res) => {
     if (aiClient) {
         const health = await aiClient.checkHealth();
         res.json(health);
@@ -90,7 +90,7 @@ router.get('/ai/health', async (req, res) => {
 });
 
 // Customer Support AI
-router.post('/ai/support', async (req, res) => {
+router.post('/support', async (req, res) => {
     const { message, context } = req.body;
     
     if (!aiClient) {
@@ -106,7 +106,7 @@ router.post('/ai/support', async (req, res) => {
 });
 
 // Product Recommendation
-router.post('/ai/recommend', async (req, res) => {
+router.post('/recommend', async (req, res) => {
     const { preferences } = req.body;
     
     if (!aiClient) {
@@ -122,7 +122,7 @@ router.post('/ai/recommend', async (req, res) => {
 });
 
 // Marketing Content
-router.post('/ai/marketing', async (req, res) => {
+router.post('/marketing', async (req, res) => {
     const { topic, tone } = req.body;
     
     if (!aiClient) {
