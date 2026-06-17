@@ -606,6 +606,7 @@ if (typeof module !== 'undefined' && module.exports) {
 // Filtres
 // ===================
 function applyFilters() {
+    console.log("ApplyFilters clicked!"); {
     const search = document.getElementById('search-input')?.value?.toLowerCase() || '';
     const category = document.getElementById('category-filter')?.value || '';
     const priceMin = parseInt(document.getElementById('price-min')?.value) || 0;
@@ -618,10 +619,10 @@ function applyFilters() {
         return matchSearch && matchCategory && matchPrice;
     });
     
-    products = filtered;
+    let filteredProducts = products.filter(p => {
     currentPage = 1;
     renderProducts();
-    updateResultsCount(filtered.length);
+    updateResultsCount(filteredProducts.length);
 }
 
 function updateResultsCount(count) {
