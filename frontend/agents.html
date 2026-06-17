@@ -120,7 +120,7 @@
         <h2 class="section-title">Agents E-Tech AI</h2>
         <div class="agents-grid">
             <!-- Agent 1: Sales -->
-            <div class="agent-card" onclick="openChat('vendeur', '💰')">
+            <div class="agent-card" onclick="openChat(this)">
                 <div class="agent-header">
                     <div class="agent-icon sales">💰</div>
                     <div>
@@ -136,7 +136,7 @@
             </div>
             
             <!-- Agent 2: Support -->
-            <div class="agent-card" onclick="openChat('support', '🎧')">
+            <div class="agent-card" onclick="openChat(this)">
                 <div class="agent-header">
                     <div class="agent-icon support">🎧</div>
                     <div>
@@ -343,7 +343,7 @@
             'inventory': 'Je gere votre inventaire E-Tech. Je peux verifier les stocks, alertes et previsions.'
         };
         
-        function openChat(el, e) { console.log("CLICK", el); {
+        function openChat(el) {
             const name = el.querySelector('.agent-name').textContent;
             const icon = el.querySelector('.agent-icon').textContent;
             currentAgent = name.replace('E-Tech AI ', '').toLowerCase();
