@@ -571,6 +571,7 @@ if (typeof module !== 'undefined' && module.exports) {
 // ===================
 // Pagination
 // ===================
+let cart = [];
 let currentPage = 1;
 const itemsPerPage = 12;
 
