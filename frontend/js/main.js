@@ -578,7 +578,6 @@ if (typeof module !== 'undefined' && module.exports) {
 // ===================
 // Pagination
 // ===================
-const itemsPerPage = 12;
 
 function goToPage(page) {
     currentPage = page;
