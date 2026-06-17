@@ -125,11 +125,11 @@
                     
                     <!-- Pagination -->
                     <div style="display: flex; justify-content: center; gap: 8px; margin-top: 48px;">
-                        <button class="btn btn--secondary">← Précédent</button>
-                        <button class="btn btn--primary">1</button>
-                        <button class="btn btn--secondary">2</button>
-                        <button class="btn btn--secondary">3</button>
-                        <button class="btn btn--secondary">Suivant →</button>
+                        <button class="btn btn--secondary" onclick="prevPage()">← Précédent</button>
+                        <button class="btn btn--primary" onclick="goToPage(1)">1</button>
+                        <button class="btn btn--secondary" onclick="goToPage(2)">2</button>
+                        <button class="btn btn--secondary" onclick="goToPage(3)">3</button>
+                        <button class="btn btn--secondary" onclick="nextPage()">Suivant →</button>
                     </div>
                 </div>
             </div>

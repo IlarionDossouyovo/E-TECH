@@ -380,7 +380,8 @@ function renderProducts() {
     const grid = document.getElementById('products-grid');
     if (!grid) return;
     
-    grid.innerHTML = products.map(product => `
+    const pageProducts = products.slice((currentPage-1)*itemsPerPage, currentPage*itemsPerPage);
+    grid.innerHTML = pageProducts.map(product => `
         <div class="product-card">
             ${product.badge ? `<div class="product-card__badges">
                 <span class="product-badge product-badge--${product.badge}">
@@ -566,4 +567,37 @@ if (typeof module !== 'undefined' && module.exports) {
         subscribeNewsletter,
         searchProducts
     };
+}
+// ===================
+// Pagination
+// ===================
+let currentPage = 1;
+const itemsPerPage = 12;
+
+function goToPage(page) {
+    currentPage = page;
+    renderProducts();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextPage() {
+    const totalPages = Math.ceil(products.length / itemsPerPage);
+    if (currentPage < totalPages) {
+        currentPage++;
+        renderProducts();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+function prevPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        renderProducts();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+// Export
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { ...module.exports, goToPage, nextPage, prevPage, currentPage };
 }
