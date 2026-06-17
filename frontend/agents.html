@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Tech AI - Agents Intelligence</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0a0a0f; color: #fff; min-height: 100vh; }
+        
+        /* Header */
+        header { background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%); padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; }
+        .logo { font-size: 28px; font-weight: bold; background: linear-gradient(90deg, #00d4ff, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        nav a { color: #fff; text-decoration: none; margin-left: 30px; font-size: 15px; transition: 0.3s; }
+        nav a:hover { color: #00d4ff; }
+        
+        /* Hero */
+        .hero { text-align: center; padding: 60px 20px; background: linear-gradient(180deg, #0a0a0f 0%, #1a1a2e 100%); }
+        .hero h1 { font-size: 48px; margin-bottom: 20px; }
+        .hero h1 span { background: linear-gradient(90deg, #00d4ff, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 18px; color: #aaa; max-width: 600px; margin: 0 auto 30px; }
+        
+        /* Stats */
+        .stats { display: flex; justify-content: center; gap: 40px; padding: 40px; background: #111; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 36px; font-weight: bold; color: #00d4ff; }
+        .stat-label { color: #888; font-size: 14px; }
+        
+        /* Agents Grid */
+        .agents-section { padding: 40px; max-width: 1400px; margin: 0 auto; }
+        .section-title { font-size: 28px; margin-bottom: 30px; display: flex; align-items: center; gap: 12px; }
+        .section-title::before { content: ''; width: 4px; height: 28px; background: #00d4ff; border-radius: 2px; }
+        
+        .agents-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+        
+        .agent-card { background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%); border-radius: 16px; padding: 24px; border: 1px solid #333; transition: 0.3s; }
+        .agent-card:hover { border-color: #00d4ff; transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1); }
+        
+        .agent-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+        .agent-icon { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        .agent-icon.sales { background: linear-gradient(135deg, #10b981, #059669); }
+        .agent-icon.support { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+        .agent-icon.marketing { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .agent-icon.inventory { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+        
+        .agent-name { font-size: 18px; font-weight: 600; }
+        .agent-status { font-size: 13px; color: #10b981; display: flex; align-items: center; gap: 6px; }
+        .agent-status::before { content: ''; width: 8px; height: 8px; background: #10b981; border-radius: 50%; animation: pulse 2s infinite; }
+        
+        .agent-desc { color: #888; font-size: 14px; margin-bottom: 16px; line-height: 1.6; }
+        
+        .agent-stats { display: flex; gap: 20px; padding-top: 16px; border-top: 1px solid #333; }
+        .agent-stat { font-size: 13px; }
+        .agent-stat-label { color: #666; }
+        .agent-stat-value { color: #00d4ff; font-weight: 600; }
+        
+        /* Add Button */
+        .add-agent-btn { background: linear-gradient(90deg, #00d4ff, #7c3aed); color: #fff; border: none; padding: 14px 28px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .add-agent-btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3); }
+        
+        /* Footer */
+        footer { text-align: center; padding: 40px; color: #666; border-top: 1px solid #222; margin-top: 60px; }
+        
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">🤖 E-Tech AI</div>
+        <nav>
+            <a href="index.html">Accueil</a>
+            <a href="products.html">Produits</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <h1>🤖 <span>Agents AI</span> Intelligents</h1>
+        <p>12 agents IA spécialisés pour automatiser votre E-Commerce au Benin. Support 24/7, gestion des commandes, inventory et plus.</p>
+    </section>
+    
+    <div class="stats">
+        <div class="stat">
+            <div class="stat-value">12</div>
+            <div class="stat-label">Agents Actifs</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">24/7</div>
+            <div class="stat-label">Disponibilité</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">98%</div>
+            <div class="stat-label">Précision</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">N8N</div>
+            <div class="stat-label">Automatisation</div>
+        </div>
+    </div>
+    
+    <section class="agents-section">
+        <h2 class="section-title">Agents E-Tech AI</h2>
+        <div class="agents-grid">
+            <!-- Agent 1: Sales -->
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-icon sales">💰</div>
+                    <div>
+                        <div class="agent-name">E-Tech AI Vendeur</div>
+                        <div class="agent-status">Actif</div>
+                    </div>
+                </div>
+                <p class="agent-desc">Assistant commercial IA pour recommandations produits et conversion. Analyse le comportement client pour suggerer les meilleurs produits.</p>
+                <div class="agent-stats">
+                    <div class="agent-stat"><span class="agent-stat-label">Requetes:</span> <span class="agent-stat-value">1,247</span></div>
+                    <div class="agent-stat"><span class="agent-stat-label">Conversion:</span> <span class="agent-stat-value">34%</span></div>
+                </div>
+            </div>
+            
+            <!-- Agent 2: Support -->
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-icon support">🎧</div>
+                    <div>
+                        <div class="agent-name">E-Tech AI Support</div>
+                        <div class="agent-status">Actif</div>
+                    </div>
+                </div>
+                <p class="agent-desc">Support client 24/7 en francais et anglais. Repond aux questions, suit les commandes et resout les problemes.</p>
+                <div class="agent-stats">
+                    <div class="agent-stat"><span class="agent-stat-label">Tickets:</span> <span class="agent-stat-value">892</span></div>
+                    <div class="agent-stat"><span class="agent-stat-label">Satisfaction:</span> <span class="agent-stat-value">96%</span></div>
+                </div>
+            </div>
+            
+            <!-- Agent 3: Marketing -->
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-icon marketing">📢</div>
+                    <div>
+                        <div class="agent-name">E-Tech AI Marketing</div>
+                        <div class="agent-status">Actif</div>
+                    </div>
+                </div>
+                <p class="agent-desc">Creation de campagnes marketing, analyse des donnees clients et optimisation des conversions.</p>
+                <div class="agent-stats">
+                    <div class="agent-stat"><span class="agent-stat-label">Campagnes:</span> <span class="agent-stat-value">45</span></div>
+                    <div class="agent-stat"><span class="agent-stat-label">ROI:</span> <span class="agent-stat-value">312%</span></div>
+                </div>
+            </div>
+            
+            <!-- Agent 4: Inventory -->
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-icon inventory">📦</div>
+                    <div>
+                        <div class="agent-name">E-Tech AI Inventory</div>
+                        <div class="agent-status">Actif</div>
+                    </div>
+                </div>
+                <p class="agent-desc">Gestion des stocks, alertes de reapprovisionnement et prevision de la demande.</p>
+                <div class="agent-stats">
+                    <div class="agent-stat"><span class="agent-stat-label">Produits:</span> <span class="agent-stat-value">156</span></div>
+                    <div class="agent-stat"><span class="agent-stat-label">Alertes:</span> <span class="agent-stat-value">12</span></div>
+                </div>
+            </div>
+            
+            <!-- Agent 5: Orders -->
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-icon sales">📋</div>
+                    <div>
+                        <div class="agent-name">E-Tech AI Commandes</div>
+                        <div class="agent-status">Actif</div>
+                    </div>
+                </div>
+                <p class="agent-desc">Suivi des commandes, coordination avec les transporteurs et gestion des retards.</p>
+                <div class="agent-stats">
+                    <div class="agent-stat"><span class="agent-stat-label">Commandes:</span> <span class="agent-stat-value">534</span></div>
+                    <div class="agent-stat"><span class="agent-stat-label">Livrees:</span> <span class="agent-stat-value">489</span></div>
+                </div>
+            </div>
+            
+            <!-- Agent 6: Reviews -->
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-icon support">⭐</div>
+                    <div>
+                        <div class="agent-name">E-Tech AI Avis</div>
+                        <div class="agent-status">Actif</div>
+                    </div>
+                </div>
+                <p class="agent-desc">Collecte et analyse des avis clients. Repond aux commentaires et ameliore la note.</p>
+                <div class="agent-stats">
+                    <div class="agent-stat"><span class="agent-stat-label">Avis:</span> <span class="agent-stat-value">234</span></div>
+                    <div class="agent-stat"><span class="agent-stat-label">Note:</span> <span class="agent-stat-value">4.7/5</span></div>
+                </div>
+            </div>
+            
+            <!-- Agent 7: Returns -->
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-icon inventory">🔄</div>
+                    <div>
+                        <div class="agent-name">E-Tech AI Retours</div>
+                        <div class="agent-status">Actif</div>
+                    </div>
+                </div>
+                <p class="agent-desc">Gestion des retours et remboursements. Processus automatise et suivi client.</p>
+                <div class="agent-stats">
+                    <div class="agent-stat"><span class="agent-stat-label">Retours:</span> <span class="agent-stat-value">45</span></div>
+                    <div class="agent-stat"><span class="agent-stat-label">Delai:</span> <span class="agent-stat-value">2.3j</span></div>
+                </div>
+            </div>
+            
+            <!-- Agent 8: Pricing -->
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-icon marketing">🏷️</div>
+                    <div>
+                        <div class="agent-name">E-Tech AI Prix</div>
+                        <div class="agent-status">Actif</div>
+                    </div>
+                </div>
+                <p class="agent-desc">Optimisation des prix en temps reel selon concurrence, demande et marge.</p>
+                <div class="agent-stats">
+                    <div class="agent-stat"><span class="agent-stat-label">Produits:</span> <span class="agent-stat-value">156</span></div>
+                    <div class="agent-stat"><span class="agent-stat-label">Marge:</span> <span class="agent-stat-value">+8%</span></div>
+                </div>
+            </div>
+            
+            <!-- Agent 9: Shipping -->
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-icon sales">🚚</div>
+                    <div>
+                        <div class="agent-name">E-Tech AI Livraison</div>
+                        <div class="agent-status">Actif</div>
+                    </div>
+                </div>
+                <p class="agent-desc">Coordination avec DHL, FedEx et Mobile Money MTN/Moov. Suivi en temps reel.</p>
+                <div class="agent-stats">
+                    <div class="agent-stat"><span class="agent-stat-label">Livraisons:</span> <span class="agent-stat-value">489</span></div>
+                    <div class="agent-stat"><span class="agent-stat-label">Delai:</span> <span class="agent-stat-value">2.8j</span></div>
+                </div>
+            </div>
+            
+            <!-- Agent 10: Fraud -->
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-icon support">🔒</div>
+                    <div>
+                        <div class="agent-name">E-Tech AI Fraud</div>
+                        <div class="agent-status">Actif</div>
+                    </div>
+                </div>
+                <p class="agent-desc">Detection des fraudes et transactions suspectes. Securisation des paiements Stripe/PayPal.</p>
+                <div class="agent-stats">
+                    <div class="agent-stat"><span class="agent-stat-label">Bloque:</span> <span class="agent-stat-value">23</span></div>
+                    <div class="agent-stat"><span class="agent-stat-label">Securite:</span> <span class="agent-stat-value">99.9%</span></div>
+                </div>
+            </div>
+            
+            <!-- Agent 11: Email -->
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-icon marketing">📧</div>
+                    <div>
+                        <div class="agent-name">E-Tech AI Email</div>
+                        <div class="agent-status">Actif</div>
+                    </div>
+                </div>
+                <p class="agent-desc">Emails transactionnels, newsletters et follow-ups automatises.</p>
+                <div class="agent-stats">
+                    <div class="agent-stat"><span class="agent-stat-label">Emails:</span> <span class="agent-stat-value">3,456</span></div>
+                    <div class="agent-stat"><span class="agent-stat-label">Ouverture:</span> <span class="agent-stat-value">34%</span></div>
+                </div>
+            </div>
+            
+            <!-- Agent 12: Analytics -->
+            <div class="agent-card">
+                <div class="agent-header">
+                    <div class="agent-icon inventory">📊</div>
+                    <div>
+                        <div class="agent-name">E-Tech AI Analytics</div>
+                        <div class="agent-status">Actif</div>
+                    </div>
+                </div>
+                <p class="agent-desc">Rapports quotidien, analyse des performances et suggestions d'optimisation.</p>
+                <div class="agent-stats">
+                    <div class="agent-stat"><span class="agent-stat-label">Rapports:</span> <span class="agent-stat-value">30</span></div>
+                    <div class="agent-stat"><span class="agent-stat-label">Ventes:</span> <span class="agent-stat-value">+23%</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>🤖 E-Tech AI - Powered by Claude + N8N | Cotonou, Benin</p>
+    </footer>
+</body>
+</html>
