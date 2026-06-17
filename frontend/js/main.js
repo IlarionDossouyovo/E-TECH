@@ -338,7 +338,7 @@ async function loadProducts() {
     isLoading = true;
     
     // API URL - Change if needed
-    const API_URL = 'http://localhost:3000/api';
+    const API_URL = 'http://localhost:3001/api';
     
     try {
         // Try to fetch from backend API first
