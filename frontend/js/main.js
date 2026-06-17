@@ -392,7 +392,7 @@ function renderProducts() {
             <div class="product-card__image">
                 <div style="font-size: 80px;">${product.image}</div>
             </div>
-            <div class="product-card__quick-view">Aperçu Rapide</div>
+            <div class="product-card__quick-view" onclick="quickView(${product.id})">Aperçu Rapide</div>
             <div class="product-card__content">
                 <p class="product-card__brand">${product.brand}</p>
                 <h3 class="product-card__name">${product.name}</h3>
@@ -423,6 +423,40 @@ function renderProducts() {
 function toggleWishlist(productId) {
     // In production, this would save to backend
     showNotification('Produit ajouté aux favoris!');
+}
+
+/**
+ * Quick View - Aperçu Rapide
+ */
+function quickView(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+    
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal__content" onclick="event.stopPropagation()">
+            <button class="modal__close" onclick="this.closest('.modal').remove()">×</button>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 24px;">
+                <div style="font-size: 120px; text-align: center;">${product.image}</div>
+                <div>
+                    <p style="color: #666; font-size: 14px;">${product.brand}</p>
+                    <h2 style="margin: 8px 0;">${product.name}</h2>
+                    <div style="margin: 16px 0;">
+                        <span style="font-size: 24px; font-weight: bold;">${formatPrice(product.price)}</span>
+                        ${product.originalPrice ? `<span style="text-decoration: line-through; color: #999; margin-left: 8px;">${formatPrice(product.originalPrice)}</span>` : ''}
+                    </div>
+                    <p style="color: #666; margin: 16px 0;">${'★'.repeat(product.rating)} (${product.reviews} avis)</p>
+                    <div style="margin: 24px 0; display: flex; gap: 12px;">
+                        <button class="btn btn--primary" onclick="addToCart(${product.id})">Ajouter au Panier</button>
+                        <button class="btn btn--secondary" onclick="toggleWishlist(${product.id})">♡ Favoris</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    modal.onclick = () => modal.remove();
+    document.body.appendChild(modal);
 }
 
 // ===================
