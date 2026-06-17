@@ -2,6 +2,7 @@ let products = [];
 let cart = [];
 let currentPage = 1;
 let isLoading = false;
+const VERSION = "v2";
 const itemsPerPage = 12;
 
 // Complete Product Database - All Categories 2025
