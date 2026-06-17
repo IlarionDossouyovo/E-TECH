@@ -50,5 +50,8 @@
         document.addEventListener('DOMContentLoaded',()=>{
             document.getElementById('products-grid').innerHTML=products.map(p=>`<div class="product-card">${p.badge?`<div class="product-card__badges"><span class="product-badge product-badge--${p.badge}">${p.badge}</span></div>`:''}<div class="product-card__image"><div style="font-size:80px">${p.image}</div></div><div class="product-card__quick-view">Aperçu</div><div class="product-card__content"><p class="product-card__brand">${p.brand}</p><h3 class="product-card__name">${p.name}</h3><div class="product-card__rating"><span class="stars">${'★'.repeat(p.rating)}</span><span>(${p.reviews})</span></div><div class="product-card__price"><span>${formatPrice(p.price)}</span>${p.originalPrice?`<span class="product-card__price-original">${formatPrice(p.originalPrice)}</span>`:''}</div><div class="product-card__actions"><button class="btn btn--primary">Panier</button><button>♡</button></div></div></div>`).join('')});
     </script>
+<!-- Nav -->
+<div style="position:fixed;bottom:20px;left:20px;z-index:1000;display:flex;gap:8px;"><a href="../index.html" class="btn btn--primary" style="padding:12px 20px;">🏠</a><a href="../products.html" class="btn btn--secondary" style="padding:12px 20px;">📱</a><a href="../cart.html" class="btn btn--secondary" style="padding:12px 20px;">🛒</a></div>
+<script src="../js/main.js"></script>
 </body>
 </html>
