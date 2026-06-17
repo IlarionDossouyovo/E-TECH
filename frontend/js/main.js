@@ -601,3 +601,38 @@ function prevPage() {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { ...module.exports, goToPage, nextPage, prevPage, currentPage };
 }
+
+// ===================
+// Filtres
+// ===================
+function applyFilters() {
+    const search = document.getElementById('search-input')?.value?.toLowerCase() || '';
+    const category = document.getElementById('category-filter')?.value || '';
+    const priceMin = parseInt(document.getElementById('price-min')?.value) || 0;
+    const priceMax = parseInt(document.getElementById('price-max')?.value) || Infinity;
+    
+    let filtered = products.filter(p => {
+        const matchSearch = !search || p.name.toLowerCase().includes(search);
+        const matchCategory = !category || p.category === category;
+        const matchPrice = p.price >= priceMin && p.price <= priceMax;
+        return matchSearch && matchCategory && matchPrice;
+    });
+    
+    products = filtered;
+    currentPage = 1;
+    renderProducts();
+    updateResultsCount(filtered.length);
+}
+
+function updateResultsCount(count) {
+    const countEl = document.getElementById('results-count');
+    if (countEl) countEl.textContent = count;
+}
+
+function resetFilters() {
+    document.getElementById('search-input').value = '';
+    document.getElementById('category-filter').value = '';
+    document.getElementById('price-min').value = '';
+    document.getElementById('price-max').value = '';
+    loadProducts();
+}
