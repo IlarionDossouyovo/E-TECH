@@ -613,25 +613,26 @@ if (typeof module !== 'undefined' && module.exports) {
 // ===================
 function applyFilters() {
     console.log("FILTERS CLICKED");
-    alert("Filtres appliques!");
-    console.log("ApplyFilters clicked!"); {
+    
     const search = document.getElementById('search-input')?.value?.toLowerCase() || '';
     const category = document.getElementById('category-filter')?.value || '';
     const priceMin = parseInt(document.getElementById('price-min')?.value) || 0;
     const priceMax = parseInt(document.getElementById('price-max')?.value) || Infinity;
     
-    let filtered = products.filter(p => {
+    const filteredProducts = products.filter(p => {
         const matchSearch = !search || p.name.toLowerCase().includes(search);
         const matchCategory = !category || p.category === category;
         const matchPrice = p.price >= priceMin && p.price <= priceMax;
         return matchSearch && matchCategory && matchPrice;
     });
-    
-    let filteredProducts = products.filter(p => {
+
     currentPage = 1;
-    renderProducts();
+    renderProducts(filteredProducts);
     updateResultsCount(filteredProducts.length);
+    alert("Filtres appliques: " + filteredProducts.length + " produits"); 
 }
+}
+    });
 
 function updateResultsCount(count) {
     const countEl = document.getElementById('results-count');
