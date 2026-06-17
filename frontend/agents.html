@@ -152,7 +152,7 @@
             </div>
             
             <!-- Agent 3: Marketing -->
-            <div class="agent-card" onclick="openChat(this)">
+            <div class="agent-card" onclick="openChat(this, event)">
                 <div class="agent-header">
                     <div class="agent-icon marketing">📢</div>
                     <div>
@@ -168,7 +168,7 @@
             </div>
             
             <!-- Agent 4: Inventory -->
-            <div class="agent-card" onclick="openChat(this)">
+            <div class="agent-card" onclick="openChat(this, event)">
                 <div class="agent-header">
                     <div class="agent-icon inventory">📦</div>
                     <div>
@@ -184,7 +184,7 @@
             </div>
             
             <!-- Agent 5: Orders -->
-            <div class="agent-card" onclick="openChat(this)">
+            <div class="agent-card" onclick="openChat(this, event)">
                 <div class="agent-header">
                     <div class="agent-icon sales">📋</div>
                     <div>
@@ -200,7 +200,7 @@
             </div>
             
             <!-- Agent 6: Reviews -->
-            <div class="agent-card" onclick="openChat(this)">
+            <div class="agent-card" onclick="openChat(this, event)">
                 <div class="agent-header">
                     <div class="agent-icon support">⭐</div>
                     <div>
@@ -216,7 +216,7 @@
             </div>
             
             <!-- Agent 7: Returns -->
-            <div class="agent-card" onclick="openChat(this)">
+            <div class="agent-card" onclick="openChat(this, event)">
                 <div class="agent-header">
                     <div class="agent-icon inventory">🔄</div>
                     <div>
@@ -232,7 +232,7 @@
             </div>
             
             <!-- Agent 8: Pricing -->
-            <div class="agent-card" onclick="openChat(this)">
+            <div class="agent-card" onclick="openChat(this, event)">
                 <div class="agent-header">
                     <div class="agent-icon marketing">🏷️</div>
                     <div>
@@ -248,7 +248,7 @@
             </div>
             
             <!-- Agent 9: Shipping -->
-            <div class="agent-card" onclick="openChat(this)">
+            <div class="agent-card" onclick="openChat(this, event)">
                 <div class="agent-header">
                     <div class="agent-icon sales">🚚</div>
                     <div>
@@ -264,7 +264,7 @@
             </div>
             
             <!-- Agent 10: Fraud -->
-            <div class="agent-card" onclick="openChat(this)">
+            <div class="agent-card" onclick="openChat(this, event)">
                 <div class="agent-header">
                     <div class="agent-icon support">🔒</div>
                     <div>
@@ -280,7 +280,7 @@
             </div>
             
             <!-- Agent 11: Email -->
-            <div class="agent-card" onclick="openChat(this)">
+            <div class="agent-card" onclick="openChat(this, event)">
                 <div class="agent-header">
                     <div class="agent-icon marketing">📧</div>
                     <div>
@@ -296,7 +296,7 @@
             </div>
             
             <!-- Agent 12: Analytics -->
-            <div class="agent-card" onclick="openChat(this)">
+            <div class="agent-card" onclick="openChat(this, event)">
                 <div class="agent-header">
                     <div class="agent-icon inventory">📊</div>
                     <div>
@@ -343,7 +343,7 @@
             'inventory': 'Je gere votre inventaire E-Tech. Je peux verifier les stocks, alertes et previsions.'
         };
         
-        function openChat(el) {
+        function openChat(el, e) { console.log("CLICK", el); {
             const name = el.querySelector('.agent-name').textContent;
             const icon = el.querySelector('.agent-icon').textContent;
             currentAgent = name.replace('E-Tech AI ', '').toLowerCase();
