@@ -1,3 +1,8 @@
+let products = [];
+let cart = [];
+let currentPage = 1;
+const itemsPerPage = 12;
+
 // Complete Product Database - All Categories 2025
 const allProducts = {
     smartphones: [
