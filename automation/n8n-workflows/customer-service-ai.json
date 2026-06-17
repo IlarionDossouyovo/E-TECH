@@ -2,17 +2,94 @@
   "name": "E-Tech AI - Customer Service",
   "nodes": [
     {
-      "parameters": {},
-      "id": "trigger",
-      "name": "Trigger",
+      "parameters": {
+        "path": "etech-support"
+      },
+      "id": "webhook",
+      "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
       "position": [
         100,
         300
-      ]
+      ],
+      "typeVersion": 2.1,
+      "webhookId": "etech-support"
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:11434/api/generate",
+        "method": "POST",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "model",
+              "value": "llama3.1:8b"
+            },
+            {
+              "name": "prompt",
+              "value": "\ud83d\udca1_instruction"
+            },
+            {
+              "name": "stream",
+              "value": false
+            }
+          ]
+        },
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "ollama",
+      "name": "Ollama AI",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        300,
+        300
+      ],
+      "typeVersion": 4.1
+    },
+    {
+      "parameters": {
+        "fromEmail": "noreply@e-tech.bj",
+        "toEmail": "electronbusiness07@gmail.com",
+        "subject": "\ud83c\udfa7 E-Tech - Support Client",
+        "text": "\ud83d\udca1_response"
+      },
+      "id": "email",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "position": [
+        500,
+        300
+      ],
+      "typeVersion": 2
     }
   ],
-  "connections": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Ollama AI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama AI": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "active": false,
   "settings": {},
   "version": 1
