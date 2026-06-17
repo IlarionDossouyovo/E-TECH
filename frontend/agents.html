@@ -316,6 +316,7 @@
     <footer>
         <p>🤖 E-Tech AI - Powered by Claude + N8N | Cotonou, Benin</p>
     </footer>
+    <script src="js/agents.js"></script>
 </body>
 </html>
     <!-- Chat Panel -->
@@ -333,53 +334,6 @@
         </div>
     </div>
     
-    <script>
-        let currentAgent = ''; // v3
-        
-        const agentPrompts = {
-            'vendeur': 'Je suis votre assistant commercial E-Tech. Je peux vous aider a trouver les meilleurs produits, comprendre les tendances de vente et optimiser vos revenus.',
-            'support': 'Je suis le support client E-Tech. Je peux repondre a vos questions sur les commandes, livraisons et produits.',
-            'marketing': 'Je suis votre expert marketing E-Tech. Je peux analyser vos campagnes et suggerer des strategies pour augmenter vos ventes.',
-            'inventory': 'Je gere votre inventaire E-Tech. Je peux verifier les stocks, alertes et previsions.'
-        };
-        
-        function openChat(el) {
-            const name = el.querySelector('.agent-name').textContent;
-            const icon = el.querySelector('.agent-icon').textContent;
-            currentAgent = name.replace('E-Tech AI ', '').toLowerCase();
-            
-            document.getElementById('chatName').textContent = name;
-            document.getElementById('chatIcon').textContent = icon;
-            document.getElementById('chatMessages').innerHTML = '<div class="chat-msg ai">' + agentPrompts[currentAgent] + '</div>';
-            document.getElementById('chatPanel').classList.add('active');
-        }
-        
-        function closeChat() {
-            document.getElementById('chatPanel').classList.remove('active');
-        }
-        
-        function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const msg = input.value.trim();
-            if (!msg) return;
-            
-            const messages = document.getElementById('chatMessages');
-            messages.innerHTML += '<div class="chat-msg user">' + msg + '</div>';
-            
-            setTimeout(() => {
-                let response = 'Je comprends votre demande. Je vais traiter cela...';
-                if (currentAgent === 'vendeur') response = 'Je vous recommande nos meilleurs produits: iPhone 16 Pro, Galaxy S25 Ultra et MacBook Air.';
-                if (currentAgent === 'support') response = 'Je vais verifier votre commande. Quel est le numero de commande?';
-                if (currentAgent === 'marketing') response = 'Vos campagnes ont un ROI de 312%. Je suggererais d\'augmenter le budget.';
-                if (currentAgent === 'inventory') response = 'Vous avez 12 produits en stock faible.';
-                
-                messages.innerHTML += '<div class="chat-msg ai">' + response + '</div>';
-                messages.scrollTop = messages.scrollHeight;
-            }, 1000);
-            
-            input.value = '';
-            messages.scrollTop = messages.scrollHeight;
-        }
-    </script>
+    
 </body>
 </html>
