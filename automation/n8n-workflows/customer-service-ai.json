@@ -3,23 +3,21 @@
   "nodes": [
     {
       "parameters": {
-        "path": "etech-support",
-        "options": {}
+        "path": "etech"
       },
-      "id": "webhook",
+      "id": "trig",
       "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
       "position": [
-        100,
-        300
+        320,
+        16
       ],
-      "typeVersion": 2.1,
-      "webhookId": "etech-support"
+      "typeVersion": 2.1
     },
     {
       "parameters": {
-        "url": "http://localhost:11434/api/generate",
         "method": "POST",
+        "url": "http://localhost:11434/api/generate",
         "sendBody": true,
         "bodyParameters": {
           "parameters": [
@@ -41,12 +39,12 @@
           "timeout": 120000
         }
       },
-      "id": "ollama",
+      "id": "oll",
       "name": "Ollama AI",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        300,
-        300
+        528,
+        16
       ],
       "typeVersion": 4.1
     },
@@ -55,14 +53,15 @@
         "fromEmail": "noreply@e-tech.bj",
         "toEmail": "electronbusiness07@gmail.com",
         "subject": "\ud83c\udfa7 E-Tech - Support Client",
-        "text": "={{ $json.response }}"
+        "text": "={{ $json.response }}",
+        "options": {}
       },
       "id": "email",
       "name": "Send Email",
       "type": "n8n-nodes-base.emailSend",
       "position": [
-        500,
-        300
+        720,
+        16
       ],
       "typeVersion": 2
     }
@@ -91,7 +90,8 @@
       ]
     }
   },
-  "active": false,
-  "settings": {},
-  "version": 1
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
 }
