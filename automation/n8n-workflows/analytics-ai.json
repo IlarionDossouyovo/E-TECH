@@ -8,7 +8,7 @@
         "minute": 0
       },
       "id": "schedule",
-      "name": "Daily",
+      "name": "Daily 8h",
       "type": "n8n-nodes-base.scheduleTrigger",
       "position": [
         100,
@@ -29,7 +29,7 @@
             },
             {
               "name": "prompt",
-              "value": "\ud83d\udca1_instruction"
+              "value": "Tu es l'analyste E-Tech. G\u00e9n\u00e8re un rapport quotidien avec: 1) Ventes du jour 2) Top 3 produits 3) Alertes stock 4) Recommandations pour demain. Format: Markdown avec \u00e9mojis."
             },
             {
               "name": "stream",
@@ -55,7 +55,7 @@
         "fromEmail": "noreply@e-tech.bj",
         "toEmail": "electronbusiness07@gmail.com",
         "subject": "\ud83d\udcca E-Tech - Rapport Analytique Quotidien",
-        "text": "\ud83d\udca1_response"
+        "text": "={{ $json.response }}"
       },
       "id": "email",
       "name": "Send Email",
@@ -68,7 +68,7 @@
     }
   ],
   "connections": {
-    "Daily": {
+    "Daily 8h": {
       "main": [
         [
           {

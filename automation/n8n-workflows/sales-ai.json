@@ -4,7 +4,7 @@
     {
       "parameters": {
         "rule": "every30Minutes",
-        "hour": 8,
+        "hour": null,
         "minute": 0
       },
       "id": "schedule",
@@ -29,7 +29,7 @@
             },
             {
               "name": "prompt",
-              "value": "\ud83d\udca1_instruction"
+              "value": "Tu es l'agent ventes E-Tech. Cr\u00e9e un email de r\u00e9cup\u00e9ration panier: 1) Rappel produits 2) Offre sp\u00e9cial 3) Urgence stock. Format: Email persuasif."
             },
             {
               "name": "stream",
@@ -55,7 +55,7 @@
         "fromEmail": "noreply@e-tech.bj",
         "toEmail": "electronbusiness07@gmail.com",
         "subject": "\ud83d\uded2 E-Tech - N'oubliez pas votre panier!",
-        "text": "\ud83d\udca1_response"
+        "text": "={{ $json.response }}"
       },
       "id": "email",
       "name": "Send Email",
@@ -68,7 +68,7 @@
     }
   ],
   "connections": {
-    "Daily": {
+    "Trigger": {
       "main": [
         [
           {

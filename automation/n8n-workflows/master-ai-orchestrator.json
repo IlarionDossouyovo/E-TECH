@@ -8,7 +8,7 @@
         "minute": 0
       },
       "id": "schedule",
-      "name": "Daily",
+      "name": "Trigger",
       "type": "n8n-nodes-base.scheduleTrigger",
       "position": [
         100,
@@ -29,7 +29,7 @@
             },
             {
               "name": "prompt",
-              "value": "\ud83d\udca1_instruction"
+              "value": "Tu es l'orchestrateur E-Tech. R\u00e9sum\u00e9 quotidien: 1) Ventes 2) Support 3) Marketing 4) Stock 5) Actions prioritaires. Format: Dashboard."
             },
             {
               "name": "stream",
@@ -55,7 +55,7 @@
         "fromEmail": "noreply@e-tech.bj",
         "toEmail": "electronbusiness07@gmail.com",
         "subject": "\ud83c\udf9b\ufe0f E-Tech - Dashboard Quotidien",
-        "text": "\ud83d\udca1_response"
+        "text": "={{ $json.response }}"
       },
       "id": "email",
       "name": "Send Email",
@@ -68,7 +68,7 @@
     }
   ],
   "connections": {
-    "Daily": {
+    "Trigger": {
       "main": [
         [
           {

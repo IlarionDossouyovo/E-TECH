@@ -4,7 +4,7 @@
     {
       "parameters": {
         "rule": "every8Hours",
-        "hour": 8,
+        "hour": null,
         "minute": 0
       },
       "id": "schedule",
@@ -29,7 +29,7 @@
             },
             {
               "name": "prompt",
-              "value": "\ud83d\udca1_instruction"
+              "value": "Tu es le marketer E-Tech. Propose: 1) Posts r\u00e9seaux sociaux 2) Hashtags 3) Timing id\u00e9al. Format: Posts pr\u00eats \u00e0 publier."
             },
             {
               "name": "stream",
@@ -55,7 +55,7 @@
         "fromEmail": "noreply@e-tech.bj",
         "toEmail": "electronbusiness07@gmail.com",
         "subject": "\ud83d\udcf1 E-Tech - Contenu Marketing",
-        "text": "\ud83d\udca1_response"
+        "text": "={{ $json.response }}"
       },
       "id": "email",
       "name": "Send Email",
@@ -68,7 +68,7 @@
     }
   ],
   "connections": {
-    "Daily": {
+    "Trigger": {
       "main": [
         [
           {

@@ -8,7 +8,7 @@
         "minute": 0
       },
       "id": "schedule",
-      "name": "Daily",
+      "name": "Daily 6h",
       "type": "n8n-nodes-base.scheduleTrigger",
       "position": [
         100,
@@ -29,7 +29,7 @@
             },
             {
               "name": "prompt",
-              "value": "\ud83d\udca1_instruction"
+              "value": "Tu es l'agent veille concurrentielle E-Tech. Analyse les tendances du march\u00e9 \u00e9lectronique: 1) Nouveaut\u00e9s produits 2) Prix concurrents 3) Opportunit\u00e9s. Format: Markdown."
             },
             {
               "name": "stream",
@@ -55,7 +55,7 @@
         "fromEmail": "noreply@e-tech.bj",
         "toEmail": "electronbusiness07@gmail.com",
         "subject": "\ud83d\udd0d E-Tech - Veille Concurrents",
-        "text": "\ud83d\udca1_response"
+        "text": "={{ $json.response }}"
       },
       "id": "email",
       "name": "Send Email",
@@ -68,7 +68,7 @@
     }
   ],
   "connections": {
-    "Daily": {
+    "Daily 6h": {
       "main": [
         [
           {

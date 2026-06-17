@@ -4,7 +4,7 @@
     {
       "parameters": {
         "rule": "everyHour",
-        "hour": 8,
+        "hour": null,
         "minute": 0
       },
       "id": "schedule",
@@ -29,7 +29,7 @@
             },
             {
               "name": "prompt",
-              "value": "\ud83d\udca1_instruction"
+              "value": "Tu es l'agent inventaire E-Tech. Analyse le stock: 1) Produits en rupture 2) Faible stock (<10) 3) Recommandations r\u00e9approvisionnement. Format: Liste."
             },
             {
               "name": "stream",
@@ -55,7 +55,7 @@
         "fromEmail": "noreply@e-tech.bj",
         "toEmail": "electronbusiness07@gmail.com",
         "subject": "\ud83d\udce6 E-Tech - Alerte Stock",
-        "text": "\ud83d\udca1_response"
+        "text": "={{ $json.response }}"
       },
       "id": "email",
       "name": "Send Email",
@@ -68,7 +68,7 @@
     }
   ],
   "connections": {
-    "Daily": {
+    "Trigger": {
       "main": [
         [
           {

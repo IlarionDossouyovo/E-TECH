@@ -3,7 +3,8 @@
   "nodes": [
     {
       "parameters": {
-        "path": "etech-support"
+        "path": "etech-support",
+        "options": {}
       },
       "id": "webhook",
       "name": "Webhook",
@@ -28,7 +29,7 @@
             },
             {
               "name": "prompt",
-              "value": "\ud83d\udca1_instruction"
+              "value": "Tu es le support client E-Tech. R\u00e9ponds de mani\u00e8re professionnelle et empathique. Produits: Smartphones, Computers, Audio, Accessoires. D\u00e9lai livraison: 2-3 jours B\u00e9nin, 5-10 jours international."
             },
             {
               "name": "stream",
@@ -54,7 +55,7 @@
         "fromEmail": "noreply@e-tech.bj",
         "toEmail": "electronbusiness07@gmail.com",
         "subject": "\ud83c\udfa7 E-Tech - Support Client",
-        "text": "\ud83d\udca1_response"
+        "text": "={{ $json.response }}"
       },
       "id": "email",
       "name": "Send Email",
