@@ -94,7 +94,7 @@
                         <div class="product-card__rating"><span class="stars">${'★'.repeat(p.rating)}</span><span class="rating-count">(${p.reviews})</span></div>
                         <div class="product-card__price"><span class="product-card__price-current">${formatPrice(p.price)}</span></div>
                         <div class="product-card__actions">
-                            <button class="product-card__btn product-card__btn--cart">Ajouter au Panier</button>
+                            <button class="product-card__btn product-card__btn--cart" onclick="addToCart(1)">Ajouter au Panier</button>
                             <button class="product-card__btn product-card__btn--wishlist">♡</button>
                         </div>
                     </div>
@@ -102,5 +102,13 @@
             `).join('');
         });
     </script>
+<!-- Navigation Retour -->
+<div style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; display: flex; gap: 8px;">
+    <a href="../index.html" class="btn btn--primary" style="padding: 12px 20px;">🏠</a>
+    <a href="../products.html" class="btn btn--secondary" style="padding: 12px 20px;">📱</a>
+    <a href="../cart.html" class="btn btn--secondary" style="padding: 12px 20px;">🛒</a>
+</div>
+
+<script src="../js/main.js"></script>
 </body>
 </html>
