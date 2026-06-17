@@ -55,9 +55,25 @@
         .agent-stat-label { color: #666; }
         .agent-stat-value { color: #00d4ff; font-weight: 600; }
         
-        /* Add Button */
-        .add-agent-btn { background: linear-gradient(90deg, #00d4ff, #7c3aed); color: #fff; border: none; padding: 14px 28px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: 0.3s; }
-        .add-agent-btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3); }
+        /* Agent Card Click */
+        .agent-card { cursor: pointer; }
+        .agent-card:active { transform: scale(0.98); }
+        
+        /* Chat Panel */
+        .chat-panel { position: fixed; bottom: 20px; right: 20px; width: 380px; background: #1a1a2e; border-radius: 16px; border: 1px solid #333; box-shadow: 0 20px 60px rgba(0,0,0,0.5); z-index: 1000; display: none; }
+        .chat-panel.active { display: block; animation: slideUp 0.3s ease; }
+        .chat-header { padding: 16px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
+        .chat-title { font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .chat-close { background: none; border: none; color: #666; font-size: 24px; cursor: pointer; }
+        .chat-messages { height: 300px; padding: 16px; overflow-y: auto; }
+        .chat-msg { padding: 12px 16px; border-radius: 12px; margin-bottom: 12px; max-width: 85%; }
+        .chat-msg.ai { background: #333; color: #fff; border-bottom-left-radius: 4px; }
+        .chat-msg.user { background: linear-gradient(90deg, #00d4ff, #7c3aed); color: #fff; margin-left: auto; border-bottom-right-radius: 4px; }
+        .chat-input-area { padding: 16px; border-top: 1px solid #333; display: flex; gap: 8px; }
+        .chat-input { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #0a0a0f; color: #fff; }
+        .chat-send { padding: 12px 20px; border-radius: 8px; border: none; background: linear-gradient(90deg, #00d4ff, #7c3aed); color: #fff; font-weight: 600; cursor: pointer; }
+        
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         
         /* Footer */
         footer { text-align: center; padding: 40px; color: #666; border-top: 1px solid #222; margin-top: 60px; }
@@ -104,7 +120,7 @@
         <h2 class="section-title">Agents E-Tech AI</h2>
         <div class="agents-grid">
             <!-- Agent 1: Sales -->
-            <div class="agent-card">
+            <div class="agent-card" onclick="openChat('vendeur', '💰')">
                 <div class="agent-header">
                     <div class="agent-icon sales">💰</div>
                     <div>
@@ -120,7 +136,7 @@
             </div>
             
             <!-- Agent 2: Support -->
-            <div class="agent-card">
+            <div class="agent-card" onclick="openChat('support', '🎧')">
                 <div class="agent-header">
                     <div class="agent-icon support">🎧</div>
                     <div>
@@ -136,7 +152,7 @@
             </div>
             
             <!-- Agent 3: Marketing -->
-            <div class="agent-card">
+            <div class="agent-card" onclick="openChat(this)">
                 <div class="agent-header">
                     <div class="agent-icon marketing">📢</div>
                     <div>
@@ -152,7 +168,7 @@
             </div>
             
             <!-- Agent 4: Inventory -->
-            <div class="agent-card">
+            <div class="agent-card" onclick="openChat(this)">
                 <div class="agent-header">
                     <div class="agent-icon inventory">📦</div>
                     <div>
@@ -168,7 +184,7 @@
             </div>
             
             <!-- Agent 5: Orders -->
-            <div class="agent-card">
+            <div class="agent-card" onclick="openChat(this)">
                 <div class="agent-header">
                     <div class="agent-icon sales">📋</div>
                     <div>
@@ -184,7 +200,7 @@
             </div>
             
             <!-- Agent 6: Reviews -->
-            <div class="agent-card">
+            <div class="agent-card" onclick="openChat(this)">
                 <div class="agent-header">
                     <div class="agent-icon support">⭐</div>
                     <div>
@@ -200,7 +216,7 @@
             </div>
             
             <!-- Agent 7: Returns -->
-            <div class="agent-card">
+            <div class="agent-card" onclick="openChat(this)">
                 <div class="agent-header">
                     <div class="agent-icon inventory">🔄</div>
                     <div>
@@ -216,7 +232,7 @@
             </div>
             
             <!-- Agent 8: Pricing -->
-            <div class="agent-card">
+            <div class="agent-card" onclick="openChat(this)">
                 <div class="agent-header">
                     <div class="agent-icon marketing">🏷️</div>
                     <div>
@@ -232,7 +248,7 @@
             </div>
             
             <!-- Agent 9: Shipping -->
-            <div class="agent-card">
+            <div class="agent-card" onclick="openChat(this)">
                 <div class="agent-header">
                     <div class="agent-icon sales">🚚</div>
                     <div>
@@ -248,7 +264,7 @@
             </div>
             
             <!-- Agent 10: Fraud -->
-            <div class="agent-card">
+            <div class="agent-card" onclick="openChat(this)">
                 <div class="agent-header">
                     <div class="agent-icon support">🔒</div>
                     <div>
@@ -264,7 +280,7 @@
             </div>
             
             <!-- Agent 11: Email -->
-            <div class="agent-card">
+            <div class="agent-card" onclick="openChat(this)">
                 <div class="agent-header">
                     <div class="agent-icon marketing">📧</div>
                     <div>
@@ -280,7 +296,7 @@
             </div>
             
             <!-- Agent 12: Analytics -->
-            <div class="agent-card">
+            <div class="agent-card" onclick="openChat(this)">
                 <div class="agent-header">
                     <div class="agent-icon inventory">📊</div>
                     <div>
@@ -300,5 +316,70 @@
     <footer>
         <p>🤖 E-Tech AI - Powered by Claude + N8N | Cotonou, Benin</p>
     </footer>
+</body>
+</html>
+    <!-- Chat Panel -->
+    <div class="chat-panel" id="chatPanel">
+        <div class="chat-header">
+            <div class="chat-title"><span id="chatIcon">💬</span> <span id="chatName">E-Tech AI</span></div>
+            <button class="chat-close" onclick="closeChat()">×</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg ai">Bonjour! Comment puis-je vous aider aujourd'hui?</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Tapez votre message..." onkeypress="if(event.key==='Enter')sendMessage()">
+            <button class="chat-send" onclick="sendMessage()">Envoyer</button>
+        </div>
+    </div>
+    
+    <script>
+        let currentAgent = '';
+        
+        const agentPrompts = {
+            'vendeur': 'Je suis votre assistant commercial E-Tech. Je peux vous aider a trouver les meilleurs produits, comprendre les tendances de vente et optimiser vos revenus.',
+            'support': 'Je suis le support client E-Tech. Je peux repondre a vos questions sur les commandes, livraisons et produits.',
+            'marketing': 'Je suis votre expert marketing E-Tech. Je peux analyser vos campagnes et suggerer des strategies pour augmenter vos ventes.',
+            'inventory': 'Je gere votre inventaire E-Tech. Je peux verifier les stocks, alertes et previsions.'
+        };
+        
+        function openChat(el) {
+            const name = el.querySelector('.agent-name').textContent;
+            const icon = el.querySelector('.agent-icon').textContent;
+            currentAgent = name.replace('E-Tech AI ', '').toLowerCase();
+            
+            document.getElementById('chatName').textContent = name;
+            document.getElementById('chatIcon').textContent = icon;
+            document.getElementById('chatMessages').innerHTML = '<div class="chat-msg ai">' + agentPrompts[currentAgent] + '</div>';
+            document.getElementById('chatPanel').classList.add('active');
+        }
+        
+        function closeChat() {
+            document.getElementById('chatPanel').classList.remove('active');
+        }
+        
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const msg = input.value.trim();
+            if (!msg) return;
+            
+            const messages = document.getElementById('chatMessages');
+            messages.innerHTML += '<div class="chat-msg user">' + msg + '</div>';
+            
+            setTimeout(() => {
+                let response = 'Je comprends votre demande. Je vais traiter cela...';
+                if (currentAgent === 'vendeur') response = 'Je vous recommande nos meilleurs produits: iPhone 16 Pro, Galaxy S25 Ultra et MacBook Air.';
+                if (currentAgent === 'support') response = 'Je vais verifier votre commande. Quel est le numero de commande?';
+                if (currentAgent === 'marketing') response = 'Vos campagnes ont un ROI de 312%. Je suggererais d\'augmenter le budget.';
+                if (currentAgent === 'inventory') response = 'Vous avez 12 produits en stock faible.';
+                
+                messages.innerHTML += '<div class="chat-msg ai">' + response + '</div>';
+                messages.scrollTop = messages.scrollHeight;
+            }, 1000);
+            
+            input.value = '';
+            messages.scrollTop = messages.scrollHeight;
+        }
+    </script>
 </body>
 </html>
