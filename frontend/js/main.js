@@ -612,6 +612,8 @@ if (typeof module !== 'undefined' && module.exports) {
 // Filtres
 // ===================
 function applyFilters() {
+    console.log("FILTERS CLICKED");
+    alert("Filtres appliques!");
     console.log("ApplyFilters clicked!"); {
     const search = document.getElementById('search-input')?.value?.toLowerCase() || '';
     const category = document.getElementById('category-filter')?.value || '';
