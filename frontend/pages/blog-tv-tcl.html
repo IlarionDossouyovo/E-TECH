@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCL TV Blog - E-Tech Global</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0a0a0f; color: #fff; }
+        header { background: #e60000; padding: 20px 40px; }
+        .hero { text-align: center; padding: 60px 20px; background: linear-gradient(180deg, #e60000, #0a0a0f); }
+        .hero h1 { font-size: 48px; margin-bottom: 10px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .disclaimer { background: #1a1a2e; border-left: 4px solid #f59e0b; padding: 16px; margin-bottom: 30px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px; }
+        .article { background: linear-gradient(135deg, #1a1a2e, #0f0f1a); border-radius: 16px; overflow: hidden; border: 1px solid #333; }
+        .article-img { height: 180px; background: #e60000; display: flex; align-items: center; justify-content: center; font-size: 48px; }
+        .article-content { padding: 20px; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 40px; }
+        .product-card { background: linear-gradient(135deg, #1a1a2e, #0f0f1a); border-radius: 12px; padding: 20px; border: 1px solid #333; }
+        .product-name { font-weight: 600; margin-bottom: 8px; }
+        .product-specs { color: #888; font-size: 13px; margin-bottom: 12px; }
+        .product-price { color: #00d4ff; font-size: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">📺 E-Tech TV Blog</div>
+    </header>
+    <section class="hero">
+        <h1>TCL <span>TV</span></h1>
+        <p>Le meilleur rapport qualité/prix</p>
+    </section>
+    <div class="container">
+        <div class="disclaimer">
+            <div class="disclaimer-title">⚠️ Information importante</div>
+            <p>Blog indépendant - Non affilié à TCL. Prix indicatifs à vérifier.</p>
+        </div>
+        
+        <h2 style="margin-bottom: 20px;">Articles TCL</h2>
+        <div class="grid">
+            <div class="article">
+                <div class="article-img">📺</div>
+                <div class="article-content">
+                    <div class="article-title">TCL C845: Le Meilleur Mini LED Abordable</div>
+                    <div class="article-excerpt">Test du TV Mini LED le plus performant sous 500€...</div>
+                </div>
+            </div>
+            <div class="article">
+                <div class="article-img">📺</div>
+                <div class="article-content">
+                    <div class="article-title">TCL C655: QLED Accessible</div>
+                    <div class="article-excerpt">Analyse du QLED entrée de gamme...</div>
+                </div>
+            </div>
+        </div>
+        
+        <h2 style="margin: 50px 0 20px;">Modèles TCL Populaires</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-name">TCL C845 55"</div>
+                <div class="product-specs">Mini LED • 4K 144Hz • Google TV • HDR1000</div>
+                <div class="product-price">~380 000 XOF</div>
+            </div>
+            <div class="product-card">
+                <div class="product-name">TCL C755 65"</div>
+                <div class="product-specs">QLED • 4K 120Hz • Game Master</div>
+                <div class="product-price">~320 000 XOF</div>
+            </div>
+            <div class="product-card">
+                <div class="product-name">TCL P735 50"</div>
+                <div class="product-specs">4K • Google TV • HDR10</div>
+                <div class="product-price">~150 000 XOF</div>
+            </div>
+        </div>
+    </div>
+    <footer style="text-align: center; padding: 40px; color: #666;">
+        <p>© 2026 E-Tech TV Blog</p>
+    </footer>
+</body>
+</html>

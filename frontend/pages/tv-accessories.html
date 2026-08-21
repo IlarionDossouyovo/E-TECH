@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessoires TV - E-Tech Global</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0a0a0f; color: #fff; }
+        header { background: linear-gradient(90deg, #1a1a2e, #16213e); padding: 20px 40px; }
+        .hero { text-align: center; padding: 80px 20px; background: linear-gradient(180deg, #0a0a0f, #1a1a2e); }
+        .hero h1 { font-size: 48px; margin-bottom: 20px; }
+        .hero h1 span { background: linear-gradient(90deg, #8b5cf6, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .categories { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 30px; }
+        .cat-btn { padding: 10px 20px; background: #1a1a2e; border: 1px solid #333; border-radius: 20px; color: #fff; cursor: pointer; }
+        .cat-btn:hover, .cat-btn.active { background: linear-gradient(90deg, #8b5cf6, #a855f7); border-color: transparent; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .product-card { background: linear-gradient(135deg, #1a1a2e, #0f0f1a); border-radius: 12px; padding: 20px; border: 1px solid #333; transition: 0.3s; }
+        .product-card:hover { border-color: #8b5cf6; transform: translateY(-4px); }
+        .product-icon { font-size: 48px; text-align: center; margin-bottom: 16px; }
+        .product-name { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .product-price { color: #8b5cf6; font-size: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">🎛️ E-Tech Accessoires TV</div>
+    </header>
+    <section class="hero">
+        <h1>Accessoires <span>TV & Home Cinema</span></h1>
+        <p>Tout ce qu'il faut pour votre installation</p>
+    </section>
+    <div class="container">
+        <div class="categories">
+            <button class="cat-btn active" onclick="filterCat('all')">Tous</button>
+            <button class="cat-btn" onclick="filterCat('mounts')">Supports Muraux</button>
+            <button class="cat-btn" onclick="filterCat('cables')">Câbles HDMI</button>
+            <button class="cat-btn" onclick="filterCat('audio')">Audio</button>
+            <button class="cat-btn" onclick="filterCat('streaming')">Streaming</button>
+            <button class="cat-btn" onclick="filterCat('power')">Protection</button>
+            <button class="cat-btn" onclick="filterCat('remotes')">Télécommandes</button>
+        </div>
+        
+        <div class="grid" id="products">
+            <!-- Mounts -->
+            <div class="product-card" data-cat="mounts">
+                <div class="product-icon">🖼️</div>
+                <div class="product-name">Support Mural Fixe 32-55"</div>
+                <div class="product-price">15 000 XOF</div>
+            </div>
+            <div class="product-card" data-cat="mounts">
+                <div class="product-icon">🖼️</div>
+                <div class="product-name">Support Mural Inclinable 40-75"</div>
+                <div class="product-price">25 000 XOF</div>
+            </div>
+            <div class="product-card" data-cat="mounts">
+                <div class="product-icon">🖼️</div>
+                <div class="product-name">Support Mural Orientable 32-55"</div>
+                <div class="product-price">35 000 XOF</div>
+            </div>
+            <!-- Cables -->
+            <div class="product-card" data-cat="cables">
+                <div class="product-icon">🔌</div>
+                <div class="product-name">Câble HDMI 2.1 3M</div>
+                <div class="product-price">8 000 XOF</div>
+            </div>
+            <div class="product-card" data-cat="cables">
+                <div class="product-icon">🔌</div>
+                <div class="product-name">Câble HDMI 2.1 5M</div>
+                <div class="product-price">12 000 XOF</div>
+            </div>
+            <div class="product-card" data-cat="cables">
+                <div class="product-icon">🔌</div>
+                <div class="product-name">Câble Optique Audio 3M</div>
+                <div class="product-price">5 000 XOF</div>
+            </div>
+            <!-- Audio -->
+            <div class="product-card" data-cat="audio">
+                <div class="product-icon">🔊</div>
+                <div class="product-name">Soundbar 2.1 Samsung</div>
+                <div class="product-price">180 000 XOF</div>
+            </div>
+            <div class="product-card" data-cat="audio">
+                <div class="product-icon">🔊</div>
+                <div class="product-name">Soundbar 5.1 LG</div>
+                <div class="product-price">280 000 XOF</div>
+            </div>
+            <div class="product-card" data-cat="audio">
+                <div class="product-icon">🔈</div>
+                <div class="product-name">Caisson de basses</div>
+                <div class="product-price">95 000 XOF</div>
+            </div>
+            <!-- Streaming -->
+            <div class="product-card" data-cat="streaming">
+                <div class="product-icon">📺</div>
+                <div class="product-name">Amazon Fire TV Stick</div>
+                <div class="product-price">35 000 XOF</div>
+            </div>
+            <div class="product-card" data-cat="streaming">
+                <div class="product-icon">📺</div>
+                <div class="product-name">Google Chromecast 4K</div>
+                <div class="product-price">40 000 XOF</div>
+            </div>
+            <div class="product-card" data-cat="streaming">
+                <div class="product-icon">📺</div>
+                <div class="product-name">Apple TV 4K</div>
+                <div class="product-price">75 000 XOF</div>
+            </div>
+            <!-- Power -->
+            <div class="product-card" data-cat="power">
+                <div class="product-icon">⚡</div>
+                <div class="product-name">Multiprise Parafoudre 6 prises</div>
+                <div class="product-price">18 000 XOF</div>
+            </div>
+            <div class="product-card" data-cat="power">
+                <div class="product-icon">🔋</div>
+                <div class="product-name">Onduleur 650VA</div>
+                <div class="product-price">85 000 XOF</div>
+            </div>
+            <!-- Remotes -->
+            <div class="product-card" data-cat="remotes">
+                <div class="product-icon">📱</div>
+                <div class="product-name">Télécommande Universelle</div>
+                <div class="product-price">12 000 XOF</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function filterCat(cat) {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('.product-card').forEach(p => {
+                if (cat === 'all' || p.dataset.cat === cat) {
+                    p.style.display = 'block';
+                } else {
+                    p.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
