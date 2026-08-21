@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security - E-Tech Global</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0a0a0f; color: #fff; }
+        header { background: linear-gradient(90deg, #1a1a2e, #16213e); padding: 20px 40px; display: flex; justify-content: space-between; }
+        .logo { font-size: 24px; font-weight: bold; background: linear-gradient(90deg, #00d4ff, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        nav a { color: #fff; text-decoration: none; margin-left: 25px; }
+        .hero { text-align: center; padding: 80px 20px; background: linear-gradient(180deg, #0a0a0f, #1a1a2e); }
+        .hero h1 { font-size: 48px; }
+        .hero h1 span { background: linear-gradient(90deg, #ef4444, #dc2626); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+        .product-card { background: linear-gradient(135deg, #1a1a2e, #0f0f1a); border-radius: 16px; padding: 20px; border: 1px solid #333; }
+        .product-card:hover { border-color: #ef4444; transform: translateY(-4px); }
+        .product-icon { font-size: 48px; text-align: center; margin-bottom: 16px; }
+        .product-name { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .product-price { font-size: 24px; font-weight: bold; color: #ef4444; }
+        .btn { display: inline-block; padding: 12px 24px; background: linear-gradient(90deg, #ef4444, #dc2626); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; margin-top: 12px; }
+        footer { text-align: center; padding: 40px; color: #666; margin-top: 60px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">⚡ E-Tech</div>
+        <nav>
+            <a href="index.html">Accueil</a>
+            <a href="products.html">Produits</a>
+            <a href="agents.html">AI Agents</a>
+        </nav>
+    </header>
+    <section class="hero">
+        <h1>🔒 <span>Security</span></h1>
+        <p>Systèmes de sécurité professionnels: caméras, alarmes, contrôle d'accès</p>
+    </section>
+    <div class="container">
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-icon">📹</div>
+                <div class="product-name">Caméra Extérieure 4K</div>
+                <div class="product-price">85000 XOF</div>
+                <a href="#" class="btn">Ajouter</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">📹</div>
+                <div class="product-name">Caméra Dôme 360°</div>
+                <div class="product-price">65000 XOF</div>
+                <a href="#" class="btn">Ajouter</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🔔</div>
+                <div class="product-name">Système d'Alarme Complet</div>
+                <div class="product-price">150000 XOF</div>
+                <a href="#" class="btn">Ajouter</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🚪</div>
+                <div class="product-name">Contrôle d'Accès RFID</div>
+                <div class="product-price">95000 XOF</div>
+                <a href="#" class="btn">Ajouter</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">👁️</div>
+                <div class="product-name">Détecteur de Mouvement</div>
+                <div class="product-price">15000 XOF</div>
+                <a href="#" class="btn">Ajouter</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🔦</div>
+                <div class="product-name">Projecteur LED avec Caméra</div>
+                <div class="product-price">45000 XOF</div>
+                <a href="#" class="btn">Ajouter</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🖥️</div>
+                <div class="product-name">DVR 8 Canaux</div>
+                <div class="product-price">120000 XOF</div>
+                <a href="#" class="btn">Ajouter</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🔑</div>
+                <div class="product-name">Clavier Code</div>
+                <div class="product-price">25000 XOF</div>
+                <a href="#" class="btn">Ajouter</a>
+            </div>
+        </div>
+    </div>
+    <footer><p>© 2026 E-Tech Security | Cotonou, Benin</p></footer>
+</body>
+</html>

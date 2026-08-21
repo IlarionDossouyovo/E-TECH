@@ -19,14 +19,25 @@ const productsRouter = require('./routes/products');
 const ordersRouter = require('./routes/orders');
 const customersRouter = require('./routes/customers');
 const paymentRouter = require('./routes/payments');
-const n8nRouter = require('./routes/n8n');
+const aiRouter = require('./routes/ai');
+const agentsRouter = require('./routes/agents');
+const founderRouter = require('./routes/founder');
+const suppliersRouter = require('./routes/suppliers');
+const repairsRouter = require('./routes/repairs');
+const crmRouter = require('./routes/crm');
 
 // API Routes
 app.use('/api/products', productsRouter);
 app.use('/api/orders', ordersRouter);
 app.use('/api/customers', customersRouter);
 app.use('/api/payments', paymentRouter);
-app.use('/api/n8n', n8nRouter);
+app.use('/api/ai', aiRouter);
+app.use('/api/agents', agentsRouter);
+app.use('/api/founder', founderRouter);
+app.use('/api/suppliers', suppliersRouter);
+app.use('/api/repairs', repairsRouter);
+app.use('/api/crm', crmRouter);
+app.use('/api/erp', crmRouter);
 
 // Health check
 app.get('/api/health', (req, res) => {

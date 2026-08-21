@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic GSM IA - E-Tech</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0a0a0f; color: #fff; min-height: 100vh; }
+        
+        header { background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%); padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; }
+        .logo { font-size: 28px; font-weight: bold; background: linear-gradient(90deg, #00d4ff, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        
+        .hero { text-align: center; padding: 40px; background: linear-gradient(180deg, #0a0a0f 0%, #1a1a2e 100%); border-radius: 16px; margin-bottom: 30px; }
+        .hero h1 { font-size: 36px; margin-bottom: 16px; }
+        .hero h1 span { background: linear-gradient(90deg, #00d4ff, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { color: #888; max-width: 600px; margin: 0 auto; }
+        
+        .disclaimer { background: #f59e0b20; border: 1px solid #f59e0b; border-radius: 8px; padding: 16px; margin-bottom: 30px; text-align: center; color: #f59e0b; }
+        
+        .form-section { background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%); border-radius: 16px; padding: 30px; border: 1px solid #333; margin-bottom: 24px; }
+        .form-title { font-size: 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-label { display: block; margin-bottom: 8px; color: #aaa; font-size: 14px; }
+        .form-select, .form-input, .form-textarea { width: 100%; padding: 14px; border-radius: 8px; border: 1px solid #333; background: #0a0a0f; color: #fff; font-size: 14px; }
+        .form-textarea { min-height: 100px; resize: vertical; }
+        
+        .btn { padding: 14px 28px; border-radius: 8px; border: none; background: linear-gradient(90deg, #00d4ff, #7c3aed); color: #fff; font-weight: 600; cursor: pointer; font-size: 16px; }
+        .btn:hover { opacity: 0.9; }
+        
+        .results { display: none; }
+        .results.active { display: block; }
+        
+        .result-card { background: #0a0a0f; border-radius: 12px; padding: 24px; margin-bottom: 16px; border-left: 4px solid #00d4ff; }
+        .result-card.warning { border-left-color: #f59e0b; }
+        .result-card.error { border-left-color: #ef4444; }
+        
+        .problem-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .problem-probability { display: inline-block; background: #00d4ff20; color: #00d4ff; padding: 4px 12px; border-radius: 20px; font-size: 12px; margin-bottom: 12px; }
+        
+        .procedure { background: #1a1a2e; border-radius: 8px; padding: 16px; margin-top: 12px; }
+        .procedure h4 { color: #00d4ff; margin-bottom: 12px; }
+        .procedure ol { padding-left: 20px; color: #aaa; }
+        .procedure li { margin-bottom: 8px; }
+        
+        .parts-list { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+        .part-tag { background: #333; padding: 6px 12px; border-radius: 6px; font-size: 12px; }
+        
+        footer { text-align: center; padding: 40px; color: #666; border-top: 1px solid #222; margin-top: 60px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">📱 E-Tech GSM Diagnostic</div>
+        <a href="index.html" style="color: #fff; text-decoration: none;">← Retour</a>
+    </header>
+    
+    <div class="container">
+        <div class="hero">
+            <h1>🤖 <span>Diagnostic GSM IA</span></h1>
+            <p>Diagnostic assisté par intelligence artificielle pour identifier les problèmes de votre appareil mobile</p>
+        </div>
+        
+        <div class="disclaimer">
+            ⚠️ Diagnostic assisté par IA — Confirmation par technicien recommandée
+        </div>
+        
+        <div class="form-section">
+            <h2 class="form-title">📱 Informations Appareil</h2>
+            
+            <div class="form-group">
+                <label class="form-label">Marque</label>
+                <select class="form-select" id="brand">
+                    <option value="">Sélectionner...</option>
+                    <option value="apple">Apple</option>
+                    <option value="samsung">Samsung</option>
+                    <option value="xiaomi">Xiaomi</option>
+                    <option value="oneplus">OnePlus</option>
+                    <option value="google">Google</option>
+                    <option value="huawei">Huawei</option>
+                    <option value="oppo">OPPO</option>
+                    <option value="vivo">Vivo</option>
+                    <option value="other">Autre</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Modèle</label>
+                <input type="text" class="form-input" id="model" placeholder="Ex: iPhone 14 Pro, Galaxy S23 Ultra...">
+            </div>
+        </div>
+        
+        <div class="form-section">
+            <h2 class="form-title">⚠️ Symptômes</h2>
+            
+            <div class="form-group">
+                <label class="form-label">Sélectionnez les symptômes</label>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" value="ecran_noir" class="symptom"> Écran noir
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" value="ne_charge_pas" class="symptom"> Ne charge pas
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" value="batterie" class="symptom"> Batterie faible
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" value="wifi" class="symptom"> WiFi ne fonctionne pas
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" value="bluetooth" class="symptom"> Bluetooth
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" value="son" class="symptom"> Pas de son
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" value="camera" class="symptom"> Caméra
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" value=" tactile" class="symptom"> Écran tactile
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" value="water" class="symptom"> Eau/Liquide
+                    </label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Description supplémentaire</label>
+                <textarea class="form-textarea" id="description" placeholder="Décrivez le problème en détail..."></textarea>
+            </div>
+        </div>
+        
+        <button class="btn" onclick="runDiagnostic()" style="width: 100%;">🔍 Lancer le Diagnostic IA</button>
+        
+        <div class="results" id="results">
+            <h2 style="margin: 30px 0 20px;">📊 Résultats du Diagnostic</h2>
+            
+            <div id="diagnosis-content"></div>
+            
+            <div class="disclaimer" style="margin-top: 30px;">
+                💡 Ces résultats sont générés par IA. Pour une réparation précise, consultez un technicien qualifié.
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2026 E-Tech - Diagnostic GSM IA | Cotonou, Benin</p>
+    </footer>
+    
+    <script>
+        const API_BASE = 'http://localhost:3001/api';
+        
+        async function runDiagnostic() {
+            const brand = document.getElementById('brand').value;
+            const model = document.getElementById('model').value;
+            const description = document.getElementById('description').value;
+            
+            const symptoms = Array.from(document.querySelectorAll('.symptom:checked')).map(cb => cb.value);
+            
+            if (!brand || symptoms.length === 0) {
+                alert('Veuillez sélectionner une marque et au moins un symptôme');
+                return;
+            }
+            
+            const task = `Diagnostic GSM IA:
+- Marque: ${brand}
+- Modèle: ${model || 'Non spécifié'}
+- Symptômes: ${symptoms.join(', ')}
+- Description: ${description || 'Aucune'}
+
+Analyse ce problème et fournis:
+1. Problèmes possibles par ordre de probabilité
+2. Tests recommandés
+3. Procédures de réparation
+4. Pièces可能出现`;
+
+            try {
+                const response = await fetch(`${API_BASE}/agents/gsm/run`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ task })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('results').classList.add('active');
+                    document.getElementById('diagnosis-content').innerHTML = `
+                        <div class="result-card">
+                            <div class="problem-title">🤖 Analyse IA</div>
+                            <pre style="white-space: pre-wrap; color: #aaa; font-family: inherit;">${data.response}</pre>
+                        </div>
+                    `;
+                } else {
+                    alert('Erreur: ' + data.error);
+                }
+            } catch (e) {
+                // Fallback to local analysis
+                const analysis = analyzeLocally(brand, symptoms);
+                document.getElementById('results').classList.add('active');
+                document.getElementById('diagnosis-content').innerHTML = analysis;
+            }
+        }
+        
+        function analyzeLocally(brand, symptoms) {
+            let problems = [];
+            let procedures = [];
+            let parts = [];
+            
+            if (symptoms.includes('ecran_noir')) {
+                problems.push({ title: 'Écran LCD endommagé', probability: '45%', type: 'warning' });
+                problems.push({ title: 'Problème de connexion', probability: '25%', type: 'normal' });
+                problems.push({ title: 'Carte mère endommagée', probability: '15%', type: 'error' });
+                procedures.push('1. Vérifier le rétroéclairage');
+                procedures.push('2. Tester avec écran externe');
+                procedures.push('3. Vérifier les nappes de connexion');
+                parts.push('Écran LCD', 'Nappe display', 'Carte mère');
+            }
+            
+            if (symptoms.includes('ne_charge_pas')) {
+                problems.push({ title: 'Connecteur de charge', probability: '50%', type: 'warning' });
+                problems.push({ title: 'Batterie défaillante', probability: '30%', type: 'normal' });
+                problems.push({ title: 'Circuit de charge', probability: '20%', type: 'normal' });
+                procedures.push('1. Nettoyer le connecteur');
+                procedures.push('2. Tester avec autre chargeur');
+                procedures.push('3. Vérifier la batterie');
+                parts.push('Connecteur charge', 'Batterie', 'Circuit PMU');
+            }
+            
+            if (symptoms.includes('water')) {
+                problems.push({ title: 'Oxydation', probability: '70%', type: 'error' });
+                problems.push({ title: 'Court-circuit', probability: '30%', type: 'error' });
+                procedures.push('1. NE PAS allumer');
+                procedures.push('2. Sécher immédiatement');
+                procedures.push('3. Nettoyer avec alcool');
+                procedures.push('4. Vérifier主板');
+                parts.push('Carte mère', 'Connecteurs', 'Batterie');
+            }
+            
+            let html = problems.map(p => `
+                <div class="result-card ${p.type}">
+                    <div class="problem-title">${p.title}</div>
+                    <span class="problem-probability">Probabilité: ${p.probability}</span>
+                </div>
+            `).join('');
+            
+            if (procedures.length > 0) {
+                html += `
+                    <div class="procedure">
+                        <h4>🔧 Procédures recommandées</h4>
+                        <ol>
+                            ${procedures.map(p => `<li>${p}</li>`).join('')}
+                        </ol>
+                    </div>
+                `;
+            }
+            
+            if (parts.length > 0) {
+                html += `
+                    <div style="margin-top: 16px;">
+                        <h4 style="margin-bottom: 12px;">🛠️ Pièces可能出现</h4>
+                        <div class="parts-list">
+                            ${parts.map(p => `<span class="part-tag">${p}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            return html;
+        }
+    </script>
+</body>
+</html>

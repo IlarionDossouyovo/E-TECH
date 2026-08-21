@@ -511,7 +511,7 @@ async function convertCurrency(amount, from, to) {
  */
 async function subscribeToNewsletter(email) {
     try {
-        // In production: send to API/N8N
+        // In production: send to AI API
         console.log('Newsletter subscription:', email);
         return { success: true, code: 'BIENVENUE10' };
     } catch (error) {
@@ -529,7 +529,7 @@ async function subscribeToNewsletter(email) {
  */
 async function submitContactForm(formData) {
     try {
-        // In production: send to API/N8N for Customer Service AI
+        // In production: send to AI API for Customer Service
         console.log('Contact form submission:', formData);
         return { success: true };
     } catch (error) {

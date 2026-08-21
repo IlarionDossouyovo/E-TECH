@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fournisseurs - E-Tech</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0a0a0f; color: #fff; }
+        header { background: linear-gradient(90deg, #1a1a2e, #16213e); padding: 20px 40px; display: flex; justify-content: space-between; }
+        .logo { font-size: 24px; font-weight: bold; background: linear-gradient(90deg, #00d4ff, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        .supplier-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px; }
+        .supplier-card { background: linear-gradient(135deg, #1a1a2e, #0f0f1a); border-radius: 16px; padding: 24px; border: 1px solid #333; }
+        .supplier-card:hover { border-color: #00d4ff; }
+        .supplier-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .supplier-name { font-size: 20px; font-weight: 600; }
+        .verified { background: #22c55e; color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 12px; }
+        .supplier-info { color: #888; margin-bottom: 8px; }
+        .certifications { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+        .cert { background: #333; padding: 4px 8px; border-radius: 4px; font-size: 12px; }
+        .rating { color: #f59e0b; margin-top: 12px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">🏭 E-Tech Fournisseurs</div>
+        <a href="dashboard.html" style="color: #fff; text-decoration: none;">← Dashboard</a>
+    </header>
+    <div class="container">
+        <h2 style="margin-bottom: 30px;">Fournisseurs Vérifiés</h2>
+        <div class="supplier-grid" id="suppliers-list"></div>
+    </div>
+    <script>
+        const API = 'http://localhost:3001/api';
+        async function loadSuppliers() {
+            try {
+                const res = await fetch(`${API}/suppliers?verified=true`);
+                const data = await res.json();
+                document.getElementById('suppliers-list').innerHTML = data.suppliers.map(s => `
+                    <div class="supplier-card">
+                        <div class="supplier-header">
+                            <div class="supplier-name">${s.name}</div>
+                            ${s.verified ? '<span class="verified">✓ Vérifié</span>' : ''}
+                        </div>
+                        <div class="supplier-info">🌍 ${s.country}</div>
+                        <div class="supplier-info">📧 ${s.email}</div>
+                        <div class="supplier-info">📱 ${s.phone}</div>
+                        <div class="supplier-info">📦 MOQ: ${s.moq} unités</div>
+                        <div class="supplier-info">⏱️ Délai: ${s.leadTime}</div>
+                        <div class="supplier-info">🏷️ ${s.products.join(', ')}</div>
+                        <div class="rating">⭐ ${s.rating}/5</div>
+                        <div class="certifications">
+                            ${s.certifications.map(c => `<span class="cert">${c}</span>`).join('')}
+                        </div>
+                    </div>
+                `).join('');
+            } catch(e) { console.log(e); }
+        }
+        loadSuppliers();
+    </script>
+</body>
+</html>

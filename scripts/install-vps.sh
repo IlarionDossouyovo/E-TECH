@@ -45,35 +45,21 @@ ufw allow 443/tcp
 ufw --force enable
 print_success "Pare-feu configure"
 
-# 5. Installation de N8N
-print_step "Installation de N8N..."
-mkdir -p /opt/n8n
-cd /opt/n8n
+# 5. Configuration des variables d'environnement AI
+print_step "Configuration AI..."
+mkdir -p /opt/etech
 
-cat > docker-compose.yml << 'EOF'
-version: '3.8'
-
-services:
-  n8n:
-    image: n8nio/n8n
-    container_name: n8n
-    restart: always
-    ports:
-      - "5678:5678"
-    environment:
-      - N8N_BASIC_AUTH_ACTIVE=true
-      - N8N_BASIC_AUTH_USER=admin
-      - N8N_BASIC_AUTH_PASSWORD=CHANGER_MOT_DE_PASSE
-      - N8N_HOST=0.0.0.0
-      - WEBHOOK_URL=https://votre-domaine.com
-    volumes:
-      - n8n_data:/home/node/.n8n
-
-volumes:
-  n8n_data:
+cat > /opt/etech/.env << 'EOF'
+# E-Tech AI Configuration
+GOOGLE_API_KEY=your_google_api_key
+GOOGLE_MODEL=gemini-2.0-flash-exp
+OLLAMA_URL=http://localhost:11434
+OLLAMA_MODEL=llama3.1:8b
+AI_DEFAULT_PROVIDER=google
+AI_FALLBACK_ENABLED=true
 EOF
 
-print_success "N8N pret a etre configure"
+print_success "Configuration AI creee"
 
 # 6. Installation de Nginx
 print_step "Installation de Nginx..."
@@ -93,15 +79,16 @@ echo ""
 echo "1. Redemarrer le serveur:"
 echo "   sudo reboot"
 echo ""
-echo "2. Demarrer N8N:"
-echo "   cd /opt/n8n && docker-compose up -d"
+echo "2. Configurer les variables AI:"
+echo "   nano /opt/etech/.env"
+echo "   # Ajouter votre GOOGLE_API_KEY"
 echo ""
 echo "3. Configurer SSL:"
 echo "   sudo certbot --nginx -d votre-domaine.com"
 echo ""
-echo "4. Importer les workflows N8N:"
-echo "   - Aller sur http://votre-serveur:5678"
-echo "   - Importer les fichiers JSON dans automation/"
+echo "4. Les agents IA sont prets dans le backend"
+echo "   - API: http://localhost:3001/api/ai"
+echo "   - Agents: http://localhost:3001/api/agents"
 echo ""
 echo "5. Configurer les variables d'environnement"
 echo "   dans configs/env.template"

@@ -317,11 +317,11 @@
             messages.scrollTop = messages.scrollHeight;
             
             try {
-                // Call AI API
-                const response = await fetch('http://localhost:3001/api/n8n/support', {
+                // Call AI API - Customer Support Agent
+                const response = await fetch('http://localhost:3001/api/agents/customer_support/run', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: message })
+                    body: JSON.stringify({ task: message })
                 });
                 
                 const data = await response.json();
@@ -357,10 +357,10 @@
             messages.scrollTop = messages.scrollHeight;
             
             try {
-                const response = await fetch('http://localhost:3001/api/n8n/support', {
+                const response = await fetch('http://localhost:3001/api/agents/customer_support/run', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: message })
+                    body: JSON.stringify({ task: message })
                 });
                 const data = await response.json();
                 messages.innerHTML = messages.innerHTML.replace(

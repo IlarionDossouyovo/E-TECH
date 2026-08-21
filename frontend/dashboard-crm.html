@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM - E-Tech</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0a0a0f; color: #fff; }
+        header { background: linear-gradient(90deg, #1a1a2e, #16213e); padding: 20px 40px; display: flex; justify-content: space-between; }
+        .logo { font-size: 24px; font-weight: bold; background: linear-gradient(90deg, #00d4ff, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 40px; }
+        .stat-card { background: linear-gradient(135deg, #1a1a2e, #0f0f1a); border-radius: 12px; padding: 24px; text-align: center; }
+        .stat-value { font-size: 32px; font-weight: bold; color: #00d4ff; }
+        .stat-label { color: #888; margin-top: 8px; }
+        .section-title { font-size: 24px; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 16px; text-align: left; border-bottom: 1px solid #333; }
+        th { background: #1a1a2e; color: #00d4ff; }
+        tr:hover { background: #1a1a2e; }
+        .badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; }
+        .badge.vip { background: #f59e0b; color: #000; }
+        .badge.regular { background: #22c55e; color: #fff; }
+        .badge.new { background: #3b82f6; color: #fff; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">📊 E-Tech CRM</div>
+        <a href="dashboard.html" style="color: #fff; text-decoration: none;">← Dashboard</a>
+    </header>
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-value" id="total-customers">0</div><div class="stat-label">Total Clients</div></div>
+            <div class="stat-card"><div class="stat-value" id="vip-customers">0</div><div class="stat-label">VIP</div></div>
+            <div class="stat-card"><div class="stat-value" id="active-customers">0</div><div class="stat-label">Actifs</div></div>
+            <div class="stat-card"><div class="stat-value" id="revenue">0</div><div class="stat-label">Revenus (XOF)</div></div>
+        </div>
+        <h2 class="section-title">Liste des Clients</h2>
+        <table>
+            <thead><tr><th>ID</th><th>Nom</th><th>Email</th><th>Téléphone</th><th>Commandes</th><th>Total Dépensé</th><th>Segment</th></tr></thead>
+            <tbody id="customers-list"></tbody>
+        </table>
+    </div>
+    <script>
+        const API = 'http://localhost:3001/api';
+        async function loadCRM() {
+            try {
+                const res = await fetch(`${API}/crm/customers`);
+                const data = await res.json();
+                document.getElementById('total-customers').textContent = data.total;
+                document.getElementById('active-customers').textContent = data.customers.filter(c => c.status === 'active').length;
+                document.getElementById('vip-customers').textContent = data.customers.filter(c => c.segment === 'VIP').length;
+                document.getElementById('revenue').textContent = data.customers.reduce((s, c) => s + c.totalSpent, 0).toLocaleString();
+                
+                const tbody = document.getElementById('customers-list');
+                tbody.innerHTML = data.customers.map(c => `
+                    <tr>
+                        <td>${c.id}</td>
+                        <td>${c.name}</td>
+                        <td>${c.email}</td>
+                        <td>${c.phone}</td>
+                        <td>${c.totalOrders}</td>
+                        <td>${c.totalSpent.toLocaleString()} XOF</td>
+                        <td><span class="badge ${c.segment.toLowerCase()}">${c.segment}</span></td>
+                    </tr>
+                `).join('');
+            } catch(e) { console.log(e); }
+        }
+        loadCRM();
+    </script>
+</body>
+</html>

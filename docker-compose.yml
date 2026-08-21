@@ -1,0 +1,96 @@
+# E-Tech Global AI Platform - Docker Configuration
+
+## Services
+
+```yaml
+version: '3.8'
+
+services:
+  # Frontend (Nginx)
+  frontend:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+      - ./configs/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - backend
+    networks:
+      - etech-network
+
+  # Backend API
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://postgres:password@db:5432/etech
+      - REDIS_URL=redis://redis:6379
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - OLLAMA_URL=http://ollama:11434
+    depends_on:
+      - db
+      - redis
+      - ollama
+    networks:
+      - etech-network
+
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=etech
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=etech
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - etech-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    networks:
+      - etech-network
+
+  # Ollama (Local AI)
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    networks:
+      - etech-network
+
+volumes:
+  pgdata:
+  ollama-data:
+
+networks:
+  etech-network:
+    driver: bridge
+```
+
+## Commandes Docker
+
+```bash
+# Development
+docker-compose up -d
+
+# Logs
+docker-compose logs -f
+
+# Stop
+docker-compose down
+```
+
+## Note Importante
+
+**N8N a été supprimé** - Le système utilise maintenant une architecture AI native avec:
+- Google Gemini comme provider principal
+- Ollama comme fallback local
+- Orchestration native des agents

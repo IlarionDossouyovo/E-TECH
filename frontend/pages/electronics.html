@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electronics - E-Tech Global</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0a0a0f; color: #fff; }
+        header { background: linear-gradient(90deg, #1a1a2e, #16213e); padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: bold; background: linear-gradient(90deg, #00d4ff, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        nav a { color: #fff; text-decoration: none; margin-left: 25px; }
+        .hero { text-align: center; padding: 80px 20px; background: linear-gradient(180deg, #0a0a0f, #1a1a2e); }
+        .hero h1 { font-size: 48px; margin-bottom: 20px; }
+        .hero h1 span { background: linear-gradient(90deg, #00d4ff, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        .section-title { font-size: 28px; margin-bottom: 30px; display: flex; align-items: center; gap: 12px; }
+        .section-title::before { content: ''; width: 4px; height: 28px; background: #00d4ff; border-radius: 2px; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+        .product-card { background: linear-gradient(135deg, #1a1a2e, #0f0f1a); border-radius: 16px; padding: 20px; border: 1px solid #333; transition: 0.3s; }
+        .product-card:hover { border-color: #00d4ff; transform: translateY(-4px); }
+        .product-icon { font-size: 48px; text-align: center; margin-bottom: 16px; }
+        .product-name { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .product-brand { color: #888; font-size: 14px; margin-bottom: 12px; }
+        .product-price { font-size: 24px; font-weight: bold; color: #00d4ff; }
+        .product-price span { font-size: 14px; color: #888; }
+        .btn { display: inline-block; padding: 12px 24px; background: linear-gradient(90deg, #00d4ff, #7c3aed); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; margin-top: 12px; }
+        footer { text-align: center; padding: 40px; color: #666; margin-top: 60px; border-top: 1px solid #222; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">⚡ E-Tech</div>
+        <nav>
+            <a href="index.html">Accueil</a>
+            <a href="products.html">Produits</a>
+            <a href="agents.html">AI Agents</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <h1>💡 <span>Electronics</span></h1>
+        <p>Composants électroniques, circuits, outils et accessoires pour professionnels et particuliers</p>
+    </section>
+    
+    <div class="container">
+        <h2 class="section-title">Composants Electroniques</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-icon">🔌</div>
+                <div class="product-name">Arduino Uno R3</div>
+                <div class="product-brand">Arduino</div>
+                <div class="product-price">15000 <span>XOF</span></div>
+                <a href="#" class="btn">Ajouter au panier</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🔌</div>
+                <div class="product-name">Raspberry Pi 5 8GB</div>
+                <div class="product-brand">Raspberry</div>
+                <div class="product-price">85000 <span>XOF</span></div>
+                <a href="#" class="btn">Ajouter au panier</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🔌</div>
+                <div class="product-name">ESP32 DevKit</div>
+                <div class="product-brand">Espressif</div>
+                <div class="product-price">8000 <span>XOF</span></div>
+                <a href="#" class="btn">Ajouter au panier</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🔌</div>
+                <div class="product-name">Kit Composants 300pcs</div>
+                <div class="product-brand">Generic</div>
+                <div class="product-price">12000 <span>XOF</span></div>
+                <a href="#" class="btn">Ajouter au panier</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🔌</div>
+                <div class="product-name">Fer à souder 60W</div>
+                <div class="product-brand">Quick</div>
+                <div class="product-price">18000 <span>XOF</span></div>
+                <a href="#" class="btn">Ajouter au panier</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🔌</div>
+                <div class="product-name">Multimètre Digital</div>
+                <div class="product-brand">Fluke</div>
+                <div class="product-price">25000 <span>XOF</span></div>
+                <a href="#" class="btn">Ajouter au panier</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🔌</div>
+                <div class="product-name">Oscilloscope 20MHz</div>
+                <div class="product-brand">Hantek</div>
+                <div class="product-price">95000 <span>XOF</span></div>
+                <a href="#" class="btn">Ajouter au panier</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">🔌</div>
+                <div class="product-name">Alimentation 12V 5A</div>
+                <div class="product-brand">Generic</div>
+                <div class="product-price">8500 <span>XOF</span></div>
+                <a href="#" class="btn">Ajouter au panier</a>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2026 E-Tech Electronics | Cotonou, Benin</p>
+    </footer>
+</body>
+</html>
