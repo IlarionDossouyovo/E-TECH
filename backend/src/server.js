@@ -25,6 +25,7 @@ const founderRouter = require('./routes/founder');
 const suppliersRouter = require('./routes/suppliers');
 const repairsRouter = require('./routes/repairs');
 const crmRouter = require('./routes/crm');
+const tvSuppliersRouter = require('./routes/tv-suppliers');
 
 // API Routes
 app.use('/api/products', productsRouter);
@@ -38,6 +39,7 @@ app.use('/api/suppliers', suppliersRouter);
 app.use('/api/repairs', repairsRouter);
 app.use('/api/crm', crmRouter);
 app.use('/api/erp', crmRouter);
+app.use('/api/tv-suppliers', tvSuppliersRouter);
 
 // Health check
 app.get('/api/health', (req, res) => {

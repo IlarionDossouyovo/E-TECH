@@ -303,6 +303,65 @@ const agentsRegistry = {
         permissions: ['read_all', 'write_quality'],
         lastActivity: null,
         tasksCompleted: 0
+    },
+    // NEW AGENTS FOR TV EXPANSION
+    tv_specialist: {
+        id: 'tv_specialist',
+        name: 'TV Specialist',
+        icon: '📺',
+        description: 'TV catalog, comparisons, compatibility, accessories, repair, diagnostics, suppliers, content, trends',
+        domain: 'tv',
+        status: 'active',
+        model: 'gemini-2.0-flash-exp',
+        provider: 'google',
+        capabilities: ['tv_catalog', 'comparisons', 'compatibility', 'accessories', 'repair_diagnostics', 'suppliers', 'content', 'trends'],
+        permissions: ['read_tv', 'write_tv', 'read_suppliers', 'verify_products'],
+        sources: ['official_brands', 'verified_suppliers'],
+        lastActivity: null,
+        tasksCompleted: 0
+    },
+    product_data: {
+        id: 'product_data',
+        name: 'Product Data AI',
+        icon: '📊',
+        description: 'Product data verification: duplicates, models, specs, categories, images, prices, SKUs',
+        domain: 'quality',
+        status: 'active',
+        model: 'gemini-2.0-flash-exp',
+        provider: 'google',
+        capabilities: ['duplicate_detection', 'model_verification', 'spec_validation', 'price_analysis'],
+        permissions: ['read_products', 'write_products'],
+        lastActivity: null,
+        tasksCompleted: 0
+    },
+    affiliate: {
+        id: 'affiliate',
+        name: 'Affiliate Agent',
+        icon: '💰',
+        description: 'Affiliate program management, commissions, tracking, payouts',
+        domain: 'affiliate',
+        status: 'active',
+        model: 'gemini-2.0-flash-exp',
+        provider: 'google',
+        capabilities: ['affiliate_management', 'commission_tracking', 'payouts'],
+        permissions: ['read_affiliates', 'write_affiliates'],
+        lastActivity: null,
+        tasksCompleted: 0
+    },
+    blog_ai: {
+        id: 'blog_ai',
+        name: 'Blog AI',
+        icon: '✍️',
+        description: 'Blog content creation with source verification',
+        domain: 'content',
+        status: 'active',
+        model: 'gemini-2.0-flash-exp',
+        provider: 'google',
+        capabilities: ['article_creation', 'content_verification', 'seo_optimization'],
+        permissions: ['read_blog', 'write_blog'],
+        sources_required: true,
+        lastActivity: null,
+        tasksCompleted: 0
     }
 };
 
@@ -328,7 +387,12 @@ const agentPrompts = {
     finance: `Tu es le Finance Agent d'E-Tech. Analyse les coûts, marges, revenus et génère des rapports. NE PAS effectuer d'opérations financières critiques seul.`,
     cybersecurity: `Tu es le Cybersecurity Agent d'E-Tech. Surveille les anomalies, permissions et sécurité du système.`,
     translation: `Tu es le Translation Agent d'E-Tech. Traduis entre: français, anglais, espagnol, portugais, allemand, arabe.`,
-    quality_control: `Tu es le Quality Control Agent d'E-Tech. Vérifie les fiches produits, caractéristiques, prix, images et SEO.`
+    quality_control: `Tu es le Quality Control Agent d'E-Tech. Vérifie les fiches produits, caractéristiques, prix, images et SEO.`,
+    // NEW TV AGENTS
+    tv_specialist: `Tu es le TV Specialist Agent d'E-Tech. TU NE DOIS JAMAIS INVENTER des caractéristiques, prix ou fournisseurs. Utilise uniquement les sources officielles: sites web des marques, fournisseurs vérifiés. Marque clairement les informations non vérifiées.`,
+    product_data: `Tu es le Product Data AI d'E-Tech. Vérifie les données produits: détecte les doublons, valide les modèles, caractéristiques, catégories, images, prix, SKU, fournisseurs, compatibilité.`,
+    affiliate: `Tu es l'Affiliate Agent d'E-Tech. Gère le programme d'affiliation: inscription, liens, clics, conversions, commissions, paiements.`,
+    blog_ai: `Tu es le Blog AI d'E-Tech. Crée des articles vérifiés. TU NE DOIS PAS inventer. Ajoute toujours des sources. Marque les informations non vérifiées. Évite les hallucinations.`
 };
 
 // Get all agents

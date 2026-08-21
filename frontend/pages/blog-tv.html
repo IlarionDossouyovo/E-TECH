@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog TV - E-Tech Global</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0a0a0f; color: #fff; }
+        header { background: linear-gradient(90deg, #1a1a2e, #16213e); padding: 20px 40px; }
+        .logo { font-size: 24px; font-weight: bold; background: linear-gradient(90deg, #00d4ff, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero { text-align: center; padding: 80px 20px; background: linear-gradient(180deg, #0a0a0f, #1a1a2e); }
+        .hero h1 { font-size: 48px; }
+        .hero h1 span { background: linear-gradient(90deg, #8b5cf6, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .categories { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
+        .cat-btn { padding: 10px 20px; background: #1a1a2e; border: 1px solid #333; border-radius: 20px; color: #fff; cursor: pointer; }
+        .cat-btn:hover, .cat-btn.active { background: linear-gradient(90deg, #8b5cf6, #a855f7); border-color: transparent; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px; }
+        .article { background: linear-gradient(135deg, #1a1a2e, #0f0f1a); border-radius: 16px; overflow: hidden; border: 1px solid #333; }
+        .article-img { height: 200px; background: linear-gradient(135deg, #16213e, #0f0f1a); display: flex; align-items: center; justify-content: center; font-size: 64px; }
+        .article-content { padding: 24px; }
+        .article-cat { color: #8b5cf6; font-size: 12px; text-transform: uppercase; margin-bottom: 8px; }
+        .article-title { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+        .article-excerpt { color: #888; font-size: 14px; margin-bottom: 16px; }
+        .article-meta { display: flex; justify-content: space-between; color: #666; font-size: 12px; }
+        .brands-section { margin-top: 60px; }
+        .brands-title { font-size: 24px; margin-bottom: 20px; }
+        .brands-grid { display: flex; gap: 16px; flex-wrap: wrap; }
+        .brand-link { padding: 12px 24px; background: #1a1a2e; border-radius: 8px; color: #fff; text-decoration: none; }
+        .brand-link:hover { background: #2a2a3e; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">✍️ E-Tech TV Blog</div>
+    </header>
+    <section class="hero">
+        <h1>Blog <span>TV & Entertainment</span></h1>
+        <p>Actualités, guides et comparatifs sur les télévisers et le home cinema</p>
+    </section>
+    <div class="container">
+        <div class="categories">
+            <button class="cat-btn active" onclick="filterCat('all')">Tous</button>
+            <button class="cat-btn" onclick="filterCat('news')">Actualités</button>
+            <button class="cat-btn" onclick="filterCat('guide')">Guides</button>
+            <button class="cat-btn" onclick="filterCat('comparatif')">Comparatifs</button>
+            <button class="cat-btn" onclick="filterCat('test')">Tests</button>
+            <button class="cat-btn" onclick="filterCat('smart-tv')">Smart TV</button>
+            <button class="cat-btn" onclick="filterCat('oled')">OLED</button>
+            <button class="cat-btn" onclick="filterCat('qled')">QLED</button>
+            <button class="cat-btn" onclick="filterCat('repair')">Réparation</button>
+        </div>
+        
+        <div class="grid" id="articles">
+            <!-- Articles will be loaded here -->
+        </div>
+        
+        <div class="brands-section">
+            <h2 class="brands-title">Blog par Marque</h2>
+            <div class="brands-grid">
+                <a href="blog-tv-samsung.html" class="brand-link">Samsung</a>
+                <a href="blog-tv-lg.html" class="brand-link">LG</a>
+                <a href="blog-tv-sony.html" class="brand-link">Sony</a>
+                <a href="blog-tv-tcl.html" class="brand-link">TCL</a>
+                <a href="blog-tv-hisense.html" class="brand-link">Hisense</a>
+                <a href="blog-tv-panasonic.html" class="brand-link">Panasonic</a>
+                <a href="blog-tv-philips.html" class="brand-link">Philips</a>
+                <a href="blog-tv-xiaomi.html" class="brand-link">Xiaomi</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const articles = [
+            { cat: 'test', title: 'Samsung S95D OLED vs LG G4: Le Comparatif', excerpt: 'Match au sommet entre les deux flagships OLED 2024...', date: '21 Aoû 2026', icon: '📺' },
+            { cat: 'guide', title: 'Guide: Choisir sa taille d\'écran', excerpt: 'Comment choisir la bonne diagonale pour votre salon...', date: '20 Aoû 2026', icon: '📏' },
+            { cat: 'smart-tv', title: 'Tizen vs webOS vs Google TV: Lequel choisir?', excerpt: 'Comparaison des plateformes Smart TV populaires...', date: '19 Aoû 2026', icon: '📱' },
+            { cat: 'oled', title: 'OLED vs QD-OLED: Quelles différences?', excerpt: 'Comprendre les technologies d\'affichage...', date: '18 Aoû 2026', icon: '🔵' },
+            { cat: 'comparatif', title: 'Meilleurs TV Gaming 2026', excerpt: 'Notre sélection des meilleures TVs pour le gaming...', date: '17 Aoû 2026', icon: '🎮' },
+            { cat: 'news', title: 'Samsung annonce le 8K transparent', excerpt: 'La nouvelle technologie QD-OLED 8K de Samsung...', date: '16 Aoû 2026', icon: '📰' },
+            { cat: 'repair', title: 'Réparer son TV: Guide complet', excerpt: 'Diagnostiquer et réparer les pannes courantes...', date: '15 Aoû 2026', icon: '🔧' },
+            { cat: 'qled', title: 'Mini LED: L\'avenir du LCD?', excerpt: 'Pourquoi Mini LED gagne du terrain...', date: '14 Aoû 2026', icon: '💡' }
+        ];
+        
+        function renderArticles(filter = 'all') {
+            const filtered = filter === 'all' ? articles : articles.filter(a => a.cat === filter);
+            document.getElementById('articles').innerHTML = filtered.map(a => `
+                <div class="article">
+                    <div class="article-img">${a.icon}</div>
+                    <div class="article-content">
+                        <div class="article-cat">${a.cat}</div>
+                        <div class="article-title">${a.title}</div>
+                        <div class="article-excerpt">${a.excerpt}</div>
+                        <div class="article-meta"><span>${a.date}</span><span>Lire plus →</span></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function filterCat(cat) {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            renderArticles(cat);
+        }
+        
+        renderArticles();
+    </script>
+</body>
+</html>
