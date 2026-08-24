@@ -39,7 +39,7 @@ app.use('/api/founder', founderRouter);
 app.use('/api/suppliers', suppliersRouter);
 app.use('/api/repairs', repairsRouter);
 app.use('/api/crm', crmRouter);
-app.use('/api/erp', crmRouter);
+// app.use('/api/erp', crmRouter); // Removed duplicate
 app.use('/api/tv-suppliers', tvSuppliersRouter);
 app.use('/api/voice', voiceRouter);
 

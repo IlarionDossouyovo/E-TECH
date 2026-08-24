@@ -32,7 +32,7 @@ const inventory = [
 // ===================
 
 // Get all customers
-router.get('/crm/customers', (req, res) => {
+router.get('/customers', (req, res) => {
     const { segment, status } = req.query;
     
     let filtered = [...customers];
@@ -47,14 +47,14 @@ router.get('/crm/customers', (req, res) => {
 });
 
 // Get customer by ID
-router.get('/crm/customers/:id', (req, res) => {
+router.get('/customers/:id', (req, res) => {
     const customer = customers.find(c => c.id === parseInt(req.params.id));
     if (!customer) return res.status(404).json({ error: 'Customer not found' });
     res.json(customer);
 });
 
 // Create customer
-router.post('/crm/customers', (req, res) => {
+router.post('/customers', (req, res) => {
     const { name, email, phone } = req.body;
     if (!name || !email) return res.status(400).json({ error: 'Name and email required' });
     
@@ -72,7 +72,7 @@ router.post('/crm/customers', (req, res) => {
 });
 
 // Get customer segments
-router.get('/crm/segments', (req, res) => {
+router.get('/segments', (req, res) => {
     const segments = {
         VIP: customers.filter(c => c.segment === 'VIP').length,
         Regular: customers.filter(c => c.segment === 'Regular').length,
@@ -87,7 +87,7 @@ router.get('/crm/segments', (req, res) => {
 // ===================
 
 // Get all orders
-router.get('/erp/orders', (req, res) => {
+router.get('/orders', (req, res) => {
     const { status } = req.query;
     let filtered = [...orders];
     if (status) filtered = filtered.filter(o => o.status === status);
@@ -95,14 +95,14 @@ router.get('/erp/orders', (req, res) => {
 });
 
 // Get order by ID
-router.get('/erp/orders/:id', (req, res) => {
+router.get('/orders/:id', (req, res) => {
     const order = orders.find(o => o.id === parseInt(req.params.id));
     if (!order) return res.status(404).json({ error: 'Order not found' });
     res.json(order);
 });
 
 // Get inventory
-router.get('/erp/inventory', (req, res) => {
+router.get('/inventory', (req, res) => {
     const { lowStock } = req.query;
     let filtered = [...inventory];
     
@@ -118,7 +118,7 @@ router.get('/erp/inventory', (req, res) => {
 });
 
 // Update inventory
-router.patch('/erp/inventory/:id', (req, res) => {
+router.patch('/inventory/:id', (req, res) => {
     const item = inventory.find(i => i.id === parseInt(req.params.id));
     if (!item) return res.status(404).json({ error: 'Item not found' });
     
@@ -127,7 +127,7 @@ router.patch('/erp/inventory/:id', (req, res) => {
 });
 
 // Get ERP Dashboard
-router.get('/erp/dashboard', (req, res) => {
+router.get('/dashboard', (req, res) => {
     const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0);
     const totalOrders = orders.length;
     const lowStockItems = inventory.filter(i => i.quantity <= i.minStock);
