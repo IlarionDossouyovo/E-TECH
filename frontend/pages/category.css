@@ -1,0 +1,121 @@
+/* Category Pages Styles */
+.category-hero {
+    background: linear-gradient(135deg, #0A1929 0%, #1a3a5c 100%);
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.category-hero__icon {
+    font-size: 80px;
+    margin-bottom: 16px;
+}
+
+.category-hero__title {
+    font-size: 42px;
+    margin-bottom: 12px;
+}
+
+.category-hero__desc {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    padding: 40px 0;
+}
+
+.product-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.product-card__image {
+    font-size: 64px;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.product-card__name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.product-card__brand {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.product-card__price {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0066FF;
+    margin-bottom: 16px;
+}
+
+.product-card__btn {
+    width: 100%;
+    padding: 12px;
+    background: #0066FF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.product-card__btn:hover {
+    background: #0052cc;
+}
+
+/* Filters */
+.filters {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+}
+
+.filters__title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.filter-group {
+    margin-bottom: 20px;
+}
+
+.filter-group__label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.filter-group__options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
