@@ -630,8 +630,6 @@ function applyFilters() {
     updateResultsCount(filteredProducts.length);
     alert("Filtres appliques: " + filteredProducts.length + " produits"); 
 }
-}
-    });
 
 function updateResultsCount(count) {
     const countEl = document.getElementById('results-count');
